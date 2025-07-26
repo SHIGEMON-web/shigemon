@@ -44,7 +44,10 @@
         @keyframes shine {
             0% {
                 transform: translateX(-100%) translateY(-100%);
+            .back-to-top {
+                display: flex;
             }
+        }
             100% {
                 transform: translateX(100%) translateY(100%);
             }
@@ -609,7 +612,7 @@
         }
 
         .dog-container.show {
-            right: 50px; /* 表示時は右から50pxの位置 */
+            right: 0; /* 表示時は右端に密着 */
             pointer-events: auto;
         }
 
@@ -681,11 +684,6 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
-
-        .back-to-top {
-            display: flex;
-        }
-
         @media (max-width: 768px) {
             .announcement-banner {
                 font-size: 0.8rem;
@@ -795,7 +793,7 @@
             }
             
             .dog-container.show {
-                right: 20px; /* スマホでは右から20pxの位置 */
+                right: 0; /* スマホでも右端に密着 */
             }
 
             .passing-train {
@@ -844,14 +842,14 @@
     <main>
         <!-- ヒーローセクション -->
         <div class="hero">
-            <img src="https://via.placeholder.com/1200x400/3498db/ffffff?text=SHIGEMON+Works" alt="SHIGEMONの作品集">
+            <img src="hero-image.jpg" alt="SHIGEMONの作品集">
         </div>
 
         <!-- プロフィール -->
         <section id="profile">
             <h2>プロフィール</h2>
             <div class="profile">
-                <img src="https://via.placeholder.com/200x200/2c3e50/ffffff?text=Profile" alt="SHIGEMON" class="profile-img">
+                <img src="profile-image.jpg" alt="SHIGEMON" class="profile-img">
                 <div class="profile-text">
                     <h3>SHIGEMON</h3>
                     <p>YouTuberとして鉄道模型やジオラマ製作の動画を配信しています。<br>
@@ -937,6 +935,80 @@
                         <div class="work-card-img">画像準備中</div>
                         <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
                     </div>
+                    <div class="card card-with-tag">
+                        <span class="tag writing">執筆・書籍</span>
+                        <h3>「はじめてのジオラマ」監修</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                    </div>
+                    <div class="card card-with-tag">
+                        <span class="tag review">レビュー動画製作</span>
+                        <h3>TOMIX製品比較動画</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
+                    </div>
+                    <div class="card card-with-tag">
+                        <span class="tag diorama">ジオラマ製作</span>
+                        <h3>個人コレクション向けジオラマ</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="works-review" class="tab-content">
+                <div class="card-grid">
+                    <div class="card card-with-tag">
+                        <span class="tag review">レビュー動画製作</span>
+                        <h3>KATO新製品レビュー</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
+                    </div>
+                    <div class="card card-with-tag">
+                        <span class="tag review">レビュー動画製作</span>
+                        <h3>TOMIX製品比較動画</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="works-diorama" class="tab-content">
+                <div class="card-grid">
+                    <div class="card card-with-tag">
+                        <span class="tag diorama">ジオラマ製作</span>
+                        <h3>企業展示用ジオラマ</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
+                    </div>
+                    <div class="card card-with-tag">
+                        <span class="tag diorama">ジオラマ製作</span>
+                        <h3>個人コレクション向けジオラマ</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="works-event" class="tab-content">
+                <div class="card-grid">
+                    <div class="card card-with-tag">
+                        <span class="tag event">イベント向けコンテンツ</span>
+                        <h3>鉄道フェスタ2024</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="works-writing" class="tab-content">
+                <div class="card-grid">
+                    <div class="card card-with-tag">
+                        <span class="tag writing">執筆・書籍</span>
+                        <h3>「はじめてのジオラマ」監修</h3>
+                        <div class="work-card-img">画像準備中</div>
+                        <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -960,7 +1032,42 @@
                     <h3>海辺の路線</h3>
                     <p>海沿いを走るローカル線の情景。波の表現にもこだわりました。</p>
                 </div>
+                <div class="card">
+                    <div class="card-img">画像準備中</div>
+                    <h3>雪景色の駅</h3>
+                    <p>冬の雪に覆われた駅の情景。雪の質感表現が見どころです。</p>
+                </div>
+                <div class="card">
+                    <div class="card-img">画像準備中</div>
+                    <h3>田園風景</h3>
+                    <p>のどかな田園地帯を走る単線。日本の原風景を表現しました。</p>
+                </div>
+                <div class="card">
+                    <div class="card-img">画像準備中</div>
+                    <h3>機関区</h3>
+                    <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
+                </div>
             </div>
+            <div id="gallery-more" class="hidden">
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>橋梁のある風景</h3>
+                        <p>川を渡る鉄橋の情景。水面の表現にこだわりました。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>夜景レイアウト</h3>
+                        <p>LEDを使用した夜景表現。街の灯りが幻想的です。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>貨物ヤード</h3>
+                        <p>貨物列車が行き交うヤードの情景を再現。</p>
+                    </div>
+                </div>
+            </div>
+            <button class="more-btn" onclick="toggleGallery()">もっと見る</button>
         </section>
 
         <!-- コンテンツ -->
@@ -986,16 +1093,16 @@
             <div id="contents-blog" class="tab-content">
                 <div class="card-grid">
                     <div class="card">
-                        <h3>ジオラマ製作のコツ：リアルな水面表現</h3>
-                        <p>今回は多くの方から質問をいただく、水面の表現方法について詳しく解説します。使用する材料から具体的な手順まで...</p>
+                        <h3>ブログ記事タイトル1</h3>
+                        <p>ブログ記事の概要がここに入ります。ジオラマ製作のコツや新製品情報など。</p>
                     </div>
                     <div class="card">
-                        <h3>2024年 買ってよかったNゲージ TOP10</h3>
-                        <p>今年も多くの新製品が発売されましたが、その中から特に満足度の高かった製品を10個選んでランキング形式で...</p>
+                        <h3>ブログ記事タイトル2</h3>
+                        <p>ブログ記事の概要がここに入ります。製作過程の詳細解説など。</p>
                     </div>
                     <div class="card">
-                        <h3>初心者にオススメのスターターセット比較</h3>
-                        <p>これからNゲージを始めたい方向けに、各メーカーのスターターセットを実際に購入して比較してみました...</p>
+                        <h3>ブログ記事タイトル3</h3>
+                        <p>ブログ記事の概要がここに入ります。イベントレポートなど。</p>
                     </div>
                 </div>
                 <button class="more-btn">もっと見る</button>
@@ -1005,7 +1112,7 @@
         <!-- お問い合わせ -->
         <section id="contact">
             <h2>お問い合わせ</h2>
-            <form class="contact-form">
+            <form class="contact-form" action="mailto:shigemaru1227@gmail.com" method="post" enctype="text/plain">
                 <div class="form-group">
                     <label for="name">お名前</label>
                     <input type="text" id="name" name="name" required>
@@ -1031,17 +1138,17 @@
     <footer>
         <div class="footer-content">
             <div class="social-icons">
-                <a href="#" target="_blank" title="X (Twitter)">
+                <a href="https://twitter.com" target="_blank" title="X (Twitter)">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
-                <a href="#" target="_blank" title="Instagram">
+                <a href="https://instagram.com" target="_blank" title="Instagram">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                     </svg>
                 </a>
-                <a href="#" target="_blank" title="YouTube">
+                <a href="https://youtube.com" target="_blank" title="YouTube">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
@@ -1060,12 +1167,12 @@
 
     <!-- 通り過ぎる画像 -->
     <div class="passing-train" id="passingTrain">
-        <img src="https://via.placeholder.com/600x200/e74c3c/ffffff?text=Train" alt="通り過ぎる列車">
+        <img src="train-image.png" alt="通り過ぎる列車">
     </div>
 
     <!-- 犬の画像コンテナ -->
-    <div class="dog-container" id="dogContainer" onclick="alert('スペシャルページへ！')">
-        <img src="https://via.placeholder.com/300x400/f39c12/ffffff?text=Dog" alt="犬">
+    <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
+        <img src="main-dog.png" alt="犬">
     </div>
 
     <!-- TOPへ戻るボタン -->
@@ -1088,13 +1195,18 @@
             document.getElementById(`${section}-${tabName}`).classList.add('active');
         }
 
-        // TOPへ戻る機能
-        function scrollToTop(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        // ギャラリーの展開
+        function toggleGallery() {
+            const moreContent = document.getElementById('gallery-more');
+            const btn = event.target;
+            
+            if (moreContent.classList.contains('hidden')) {
+                moreContent.classList.remove('hidden');
+                btn.textContent = '閉じる';
+            } else {
+                moreContent.classList.add('hidden');
+                btn.textContent = 'もっと見る';
+            }
         }
 
         // YouTubeコンテンツの展開
@@ -1110,6 +1222,24 @@
                 btn.textContent = 'もっと見る';
             }
         }
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const offsetPosition = elementPosition - headerHeight - 10;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
         // チャンネル統計情報を取得
         async function loadChannelStats() {
@@ -1293,6 +1423,21 @@
             }
         }
 
+        // TOPへ戻る機能
+        function scrollToTop(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ページ読み込み時に実行
+        window.addEventListener('load', () => {
+            loadChannelStats();
+            loadLatestVideos();
+        });
+
         // 犬の画像表示制御
         let dogTimer = null;
         let hasTriggeredTrain = false;
@@ -1345,29 +1490,10 @@
             }
         });
 
-        // スムーズスクロール
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const offsetPosition = elementPosition - headerHeight - 10;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // ページ読み込み時に実行
-        window.addEventListener('load', () => {
-            loadChannelStats();
-            loadLatestVideos();
-        });
+        // スペシャルページを開く
+        function openSpecialPage() {
+            window.open('special.html', '_blank');
+        }
     </script>
 </body>
 </html>
