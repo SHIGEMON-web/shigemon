@@ -44,7 +44,10 @@
         @keyframes shine {
             0% {
                 transform: translateX(-100%) translateY(-100%);
+            .back-to-top {
+                display: flex;
             }
+        }
             100% {
                 transform: translateX(100%) translateY(100%);
             }
@@ -117,22 +120,18 @@
         .hero {
             width: 100%;
             height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #f0f0f0;
             overflow: hidden;
             position: relative;
             margin: 0;
+            padding: 0;
         }
 
         .hero img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
+            display: block;
         }
 
         /* セクション共通 */
@@ -154,11 +153,13 @@
         #profile {
             background: white;
             padding: 3rem 5%;
-            margin: 2rem auto;
+            margin: 0 auto 2rem;
             max-width: 1200px;
-            border-radius: 15px;
+            border-radius: 0 0 15px 15px;
             box-shadow: 0 5px 30px rgba(0,0,0,0.1);
             width: 90%;
+            position: relative;
+            margin-top: 0;
         }
 
         .profile {
@@ -639,7 +640,34 @@
             }
         }
 
-        /* レスポンシブ */
+        /* TOPへ戻るボタン */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
         @media (max-width: 768px) {
             .announcement-banner {
                 font-size: 0.8rem;
@@ -668,7 +696,8 @@
             #profile {
                 padding: 2rem 5%;
                 width: 95%;
-                margin: 1rem auto;
+                margin: 0 auto 1rem;
+                border-radius: 0 0 15px 15px;
             }
 
             .profile {
@@ -717,8 +746,8 @@
             .tabs {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
-                justify-content: flex-start;
-                gap: 0;
+                justify-content: center;
+                gap: 0.5rem;
                 padding-bottom: 2px;
             }
 
@@ -766,7 +795,7 @@
         }
     </style>
 </head>
-<body>
+<body id="top">
     <!-- 注目のバナー -->
     <div class="announcement-banner">
         <a href="https://amzn.to/4lNA5tf" target="_blank">
@@ -791,9 +820,9 @@
 
     <main>
         <!-- ヒーローセクション -->
-        <section class="hero">
+        <div class="hero">
             <img src="hero-image.jpg" alt="SHIGEMONの作品集">
-        </section>
+        </div>
 
         <!-- プロフィール -->
         <section id="profile">
@@ -1125,6 +1154,9 @@
         <img src="main-dog.png" alt="犬">
     </div>
 
+    <!-- TOPへ戻るボタン -->
+    <a href="#" class="back-to-top" onclick="scrollToTop(event)">TOP</a>
+
     <script>
         // YouTube API設定
         const API_KEY = 'AIzaSyBso5x4s3Air5CNAXc2UzSQEmQ5OGKkfq8';
@@ -1357,6 +1389,15 @@
                 return (num / 1000).toFixed(1) + '千';
             }
             return num.toString();
+        }
+
+        // TOPへ戻る機能
+        function scrollToTop(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         // ページ読み込み時に実行
