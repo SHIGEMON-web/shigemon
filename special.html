@@ -34,7 +34,7 @@
             width: 100%;
             height: 100%;
             background: rgba(255, 255, 255, 0.85);
-            z-index: 1;
+            z-index: 0;
         }
 
         /* 飛び回る犬 */
@@ -42,7 +42,7 @@
             position: fixed;
             width: 80px;
             height: 80px;
-            z-index: 1000;
+            z-index: 1;
             opacity: 0.9;
         }
 
@@ -53,35 +53,51 @@
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
         }
 
-        .flying-dog:nth-child(1) { animation: fly1 3s linear forwards; }
-        .flying-dog:nth-child(2) { animation: fly2 3.5s linear forwards; }
-        .flying-dog:nth-child(3) { animation: fly3 4s linear forwards; }
-        .flying-dog:nth-child(4) { animation: fly4 4.5s linear forwards; }
-        .flying-dog:nth-child(5) { animation: fly5 5s linear forwards; }
+        .flying-dog.dog1 { animation: fly1 8s linear infinite; }
+        .flying-dog.dog2 { animation: fly2 10s linear infinite; }
+        .flying-dog.dog3 { animation: fly3 12s linear infinite; }
+        .flying-dog.dog4 { animation: fly4 9s linear infinite; }
+        .flying-dog.dog5 { animation: fly5 11s linear infinite; }
 
         @keyframes fly1 {
-            0% { transform: translate(-100px, 80vh) rotate(0deg); }
-            100% { transform: translate(50vw, 45vh) rotate(720deg) scale(0); opacity: 0; }
+            0% { transform: translate(-100px, 20vh) rotate(0deg); }
+            25% { transform: translate(50vw, 10vh) rotate(180deg); }
+            50% { transform: translate(110vw, 40vh) rotate(360deg); }
+            75% { transform: translate(60vw, 80vh) rotate(540deg); }
+            100% { transform: translate(-100px, 20vh) rotate(720deg); }
         }
 
         @keyframes fly2 {
-            0% { transform: translate(100vw, -100px) rotate(0deg); }
-            100% { transform: translate(45vw, 50vh) rotate(-720deg) scale(0); opacity: 0; }
+            0% { transform: translate(110vw, 80vh) rotate(0deg); }
+            25% { transform: translate(80vw, 20vh) rotate(-180deg); }
+            50% { transform: translate(30vw, 5vh) rotate(-360deg); }
+            75% { transform: translate(-10vw, 50vh) rotate(-540deg); }
+            100% { transform: translate(110vw, 80vh) rotate(-720deg); }
         }
 
         @keyframes fly3 {
-            0% { transform: translate(50vw, 100vh) rotate(0deg); }
-            100% { transform: translate(55vw, 45vh) rotate(360deg) scale(0); opacity: 0; }
+            0% { transform: translate(50vw, -100px) rotate(0deg); }
+            20% { transform: translate(80vw, 30vh) rotate(144deg); }
+            40% { transform: translate(90vw, 70vh) rotate(288deg); }
+            60% { transform: translate(40vw, 90vh) rotate(432deg); }
+            80% { transform: translate(10vw, 60vh) rotate(576deg); }
+            100% { transform: translate(50vw, -100px) rotate(720deg); }
         }
 
         @keyframes fly4 {
-            0% { transform: translate(-100px, 20vh) rotate(0deg); }
-            100% { transform: translate(45vw, 55vh) rotate(-360deg) scale(0); opacity: 0; }
+            0% { transform: translate(-100px, 70vh) rotate(0deg); }
+            33% { transform: translate(30vw, 30vh) rotate(-240deg); }
+            66% { transform: translate(90vw, 60vh) rotate(-480deg); }
+            100% { transform: translate(-100px, 70vh) rotate(-720deg); }
         }
 
         @keyframes fly5 {
-            0% { transform: translate(100vw, 60vh) rotate(0deg); }
-            100% { transform: translate(50vw, 50vh) rotate(540deg) scale(0); opacity: 0; }
+            0% { transform: translate(110vw, 10vh) rotate(0deg); }
+            20% { transform: translate(70vw, 50vh) rotate(180deg); }
+            40% { transform: translate(20vw, 80vh) rotate(360deg); }
+            60% { transform: translate(5vw, 40vh) rotate(540deg); }
+            80% { transform: translate(50vw, 10vh) rotate(720deg); }
+            100% { transform: translate(110vw, 10vh) rotate(900deg); }
         }
 
         /* ローディングメッセージ */
@@ -183,6 +199,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         /* インスタグラム風グリッド - PC用に6列×4段 */
@@ -195,6 +214,8 @@
             max-width: 1200px;
             height: calc(100vh - 100px);
             max-height: 800px;
+            position: relative;
+            z-index: 10;
         }
 
         .dog-post {
@@ -320,19 +341,19 @@
     </div>
 
     <!-- 飛び回る犬たち -->
-    <div class="flying-dog">
+    <div class="flying-dog dog1">
         <img src="images/flying-dog1.png" alt="飛ぶ犬1">
     </div>
-    <div class="flying-dog">
+    <div class="flying-dog dog2">
         <img src="images/flying-dog2.png" alt="飛ぶ犬2">
     </div>
-    <div class="flying-dog">
+    <div class="flying-dog dog3">
         <img src="images/flying-dog3.png" alt="飛ぶ犬3">
     </div>
-    <div class="flying-dog">
+    <div class="flying-dog dog4">
         <img src="images/flying-dog4.png" alt="飛ぶ犬4">
     </div>
-    <div class="flying-dog">
+    <div class="flying-dog dog5">
         <img src="images/flying-dog5.png" alt="飛ぶ犬5">
     </div>
 
@@ -345,76 +366,76 @@
         <div class="grid-container">
             <div class="instagram-grid">
                 <div class="dog-post" style="--index: 1">
-                    <img src="https://via.placeholder.com/300x300/ffb6c1/fff?text=Dog+1" alt="かわいい犬1">
+                    <img src="images/dog-grid-1.jpg" alt="かわいい犬1">
                 </div>
                 <div class="dog-post" style="--index: 2">
-                    <img src="https://via.placeholder.com/300x300/87ceeb/fff?text=Dog+2" alt="かわいい犬2">
+                    <img src="images/dog-grid-2.jpg" alt="かわいい犬2">
                 </div>
                 <div class="dog-post" style="--index: 3">
-                    <img src="https://via.placeholder.com/300x300/98fb98/fff?text=Dog+3" alt="かわいい犬3">
+                    <img src="images/dog-grid-3.jpg" alt="かわいい犬3">
                 </div>
                 <div class="dog-post" style="--index: 4">
-                    <img src="https://via.placeholder.com/300x300/dda0dd/fff?text=Dog+4" alt="かわいい犬4">
+                    <img src="images/dog-grid-4.jpg" alt="かわいい犬4">
                 </div>
                 <div class="dog-post" style="--index: 5">
-                    <img src="https://via.placeholder.com/300x300/f0e68c/fff?text=Dog+5" alt="かわいい犬5">
+                    <img src="images/dog-grid-5.jpg" alt="かわいい犬5">
                 </div>
                 <div class="dog-post" style="--index: 6">
-                    <img src="https://via.placeholder.com/300x300/ffdab9/fff?text=Dog+6" alt="かわいい犬6">
+                    <img src="images/dog-grid-6.jpg" alt="かわいい犬6">
                 </div>
                 <div class="dog-post" style="--index: 7">
-                    <img src="https://via.placeholder.com/300x300/b0c4de/fff?text=Dog+7" alt="かわいい犬7">
+                    <img src="images/dog-grid-7.jpg" alt="かわいい犬7">
                 </div>
                 <div class="dog-post" style="--index: 8">
-                    <img src="https://via.placeholder.com/300x300/ffc0cb/fff?text=Dog+8" alt="かわいい犬8">
+                    <img src="images/dog-grid-8.jpg" alt="かわいい犬8">
                 </div>
                 <div class="dog-post" style="--index: 9">
-                    <img src="https://via.placeholder.com/300x300/add8e6/fff?text=Dog+9" alt="かわいい犬9">
+                    <img src="images/dog-grid-9.jpg" alt="かわいい犬9">
                 </div>
                 <div class="dog-post" style="--index: 10">
-                    <img src="https://via.placeholder.com/300x300/f5deb3/fff?text=Dog+10" alt="かわいい犬10">
+                    <img src="images/dog-grid-10.jpg" alt="かわいい犬10">
                 </div>
                 <div class="dog-post" style="--index: 11">
-                    <img src="https://via.placeholder.com/300x300/e6e6fa/fff?text=Dog+11" alt="かわいい犬11">
+                    <img src="images/dog-grid-11.jpg" alt="かわいい犬11">
                 </div>
                 <div class="dog-post" style="--index: 12">
-                    <img src="https://via.placeholder.com/300x300/fafad2/fff?text=Dog+12" alt="かわいい犬12">
+                    <img src="images/dog-grid-12.jpg" alt="かわいい犬12">
                 </div>
                 <div class="dog-post" style="--index: 13">
-                    <img src="https://via.placeholder.com/300x300/d8bfd8/fff?text=Dog+13" alt="かわいい犬13">
+                    <img src="images/dog-grid-13.jpg" alt="かわいい犬13">
                 </div>
                 <div class="dog-post" style="--index: 14">
-                    <img src="https://via.placeholder.com/300x300/ffe4e1/fff?text=Dog+14" alt="かわいい犬14">
+                    <img src="images/dog-grid-14.jpg" alt="かわいい犬14">
                 </div>
                 <div class="dog-post" style="--index: 15">
-                    <img src="https://via.placeholder.com/300x300/f0ffff/fff?text=Dog+15" alt="かわいい犬15">
+                    <img src="images/dog-grid-15.jpg" alt="かわいい犬15">
                 </div>
                 <div class="dog-post" style="--index: 16">
-                    <img src="https://via.placeholder.com/300x300/f5f5dc/fff?text=Dog+16" alt="かわいい犬16">
+                    <img src="images/dog-grid-16.jpg" alt="かわいい犬16">
                 </div>
                 <div class="dog-post" style="--index: 17">
-                    <img src="https://via.placeholder.com/300x300/fffacd/fff?text=Dog+17" alt="かわいい犬17">
+                    <img src="images/dog-grid-17.jpg" alt="かわいい犬17">
                 </div>
                 <div class="dog-post" style="--index: 18">
-                    <img src="https://via.placeholder.com/300x300/e0ffff/fff?text=Dog+18" alt="かわいい犬18">
+                    <img src="images/dog-grid-18.jpg" alt="かわいい犬18">
                 </div>
                 <div class="dog-post" style="--index: 19">
-                    <img src="https://via.placeholder.com/300x300/ffefd5/fff?text=Dog+19" alt="かわいい犬19">
+                    <img src="images/dog-grid-19.jpg" alt="かわいい犬19">
                 </div>
                 <div class="dog-post" style="--index: 20">
-                    <img src="https://via.placeholder.com/300x300/ffebcd/fff?text=Dog+20" alt="かわいい犬20">
+                    <img src="images/dog-grid-20.jpg" alt="かわいい犬20">
                 </div>
                 <div class="dog-post" style="--index: 21">
-                    <img src="https://via.placeholder.com/300x300/faebd7/fff?text=Dog+21" alt="かわいい犬21">
+                    <img src="images/dog-grid-21.jpg" alt="かわいい犬21">
                 </div>
                 <div class="dog-post" style="--index: 22">
-                    <img src="https://via.placeholder.com/300x300/f0f8ff/fff?text=Dog+22" alt="かわいい犬22">
+                    <img src="images/dog-grid-22.jpg" alt="かわいい犬22">
                 </div>
                 <div class="dog-post" style="--index: 23">
-                    <img src="https://via.placeholder.com/300x300/f5fffa/fff?text=Dog+23" alt="かわいい犬23">
+                    <img src="images/dog-grid-23.jpg" alt="かわいい犬23">
                 </div>
                 <div class="dog-post" style="--index: 24">
-                    <img src="https://via.placeholder.com/300x300/fff5ee/fff?text=Dog+24" alt="かわいい犬24">
+                    <img src="images/dog-grid-24.jpg" alt="かわいい犬24">
                 </div>
             </div>
         </div>
@@ -423,15 +444,10 @@
     <a href="index.html" class="home-button">ホームに戻る</a>
 
     <script>
-        // 5秒後にコンテンツを表示し、飛び回る犬を削除
+        // 5秒後にコンテンツを表示
         setTimeout(() => {
             document.getElementById('loadingMessage').style.display = 'none';
             document.getElementById('mainContent').classList.add('show');
-            
-            // 飛び回る犬を削除
-            document.querySelectorAll('.flying-dog').forEach(dog => {
-                dog.style.display = 'none';
-            });
         }, 5000);
 
         // 犬の画像をクリックで拡大表示（オプション）
