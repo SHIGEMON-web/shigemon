@@ -594,10 +594,12 @@
             z-index: 100;
             transform: translateY(100%);
             transition: transform 0.5s ease-out;
+            cursor: pointer;
         }
 
         .dog-container.show {
             transform: translateY(0);
+            pointer-events: auto;
         }
 
         .dog-container img {
@@ -1150,7 +1152,7 @@
     </div>
 
     <!-- 犬の画像コンテナ -->
-    <div class="dog-container" id="dogContainer">
+    <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
         <img src="main-dog.png" alt="犬">
     </div>
 
@@ -1406,8 +1408,8 @@
             loadLatestVideos();
         });
 
-        // 通り過ぎる画像のアニメーション制御
-        let hasTriggeredTrain = false;
+        // 犬の画像表示制御
+        let dogTimer = null;
         
         window.addEventListener('scroll', () => {
             const scrollHeight = document.documentElement.scrollHeight;
@@ -1415,12 +1417,29 @@
             const clientHeight = window.innerHeight;
             const scrollPercentage = (scrollTop + clientHeight) / scrollHeight * 100;
             
-            // 犬の画像制御
             const dogContainer = document.getElementById('dogContainer');
+            
+            // ページの90%以上スクロールしたら犬を表示
             if (scrollPercentage > 90) {
-                dogContainer.classList.add('show');
+                if (!dogContainer.classList.contains('show')) {
+                    dogContainer.classList.add('show');
+                    
+                    // 既存のタイマーをクリア
+                    if (dogTimer) {
+                        clearTimeout(dogTimer);
+                    }
+                    
+                    // 5秒後に自動的に隠す
+                    dogTimer = setTimeout(() => {
+                        dogContainer.classList.remove('show');
+                    }, 5000);
+                }
             } else {
                 dogContainer.classList.remove('show');
+                if (dogTimer) {
+                    clearTimeout(dogTimer);
+                    dogTimer = null;
+                }
             }
             
             // 列車の画像制御（40-60%の範囲で一度だけ発動）
@@ -1439,6 +1458,11 @@
                 }, 4000);
             }
         });
+
+        // スペシャルページを開く
+        function openSpecialPage() {
+            window.open('special.html', '_blank');
+        }
     </script>
 </body>
 </html>
