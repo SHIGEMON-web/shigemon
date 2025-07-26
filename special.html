@@ -359,7 +359,7 @@
                 transform: translate(0, 0) scale(0) rotate(0deg);
                 opacity: 1;
             }
-            50% {
+            60% {
                 opacity: 1;
             }
             100% {
@@ -686,22 +686,22 @@
                         document.body.appendChild(flash);
                         setTimeout(() => flash.remove(), 1000);
 
-                        // 超大量の爆発エフェクト（5波）
-                        for (let wave = 0; wave < 5; wave++) {
+                        // 軽量化した爆発エフェクト（3波）
+                        for (let wave = 0; wave < 3; wave++) {
                             setTimeout(() => {
-                                // 各ウェーブで30個の爆発
-                                for (let i = 0; i < 30; i++) {
+                                // 各ウェーブで5個の爆発
+                                for (let i = 0; i < 5; i++) {
                                     const randomX = Math.random() * window.innerWidth;
                                     const randomY = Math.random() * window.innerHeight;
                                     createMegaExplosion(randomX, randomY);
                                 }
-                                // 肉球も追加
-                                for (let i = 0; i < 15; i++) {
+                                // 肉球も5個に削減
+                                for (let i = 0; i < 5; i++) {
                                     const randomX = Math.random() * window.innerWidth;
                                     const randomY = Math.random() * window.innerHeight;
                                     createPawExplosion(randomX, randomY);
                                 }
-                            }, wave * 400);
+                            }, wave * 600);
                         }
 
                         // 巨大犬の出現
@@ -782,13 +782,13 @@
             explosion.style.height = '0';
             explosion.style.zIndex = '1998';
             
-            // 様々なサイズと色のパーティクルを大量生成
-            for (let i = 0; i < 80; i++) {
+            // パーティクル数を削減（20個）
+            for (let i = 0; i < 20; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'mega-explosion-particle';
                 
-                // ランダムなサイズ（30px〜150px）
-                const size = 30 + Math.random() * 120;
+                // ランダムなサイズ（40px〜120px）
+                const size = 40 + Math.random() * 80;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 
@@ -798,15 +798,13 @@
                     'radial-gradient(circle, #ffff00, #ff9900)',
                     'radial-gradient(circle, #ff00ff, #ff0099)',
                     'radial-gradient(circle, #00ffff, #0099ff)',
-                    'radial-gradient(circle, #ffffff, #ffcc00)',
-                    'radial-gradient(circle, #00ff00, #00ff99)',
-                    'radial-gradient(circle, #9900ff, #ff00ff)'
+                    'radial-gradient(circle, #ffffff, #ffcc00)'
                 ];
                 particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 
                 // ランダムな方向と距離
                 const angle = Math.random() * 360;
-                const distance = 300 + Math.random() * 800;
+                const distance = 200 + Math.random() * 500;
                 const x = Math.cos(angle * Math.PI / 180) * distance;
                 const y = Math.sin(angle * Math.PI / 180) * distance;
                 particle.style.setProperty('--x', `${x}px`);
@@ -820,33 +818,34 @@
             }
             
             document.body.appendChild(explosion);
-            setTimeout(() => explosion.remove(), 3000);
+            setTimeout(() => explosion.remove(), 4000);
         }
 
         // 肉球爆発エフェクト
         function createPawExplosion(x, y) {
             const paws = ['🐾', '🐕', '🦴', '❤️'];
             
-            for (let i = 0; i < 10; i++) {
+            // パーティクル数を削減（5個）
+            for (let i = 0; i < 5; i++) {
                 const paw = document.createElement('div');
                 paw.className = 'paw-particle';
                 paw.textContent = paws[Math.floor(Math.random() * paws.length)];
                 paw.style.position = 'fixed';
                 paw.style.left = x + 'px';
                 paw.style.top = y + 'px';
-                paw.style.fontSize = (30 + Math.random() * 50) + 'px';
+                paw.style.fontSize = (40 + Math.random() * 40) + 'px';
                 paw.style.zIndex = '1998';
                 
                 // ランダムな方向
                 const angle = Math.random() * 360;
-                const distance = 200 + Math.random() * 600;
+                const distance = 150 + Math.random() * 400;
                 const px = Math.cos(angle * Math.PI / 180) * distance;
                 const py = Math.sin(angle * Math.PI / 180) * distance;
                 paw.style.setProperty('--x', `${px}px`);
                 paw.style.setProperty('--y', `${py}px`);
                 
                 document.body.appendChild(paw);
-                setTimeout(() => paw.remove(), 4000);
+                setTimeout(() => paw.remove(), 5000);
             }
         }
 
