@@ -101,15 +101,23 @@
         }
 
         /* プロフィール */
+        #profile {
+            background: white;
+            padding: 3rem 5%;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+
         .profile {
             display: grid;
             grid-template-columns: 300px 1fr;
-            gap: 2rem;
+            gap: 3rem;
             align-items: center;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 0;
+            box-shadow: none;
+            background: transparent;
         }
 
         .profile-img {
@@ -124,6 +132,45 @@
             font-size: 1.5rem;
             margin-bottom: 0.75rem;
             color: #2c3e50;
+        }
+
+        /* チャンネル統計 */
+        .channel-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 3rem;
+            background: transparent;
+            padding: 2rem 0 0;
+            border-radius: 0;
+            box-shadow: none;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            border-right: 2px solid #f0f0f0;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
         }
 
         /* カードグリッド */
@@ -376,6 +423,10 @@
                 grid-template-columns: 1fr;
             }
 
+            #profile {
+                padding: 2rem 5%;
+            }
+
             .profile {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -394,6 +445,22 @@
                 flex-direction: column;
                 gap: 2rem;
                 text-align: center;
+            }
+
+            .channel-stats {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin-top: 2rem;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 2px solid #f0f0f0;
+                padding: 1rem 0;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
             }
         }
 
@@ -433,6 +500,20 @@
                     <p>YouTuberとして鉄道模型やジオラマ製作の動画を配信しています。<br>
                     精密なジオラマ製作技術を活かし、企業様向けのジオラマ製作や、イベント向けコンテンツの提供も行っています。<br>
                     鉄道模型の魅力を多くの方に伝えるため、日々活動中です。</p>
+                </div>
+            </div>
+            <div class="channel-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="subscriber-count">-</span>
+                    <span class="stat-label">チャンネル登録者数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="video-count">-</span>
+                    <span class="stat-label">動画本数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="view-count">-</span>
+                    <span class="stat-label">総再生回数</span>
                 </div>
             </div>
         </section>
@@ -644,39 +725,11 @@
             
             <div id="contents-youtube" class="tab-content active">
                 <div class="card-grid" id="youtube-grid">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x225" alt="YouTube動画1" class="card-img">
-                        <h3>最新動画タイトル1</h3>
-                        <p>動画の説明文がここに入ります。</p>
-                    </div>
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x225" alt="YouTube動画2" class="card-img">
-                        <h3>最新動画タイトル2</h3>
-                        <p>動画の説明文がここに入ります。</p>
-                    </div>
-                    <div class="card">
-                        <img src="https://via.placeholder.com/400x225" alt="YouTube動画3" class="card-img">
-                        <h3>最新動画タイトル3</h3>
-                        <p>動画の説明文がここに入ります。</p>
-                    </div>
+                    <!-- YouTube動画はJavaScriptで動的に追加されます -->
                 </div>
                 <div id="youtube-more" class="hidden">
-                    <div class="card-grid">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/400x225" alt="YouTube動画4" class="card-img">
-                            <h3>動画タイトル4</h3>
-                            <p>動画の説明文がここに入ります。</p>
-                        </div>
-                        <div class="card">
-                            <img src="https://via.placeholder.com/400x225" alt="YouTube動画5" class="card-img">
-                            <h3>動画タイトル5</h3>
-                            <p>動画の説明文がここに入ります。</p>
-                        </div>
-                        <div class="card">
-                            <img src="https://via.placeholder.com/400x225" alt="YouTube動画6" class="card-img">
-                            <h3>動画タイトル6</h3>
-                            <p>動画の説明文がここに入ります。</p>
-                        </div>
+                    <div class="card-grid" id="youtube-more-grid">
+                        <!-- 追加のYouTube動画はJavaScriptで動的に追加されます -->
                     </div>
                 </div>
                 <button class="more-btn" onclick="toggleYouTube()">もっと見る</button>
@@ -743,6 +796,10 @@
     </footer>
 
     <script>
+        // YouTube API設定
+        const API_KEY = 'AIzaSyBso5x4s3Air5CNAXc2UzSQEmQ5OGKkfq8';
+        const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
+
         // タブ切り替え機能
         function switchTab(section, tabName) {
             const tabs = document.querySelectorAll(`#${section} .tab`);
@@ -795,6 +852,160 @@
                     });
                 }
             });
+        });
+
+        // チャンネル統計情報を取得
+        async function loadChannelStats() {
+            try {
+                const response = await fetch(
+                    `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`
+                );
+                const data = await response.json();
+                
+                if (data.items && data.items.length > 0) {
+                    const stats = data.items[0].statistics;
+                    
+                    // 数値をフォーマット
+                    document.getElementById('subscriber-count').textContent = formatNumber(stats.subscriberCount);
+                    document.getElementById('video-count').textContent = formatNumber(stats.videoCount);
+                    document.getElementById('view-count').textContent = formatNumber(stats.viewCount);
+                }
+            } catch (error) {
+                console.error('チャンネル統計の取得エラー:', error);
+            }
+        }
+
+        // 最新動画を取得
+        async function loadLatestVideos() {
+            try {
+                const response = await fetch(
+                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=9&type=video`
+                );
+                const data = await response.json();
+                
+                if (data.items) {
+                    // 動画IDのリストを作成
+                    const videoIds = data.items.map(item => item.id.videoId).join(',');
+                    
+                    // 動画の詳細情報（再生回数など）を取得
+                    const detailsResponse = await fetch(
+                        `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=statistics,contentDetails`
+                    );
+                    const detailsData = await detailsResponse.json();
+                    
+                    // 動画情報と詳細情報を結合
+                    const videosWithDetails = data.items.map((item, index) => {
+                        return {
+                            ...item,
+                            statistics: detailsData.items[index]?.statistics || {},
+                            contentDetails: detailsData.items[index]?.contentDetails || {}
+                        };
+                    });
+                    
+                    displayVideos(videosWithDetails);
+                }
+            } catch (error) {
+                console.error('動画の取得エラー:', error);
+            }
+        }
+
+        // 動画を表示
+        function displayVideos(videos) {
+            const mainGrid = document.getElementById('youtube-grid');
+            const moreGrid = document.getElementById('youtube-more-grid');
+            
+            mainGrid.innerHTML = '';
+            moreGrid.innerHTML = '';
+            
+            videos.forEach((video, index) => {
+                const videoCard = createVideoCard(video);
+                if (index < 3) {
+                    mainGrid.appendChild(videoCard);
+                } else {
+                    moreGrid.appendChild(videoCard);
+                }
+            });
+        }
+
+        // 動画カードを作成
+        function createVideoCard(video) {
+            const card = document.createElement('div');
+            card.className = 'card video-card';
+            
+            const videoId = video.id.videoId;
+            const title = video.snippet.title;
+            const thumbnail = video.snippet.thumbnails.high.url;
+            const viewCount = video.statistics.viewCount || '0';
+            const publishedAt = new Date(video.snippet.publishedAt);
+            
+            card.innerHTML = `
+                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="text-decoration: none; color: inherit;">
+                    <img src="${thumbnail}" alt="${title}" class="youtube-thumbnail">
+                    <div class="play-icon"></div>
+                    <h3 style="font-size: 1rem; margin-top: 0.5rem; line-height: 1.4;">${title}</h3>
+                    <div class="video-meta">
+                        <div class="video-views">
+                            <span>👁</span>
+                            <span>${formatViewCount(viewCount)}回</span>
+                        </div>
+                        <div class="video-date">${formatDate(publishedAt)}</div>
+                    </div>
+                </a>
+            `;
+            
+            return card;
+        }
+
+        // 再生回数をフォーマット
+        function formatViewCount(count) {
+            count = parseInt(count);
+            if (count >= 10000) {
+                return (count / 10000).toFixed(1) + '万';
+            } else if (count >= 1000) {
+                return Math.floor(count / 1000) + '千';
+            }
+            return count.toString();
+        }
+
+        // 日付をフォーマット
+        function formatDate(date) {
+            const now = new Date();
+            const diff = now - date;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            if (days === 0) {
+                return '今日';
+            } else if (days === 1) {
+                return '昨日';
+            } else if (days < 7) {
+                return `${days}日前`;
+            } else if (days < 30) {
+                const weeks = Math.floor(days / 7);
+                return `${weeks}週間前`;
+            } else if (days < 365) {
+                const months = Math.floor(days / 30);
+                return `${months}ヶ月前`;
+            } else {
+                const years = Math.floor(days / 365);
+                return `${years}年前`;
+            }
+        }
+
+        // 数値をフォーマット
+        function formatNumber(num) {
+            num = parseInt(num);
+            if (num >= 10000) {
+                return (num / 10000).toFixed(1) + '万';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + '千';
+            }
+            return num.toString();
+        }
+
+        // ページ読み込み時に実行
+        window.addEventListener('load', () => {
+            loadChannelStats();
+            loadLatestVideos();
         });
     </script>
 </body>
