@@ -252,6 +252,90 @@
             margin-top: 1.5rem;
         }
 
+        /* スマホ用スライダーコンテナ */
+        .slider-container {
+            display: none;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1.5rem;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 1rem;
+        }
+
+        .slider-wrapper .card {
+            flex: 0 0 calc(85vw - 2rem);
+            max-width: 400px;
+        }
+
+        /* スライダーナビゲーション */
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dot.active {
+            background: #3498db;
+        }
+
+        /* スライダー矢印 */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            transition: opacity 0.3s;
+        }
+
+        .slider-arrow:hover {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-arrow.prev {
+            left: 10px;
+        }
+
+        .slider-arrow.next {
+            right: 10px;
+        }
+
+        .slider-arrow svg {
+            width: 20px;
+            height: 20px;
+            fill: #333;
+        }
+
+        .slider-arrow:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
         .card {
             background: white;
             padding: 1.5rem;
@@ -707,6 +791,16 @@
             .card-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+                display: none; /* スマホではグリッドを非表示 */
+            }
+
+            /* スマホでスライダーを表示 */
+            .slider-container {
+                display: block;
+            }
+
+            .slider-wrapper {
+                padding: 0 calc(7.5vw + 0.5rem);
             }
 
             #profile {
@@ -902,6 +996,42 @@
                     <p>ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。</p>
                 </div>
             </div>
+            <!-- スマホ用スライダー -->
+            <div class="slider-container">
+                <button class="slider-arrow prev" onclick="slideCards('skills', -1)">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <button class="slider-arrow next" onclick="slideCards('skills', 1)">
+                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+                <div class="slider-wrapper" id="skills-slider">
+                    <div class="card">
+                        <h3>YouTube動画製作</h3>
+                        <p>鉄道模型のレビュー動画や、ジオラマ製作過程の動画を企画から編集まで一貫して行います。</p>
+                    </div>
+                    <div class="card">
+                        <h3>ジオラマ製作</h3>
+                        <p>Nゲージを中心とした精密なジオラマを製作。企業様の展示用ジオラマも承ります。</p>
+                    </div>
+                    <div class="card">
+                        <h3>イベント企画</h3>
+                        <p>鉄道模型関連のイベント企画・運営をサポート。体験型コンテンツの提供も可能です。</p>
+                    </div>
+                    <div class="card">
+                        <h3>執筆・監修</h3>
+                        <p>鉄道模型やジオラマ製作に関する記事執筆、書籍の監修を行います。</p>
+                    </div>
+                    <div class="card">
+                        <h3>商品レビュー</h3>
+                        <p>新製品のレビュー動画製作。製品の魅力を分かりやすく伝えます。</p>
+                    </div>
+                    <div class="card">
+                        <h3>ワークショップ</h3>
+                        <p>ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。</p>
+                    </div>
+                </div>
+                <div class="slider-nav" id="skills-nav"></div>
+            </div>
         </section>
 
         <!-- 過去の仕事 -->
@@ -1047,6 +1177,48 @@
                     <h3>機関区</h3>
                     <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
                 </div>
+            </div>
+            <!-- スマホ用スライダー -->
+            <div class="slider-container">
+                <button class="slider-arrow prev" onclick="slideCards('gallery', -1)">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <button class="slider-arrow next" onclick="slideCards('gallery', 1)">
+                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+                <div class="slider-wrapper" id="gallery-slider">
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>山間部の駅</h3>
+                        <p>緑豊かな山間部の小さな駅を再現。四季の変化も表現しています。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>都市型レイアウト</h3>
+                        <p>高架線と地上線が交差する都市部の風景を精密に再現。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>海辺の路線</h3>
+                        <p>海沿いを走るローカル線の情景。波の表現にもこだわりました。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>雪景色の駅</h3>
+                        <p>冬の雪に覆われた駅の情景。雪の質感表現が見どころです。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>田園風景</h3>
+                        <p>のどかな田園地帯を走る単線。日本の原風景を表現しました。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">画像準備中</div>
+                        <h3>機関区</h3>
+                        <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
+                    </div>
+                </div>
+                <div class="slider-nav" id="gallery-nav"></div>
             </div>
             <div id="gallery-more" class="hidden">
                 <div class="card-grid">
@@ -1432,10 +1604,136 @@
             });
         }
 
+        // スライダー機能
+        const sliderPositions = {};
+        
+        function initSliders() {
+            const sections = ['skills', 'gallery'];
+            sections.forEach(section => {
+                sliderPositions[section] = 0;
+                updateSliderNav(section);
+                updateSliderButtons(section);
+            });
+            
+            // タッチスワイプ対応
+            if (window.innerWidth <= 768) {
+                sections.forEach(section => {
+                    const slider = document.getElementById(`${section}-slider`);
+                    if (slider) {
+                        let startX = 0;
+                        let currentX = 0;
+                        let isDragging = false;
+                        
+                        slider.addEventListener('touchstart', (e) => {
+                            startX = e.touches[0].clientX;
+                            isDragging = true;
+                        });
+                        
+                        slider.addEventListener('touchmove', (e) => {
+                            if (!isDragging) return;
+                            currentX = e.touches[0].clientX;
+                        });
+                        
+                        slider.addEventListener('touchend', () => {
+                            if (!isDragging) return;
+                            isDragging = false;
+                            const diff = startX - currentX;
+                            if (Math.abs(diff) > 50) {
+                                slideCards(section, diff > 0 ? 1 : -1);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        
+        function slideCards(section, direction) {
+            const slider = document.getElementById(`${section}-slider`);
+            const cards = slider.querySelectorAll('.card');
+            const maxPosition = cards.length - 1;
+            
+            sliderPositions[section] += direction;
+            
+            // 境界チェック
+            if (sliderPositions[section] < 0) {
+                sliderPositions[section] = 0;
+            } else if (sliderPositions[section] > maxPosition) {
+                sliderPositions[section] = maxPosition;
+            }
+            
+            // スライド実行
+            const cardWidth = cards[0].offsetWidth + 16; // カード幅 + gap
+            slider.style.transform = `translateX(-${sliderPositions[section] * cardWidth}px)`;
+            
+            updateSliderNav(section);
+            updateSliderButtons(section);
+        }
+        
+        function updateSliderNav(section) {
+            const nav = document.getElementById(`${section}-nav`);
+            const slider = document.getElementById(`${section}-slider`);
+            
+            if (!nav || !slider) return;
+            
+            const cards = slider.querySelectorAll('.card');
+            nav.innerHTML = '';
+            
+            cards.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = 'slider-dot';
+                if (index === sliderPositions[section]) {
+                    dot.classList.add('active');
+                }
+                dot.onclick = () => goToSlide(section, index);
+                nav.appendChild(dot);
+            });
+        }
+        
+        function updateSliderButtons(section) {
+            const container = document.querySelector(`#${section} .slider-container`);
+            if (!container) return;
+            
+            const prevBtn = container.querySelector('.prev');
+            const nextBtn = container.querySelector('.next');
+            const slider = document.getElementById(`${section}-slider`);
+            const cards = slider.querySelectorAll('.card');
+            
+            prevBtn.disabled = sliderPositions[section] === 0;
+            nextBtn.disabled = sliderPositions[section] === cards.length - 1;
+        }
+        
+        function goToSlide(section, index) {
+            const slider = document.getElementById(`${section}-slider`);
+            const cards = slider.querySelectorAll('.card');
+            
+            sliderPositions[section] = index;
+            
+            const cardWidth = cards[0].offsetWidth + 16;
+            slider.style.transform = `translateX(-${index * cardWidth}px)`;
+            
+            updateSliderNav(section);
+            updateSliderButtons(section);
+        }
+
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
             loadChannelStats();
             loadLatestVideos();
+            initSliders();
+        });
+
+        // ウィンドウリサイズ時の処理
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                // PCサイズに戻った時はスライダーをリセット
+                Object.keys(sliderPositions).forEach(section => {
+                    const slider = document.getElementById(`${section}-slider`);
+                    if (slider) {
+                        slider.style.transform = 'translateX(0)';
+                        sliderPositions[section] = 0;
+                    }
+                });
+            }
         });
 
         // 犬の画像表示制御
