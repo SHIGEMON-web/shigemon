@@ -16,15 +16,71 @@
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
+            padding-top: 40px;
+        }
+
+        /* 注目のバナー */
+        .announcement-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            color: white;
+            padding: 0.75rem 5%;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .announcement-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%);
+            }
+        }
+
+        .announcement-banner a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+            height: 100%;
+        }
+
+        .announcement-banner a:hover {
+            text-decoration: underline;
+        }
+
+        .announcement-banner .icon {
+            font-size: 1.2rem;
         }
 
         /* ヘッダー */
         header {
             background: #fff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
+            position: sticky;
+            top: 40px;
             z-index: 1000;
         }
 
@@ -62,7 +118,7 @@
 
         /* メインコンテンツ */
         main {
-            margin-top: 50px;
+            min-height: 100vh;
         }
 
         /* ヒーローセクション */
@@ -88,14 +144,14 @@
 
         /* セクション共通 */
         section {
-            padding: 2.5rem 5%;
+            padding: 1.5rem 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         h2 {
             font-size: 1.75rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-align: center;
             color: #2c3e50;
         }
@@ -103,8 +159,8 @@
         /* プロフィール */
         #profile {
             background: white;
-            padding: 3rem 5%;
-            margin: 2rem auto;
+            padding: 2rem 5%;
+            margin: 1rem auto;
             max-width: 1200px;
             border-radius: 15px;
             box-shadow: 0 5px 30px rgba(0,0,0,0.1);
@@ -112,8 +168,8 @@
 
         .profile {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 3rem;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
             align-items: center;
             padding: 0;
             box-shadow: none;
@@ -130,8 +186,12 @@
 
         .profile-text h3 {
             font-size: 1.5rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: #2c3e50;
+        }
+
+        .profile-text p {
+            margin-bottom: 0;
         }
 
         /* チャンネル統計 */
@@ -139,9 +199,9 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0;
-            margin-top: 3rem;
+            margin-top: 1.5rem;
             background: transparent;
-            padding: 2rem 0 0;
+            padding: 1rem 0 0;
             border-radius: 0;
             box-shadow: none;
             border-top: 2px solid #f0f0f0;
@@ -149,7 +209,7 @@
 
         .stat-item {
             text-align: center;
-            padding: 1rem;
+            padding: 0.75rem;
             border-right: 2px solid #f0f0f0;
         }
 
@@ -159,16 +219,16 @@
 
         .stat-number {
             display: block;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #3498db;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             line-height: 1;
         }
 
         .stat-label {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #666;
             font-weight: 500;
         }
@@ -177,13 +237,13 @@
         .card-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
         .card {
             background: white;
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s, box-shadow 0.3s;
@@ -197,7 +257,7 @@
         }
 
         .card h3 {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: #2c3e50;
         }
 
@@ -233,21 +293,23 @@
         /* タブ */
         .tabs {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
             border-bottom: 2px solid #e0e0e0;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .tab {
-            padding: 0.5rem 1.5rem;
+            padding: 0.4rem 1rem;
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #666;
             transition: color 0.3s;
             position: relative;
+            white-space: nowrap;
         }
 
         .tab.active {
@@ -322,10 +384,93 @@
             background: #2980b9;
         }
 
+        /* YouTube動画埋め込み */
+        .video-card {
+            position: relative;
+        }
+
+        .video-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-thumbnail-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            border-radius: 5px;
+            background: #000;
+        }
+
+        .youtube-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .video-card:hover .play-icon {
+            background: #ff0000;
+        }
+
+        .play-icon::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 3px;
+        }
+
+        .video-card h3 {
+            font-size: 0.95rem;
+            margin: 0.75rem 0 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .video-views {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
         /* お問い合わせフォーム */
         .contact-form {
             background: white;
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             max-width: 600px;
@@ -333,7 +478,7 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         label {
@@ -375,7 +520,8 @@
         footer {
             background: #2c3e50;
             color: white;
-            padding: 3rem 5%;
+            padding: 2rem 5%;
+            margin-top: 2rem;
         }
 
         .footer-content {
@@ -393,12 +539,21 @@
 
         .social-icons a {
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .social-icons a:hover {
-            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .footer-links {
@@ -417,19 +572,57 @@
             opacity: 0.8;
         }
 
+        .footer-copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 犬の画像 */
+        .dog-container {
+            position: fixed;
+            bottom: 0;
+            right: 50px;
+            width: 300px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.5s ease-out;
+        }
+
+        .dog-container.show {
+            transform: translateY(0);
+        }
+
+        .dog-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom;
+        }
+
         /* レスポンシブ */
         @media (max-width: 768px) {
+            body {
+                padding-top: 40px;
+            }
+
             .card-grid {
                 grid-template-columns: 1fr;
             }
 
             #profile {
-                padding: 2rem 5%;
+                padding: 1.5rem 5%;
             }
 
             .profile {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 1.5rem;
             }
 
             .profile-img {
@@ -450,17 +643,38 @@
             .channel-stats {
                 grid-template-columns: 1fr;
                 gap: 0;
-                margin-top: 2rem;
+                margin-top: 1rem;
             }
 
             .stat-item {
                 border-right: none;
                 border-bottom: 2px solid #f0f0f0;
-                padding: 1rem 0;
+                padding: 0.75rem 0;
             }
 
             .stat-item:last-child {
                 border-bottom: none;
+            }
+
+            /* タブのスマホ表示 */
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
+                gap: 0;
+                padding-bottom: 2px;
+            }
+
+            .tab {
+                flex: 0 0 auto;
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .dog-container {
+                width: 200px;
+                height: 300px;
+                right: 20px;
             }
         }
 
@@ -470,6 +684,14 @@
     </style>
 </head>
 <body>
+    <!-- 注目のバナー -->
+    <div class="announcement-banner">
+        <a href="https://amzn.to/4lNA5tf" target="_blank">
+            <span class="icon">📚</span>
+            <span>初の著書『やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル(成美堂出版)』 好評発売中！</span>
+        </a>
+    </div>
+
     <!-- ヘッダー -->
     <header>
         <nav>
@@ -783,9 +1005,21 @@
     <footer>
         <div class="footer-content">
             <div class="social-icons">
-                <a href="https://twitter.com" target="_blank">X</a>
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-                <a href="https://youtube.com" target="_blank">YouTube</a>
+                <a href="https://twitter.com" target="_blank" title="X (Twitter)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" title="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
+                <a href="https://youtube.com" target="_blank" title="YouTube">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
             </div>
             <div class="footer-links">
                 <a href="#">N蒸機の世界</a>
@@ -793,7 +1027,15 @@
                 <a href="#">Nゲージ蒸気機関車</a>
             </div>
         </div>
+        <div class="footer-copyright">
+            © 2025 SHIGEMON. All rights reserved.
+        </div>
     </footer>
+
+    <!-- 犬の画像コンテナ -->
+    <div class="dog-container" id="dogContainer">
+        <img src="main-dog.png" alt="犬">
+    </div>
 
     <script>
         // YouTube API設定
@@ -846,9 +1088,14 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const bannerHeight = document.querySelector('.announcement-banner').offsetHeight;
+                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerHeight - bannerHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -879,34 +1126,56 @@
         async function loadLatestVideos() {
             try {
                 const response = await fetch(
-                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=9&type=video`
+                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20&type=video`
                 );
                 const data = await response.json();
                 
                 if (data.items) {
-                    // 動画IDのリストを作成
-                    const videoIds = data.items.map(item => item.id.videoId).join(',');
+                    // ショート動画を除外
+                    const regularVideos = [];
+                    const videoIds = [];
                     
-                    // 動画の詳細情報（再生回数など）を取得
+                    for (const item of data.items) {
+                        videoIds.push(item.id.videoId);
+                    }
+                    
+                    // 動画の詳細情報を取得
                     const detailsResponse = await fetch(
-                        `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=statistics,contentDetails`
+                        `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds.join(',')}&part=statistics,contentDetails`
                     );
                     const detailsData = await detailsResponse.json();
                     
-                    // 動画情報と詳細情報を結合
-                    const videosWithDetails = data.items.map((item, index) => {
-                        return {
-                            ...item,
-                            statistics: detailsData.items[index]?.statistics || {},
-                            contentDetails: detailsData.items[index]?.contentDetails || {}
-                        };
+                    // ショート動画をフィルタリング（60秒以下の動画を除外）
+                    data.items.forEach((item, index) => {
+                        const details = detailsData.items.find(d => d.id === item.id.videoId);
+                        if (details) {
+                            const duration = details.contentDetails.duration;
+                            const seconds = parseDuration(duration);
+                            
+                            if (seconds > 60) {
+                                regularVideos.push({
+                                    ...item,
+                                    statistics: details.statistics || {},
+                                    contentDetails: details.contentDetails || {}
+                                });
+                            }
+                        }
                     });
                     
-                    displayVideos(videosWithDetails);
+                    displayVideos(regularVideos.slice(0, 9));
                 }
             } catch (error) {
                 console.error('動画の取得エラー:', error);
             }
+        }
+
+        // ISO 8601形式の期間を秒に変換
+        function parseDuration(duration) {
+            const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+            const hours = (parseInt(match[1]) || 0);
+            const minutes = (parseInt(match[2]) || 0);
+            const seconds = (parseInt(match[3]) || 0);
+            return hours * 3600 + minutes * 60 + seconds;
         }
 
         // 動画を表示
@@ -939,14 +1208,15 @@
             const publishedAt = new Date(video.snippet.publishedAt);
             
             card.innerHTML = `
-                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="text-decoration: none; color: inherit;">
-                    <img src="${thumbnail}" alt="${title}" class="youtube-thumbnail">
-                    <div class="play-icon"></div>
-                    <h3 style="font-size: 1rem; margin-top: 0.5rem; line-height: 1.4;">${title}</h3>
+                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+                    <div class="video-thumbnail-wrapper">
+                        <img src="${thumbnail}" alt="${title}" class="youtube-thumbnail">
+                        <div class="play-icon"></div>
+                    </div>
+                    <h3>${title}</h3>
                     <div class="video-meta">
                         <div class="video-views">
-                            <span>👁</span>
-                            <span>${formatViewCount(viewCount)}回</span>
+                            <span>視聴回数: ${formatViewCount(viewCount)}回</span>
                         </div>
                         <div class="video-date">${formatDate(publishedAt)}</div>
                     </div>
@@ -1006,6 +1276,23 @@
         window.addEventListener('load', () => {
             loadChannelStats();
             loadLatestVideos();
+        });
+
+        // 犬の画像表示制御
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.scrollY;
+            const clientHeight = window.innerHeight;
+            const scrollPercentage = (scrollTop + clientHeight) / scrollHeight * 100;
+            
+            const dogContainer = document.getElementById('dogContainer');
+            
+            // ページの90%以上スクロールしたら犬を表示
+            if (scrollPercentage > 90) {
+                dogContainer.classList.add('show');
+            } else {
+                dogContainer.classList.remove('show');
+            }
         });
     </script>
 </body>
