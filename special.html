@@ -220,14 +220,67 @@
 
         .dog-post {
             position: relative;
-            background: #fff;
+            background: transparent;
+            cursor: pointer;
+            animation: popIn 0.5s ease-out backwards;
+            aspect-ratio: 1 / 1;
+            perspective: 1000px;
+        }
+
+        .dog-post.matched {
+            pointer-events: none;
+        }
+
+        .dog-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            border-radius: 8px;
+        }
+
+        .dog-post.flipped .dog-card {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: popIn 0.5s ease-out backwards;
-            aspect-ratio: 1 / 1; /* 正方形を保つ */
+        }
+
+        .card-front {
+            background: #fff;
+        }
+
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: #fff;
+        }
+
+        .dog-post:hover .dog-card {
+            transform: rotateY(10deg);
+        }
+
+        .dog-post.flipped:hover .dog-card {
+            transform: rotateY(170deg);
+        }
+
+        .card-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .dog-post:nth-child(n) { animation-delay: calc(0.05s * var(--index)); }
@@ -243,20 +296,159 @@
             }
         }
 
-        .dog-post:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        /* 爆発エフェクト */
+        .explosion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+            z-index: 1000;
         }
 
-        .dog-post img {
+        .explosion-particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ff6b6b, #feca57, #ff9ff3);
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        .mega-explosion-particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: megaExplode 2s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes megaExplode {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* 画面全体の爆発オーバーレイ */
+        .explosion-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            z-index: 1999;
+            pointer-events: none;
+            animation: flashScreen 0.5s ease-out;
         }
 
-        .dog-post:hover img {
-            transform: scale(1.1);
+        @keyframes flashScreen {
+            0% {
+                background: rgba(255, 255, 255, 0);
+            }
+            50% {
+                background: rgba(255, 255, 100, 0.8);
+            }
+            100% {
+                background: rgba(255, 255, 255, 0);
+            }
+        }
+
+        /* 巨大犬の出現 */
+        .giant-dog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 95vw;
+            max-width: 1200px;
+            height: 95vh;
+            max-height: 1200px;
+            z-index: 2000;
+            animation: giantAppear 2s ease-out forwards;
+        }
+
+        .giant-dog.crazy {
+            animation: crazyDog 3s ease-in-out infinite;
+        }
+
+        .giant-dog img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+        }
+
+        @keyframes giantAppear {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+                opacity: 1;
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(0.9) rotate(270deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes crazyDog {
+            0% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+            }
+            10% {
+                transform: translate(-50%, -150%) scale(0.5) rotate(380deg);
+            }
+            20% {
+                transform: translate(-150%, -50%) scale(1.5) rotate(340deg);
+            }
+            30% {
+                transform: translate(50%, -50%) scale(0.3) rotate(400deg);
+            }
+            40% {
+                transform: translate(-50%, 50%) scale(2) rotate(320deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(0) rotate(450deg);
+            }
+            60% {
+                transform: translate(-50%, -50%) scale(1.8) rotate(500deg);
+            }
+            70% {
+                transform: translate(-200%, -200%) scale(0.7) rotate(540deg);
+            }
+            80% {
+                transform: translate(100%, 100%) scale(1.2) rotate(600deg);
+            }
+            90% {
+                transform: translate(-50%, -50%) scale(0.1) rotate(680deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(720deg);
+            }
         }
 
         /* ホームボタン */
@@ -364,79 +556,8 @@
         </div>
         
         <div class="grid-container">
-            <div class="instagram-grid">
-                <div class="dog-post" style="--index: 1">
-                    <img src="images/dog-grid-1.jpg" alt="かわいい犬1">
-                </div>
-                <div class="dog-post" style="--index: 2">
-                    <img src="images/dog-grid-2.jpg" alt="かわいい犬2">
-                </div>
-                <div class="dog-post" style="--index: 3">
-                    <img src="images/dog-grid-3.jpg" alt="かわいい犬3">
-                </div>
-                <div class="dog-post" style="--index: 4">
-                    <img src="images/dog-grid-4.jpg" alt="かわいい犬4">
-                </div>
-                <div class="dog-post" style="--index: 5">
-                    <img src="images/dog-grid-5.jpg" alt="かわいい犬5">
-                </div>
-                <div class="dog-post" style="--index: 6">
-                    <img src="images/dog-grid-6.jpg" alt="かわいい犬6">
-                </div>
-                <div class="dog-post" style="--index: 7">
-                    <img src="images/dog-grid-7.jpg" alt="かわいい犬7">
-                </div>
-                <div class="dog-post" style="--index: 8">
-                    <img src="images/dog-grid-8.jpg" alt="かわいい犬8">
-                </div>
-                <div class="dog-post" style="--index: 9">
-                    <img src="images/dog-grid-9.jpg" alt="かわいい犬9">
-                </div>
-                <div class="dog-post" style="--index: 10">
-                    <img src="images/dog-grid-10.jpg" alt="かわいい犬10">
-                </div>
-                <div class="dog-post" style="--index: 11">
-                    <img src="images/dog-grid-11.jpg" alt="かわいい犬11">
-                </div>
-                <div class="dog-post" style="--index: 12">
-                    <img src="images/dog-grid-12.jpg" alt="かわいい犬12">
-                </div>
-                <div class="dog-post" style="--index: 13">
-                    <img src="images/dog-grid-13.jpg" alt="かわいい犬13">
-                </div>
-                <div class="dog-post" style="--index: 14">
-                    <img src="images/dog-grid-14.jpg" alt="かわいい犬14">
-                </div>
-                <div class="dog-post" style="--index: 15">
-                    <img src="images/dog-grid-15.jpg" alt="かわいい犬15">
-                </div>
-                <div class="dog-post" style="--index: 16">
-                    <img src="images/dog-grid-16.jpg" alt="かわいい犬16">
-                </div>
-                <div class="dog-post" style="--index: 17">
-                    <img src="images/dog-grid-17.jpg" alt="かわいい犬17">
-                </div>
-                <div class="dog-post" style="--index: 18">
-                    <img src="images/dog-grid-18.jpg" alt="かわいい犬18">
-                </div>
-                <div class="dog-post" style="--index: 19">
-                    <img src="images/dog-grid-19.jpg" alt="かわいい犬19">
-                </div>
-                <div class="dog-post" style="--index: 20">
-                    <img src="images/dog-grid-20.jpg" alt="かわいい犬20">
-                </div>
-                <div class="dog-post" style="--index: 21">
-                    <img src="images/dog-grid-21.jpg" alt="かわいい犬21">
-                </div>
-                <div class="dog-post" style="--index: 22">
-                    <img src="images/dog-grid-22.jpg" alt="かわいい犬22">
-                </div>
-                <div class="dog-post" style="--index: 23">
-                    <img src="images/dog-grid-23.jpg" alt="かわいい犬23">
-                </div>
-                <div class="dog-post" style="--index: 24">
-                    <img src="images/dog-grid-24.jpg" alt="かわいい犬24">
-                </div>
+            <div class="instagram-grid" id="gameGrid">
+                <!-- カードはJavaScriptで動的に生成 -->
             </div>
         </div>
     </div>
@@ -444,18 +565,266 @@
     <a href="index.html" class="home-button">ホームに戻る</a>
 
     <script>
-        // 5秒後にコンテンツを表示
+        // ゲームの状態管理
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let canFlip = true;
+
+        // カードデータの作成（1組のペアと22枚の異なるカード）
+        function createCardData() {
+            const cards = [];
+            // 1組のペアを追加
+            cards.push({ id: 1, image: `images/dog-grid-1.jpg` });
+            cards.push({ id: 1, image: `images/dog-grid-1.jpg` });
+            
+            // 残り22枚は異なるカード
+            for (let i = 2; i <= 23; i++) {
+                cards.push({ id: i, image: `images/dog-grid-${i}.jpg` });
+            }
+            return shuffleArray(cards);
+        }
+
+        // 配列をシャッフル
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // カードを生成してグリッドに追加
+        function createCards() {
+            const grid = document.getElementById('gameGrid');
+            const cards = createCardData();
+            
+            cards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'dog-post';
+                cardElement.style.setProperty('--index', index + 1);
+                cardElement.dataset.cardId = card.id;
+                
+                cardElement.innerHTML = `
+                    <div class="dog-card">
+                        <div class="card-face card-front">
+                            <img src="images/card-front.jpg" alt="カード表面">
+                        </div>
+                        <div class="card-face card-back">
+                            <img src="${card.image}" alt="かわいい犬${card.id}">
+                        </div>
+                    </div>
+                `;
+                
+                cardElement.addEventListener('click', () => flipCard(cardElement));
+                grid.appendChild(cardElement);
+            });
+        }
+
+        // カードをめくる
+        function flipCard(card) {
+            if (!canFlip || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                canFlip = false;
+                checkMatch();
+            }
+        }
+
+        // マッチをチェック
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const id1 = card1.dataset.cardId;
+            const id2 = card2.dataset.cardId;
+
+            if (id1 === id2) {
+                // マッチした場合
+                setTimeout(() => {
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    createExplosion(card1);
+                    createExplosion(card2);
+                    flippedCards = [];
+                    canFlip = true;
+                    matchedPairs++;
+
+                    if (matchedPairs === 1) {
+                        // 画面全体のフラッシュ
+                        const flash = document.createElement('div');
+                        flash.className = 'explosion-overlay';
+                        document.body.appendChild(flash);
+                        setTimeout(() => flash.remove(), 500);
+
+                        // 超大量の爆発エフェクト
+                        for (let wave = 0; wave < 3; wave++) {
+                            setTimeout(() => {
+                                // 各ウェーブで20個の爆発
+                                for (let i = 0; i < 20; i++) {
+                                    const randomX = Math.random() * window.innerWidth;
+                                    const randomY = Math.random() * window.innerHeight;
+                                    createMegaExplosion(randomX, randomY);
+                                }
+                            }, wave * 300);
+                        }
+
+                        // 巨大犬の出現
+                        setTimeout(() => {
+                            showGiantDog();
+                        }, 1500);
+
+                        setTimeout(() => {
+                            alert('ペアを見つけました！おめでとうございます！');
+                            resetGame();
+                        }, 10000);
+                    }
+                }, 500);
+            } else {
+                // マッチしなかった場合
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                    canFlip = true;
+                }, 1500);
+            }
+        }
+
+        // 爆発エフェクトを作成
+        function createExplosion(card) {
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion';
+            
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'explosion-particle';
+                const angle = (i / 12) * 360;
+                const distance = 100 + Math.random() * 50;
+                const x = Math.cos(angle * Math.PI / 180) * distance;
+                const y = Math.sin(angle * Math.PI / 180) * distance;
+                particle.style.setProperty('--x', `${x}px`);
+                particle.style.setProperty('--y', `${y}px`);
+                explosion.appendChild(particle);
+            }
+            
+            card.appendChild(explosion);
+            setTimeout(() => explosion.remove(), 1000);
+        }
+
+        // 指定位置に爆発エフェクトを作成
+        function createExplosionAt(x, y) {
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion';
+            explosion.style.position = 'fixed';
+            explosion.style.left = x + 'px';
+            explosion.style.top = y + 'px';
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'explosion-particle';
+                particle.style.width = '30px';
+                particle.style.height = '30px';
+                const angle = (i / 20) * 360;
+                const distance = 150 + Math.random() * 100;
+                const x = Math.cos(angle * Math.PI / 180) * distance;
+                const y = Math.sin(angle * Math.PI / 180) * distance;
+                particle.style.setProperty('--x', `${x}px`);
+                particle.style.setProperty('--y', `${y}px`);
+                explosion.appendChild(particle);
+            }
+            
+            document.body.appendChild(explosion);
+            setTimeout(() => explosion.remove(), 1000);
+        }
+
+        // 超巨大爆発エフェクト
+        function createMegaExplosion(x, y) {
+            const explosion = document.createElement('div');
+            explosion.style.position = 'fixed';
+            explosion.style.left = x + 'px';
+            explosion.style.top = y + 'px';
+            explosion.style.width = '0';
+            explosion.style.height = '0';
+            explosion.style.zIndex = '1998';
+            
+            // 様々なサイズと色のパーティクルを大量生成
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'mega-explosion-particle';
+                
+                // ランダムなサイズ（20px〜100px）
+                const size = 20 + Math.random() * 80;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // ランダムな色
+                const colors = [
+                    'radial-gradient(circle, #ff0000, #ff6600)',
+                    'radial-gradient(circle, #ffff00, #ff9900)',
+                    'radial-gradient(circle, #ff00ff, #ff0099)',
+                    'radial-gradient(circle, #00ffff, #0099ff)',
+                    'radial-gradient(circle, #ffffff, #ffcc00)'
+                ];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // ランダムな方向と距離
+                const angle = Math.random() * 360;
+                const distance = 200 + Math.random() * 600;
+                const x = Math.cos(angle * Math.PI / 180) * distance;
+                const y = Math.sin(angle * Math.PI / 180) * distance;
+                particle.style.setProperty('--x', `${x}px`);
+                particle.style.setProperty('--y', `${y}px`);
+                
+                // ランダムな開始位置
+                particle.style.left = (-size/2) + 'px';
+                particle.style.top = (-size/2) + 'px';
+                
+                explosion.appendChild(particle);
+            }
+            
+            document.body.appendChild(explosion);
+            setTimeout(() => explosion.remove(), 2000);
+        }
+
+        // 巨大犬を表示
+        function showGiantDog() {
+            // 巨大犬
+            const giantDog = document.createElement('div');
+            giantDog.className = 'giant-dog';
+            giantDog.innerHTML = '<img src="images/dog-grid-1.jpg" alt="巨大な犬">';
+            document.body.appendChild(giantDog);
+
+            // 5秒後に変な動きを開始
+            setTimeout(() => {
+                giantDog.classList.add('crazy');
+            }, 5000);
+
+            // 8秒後に削除
+            setTimeout(() => {
+                giantDog.remove();
+            }, 8000);
+        }
+
+        // ゲームをリセット
+        function resetGame() {
+            const grid = document.getElementById('gameGrid');
+            grid.innerHTML = '';
+            flippedCards = [];
+            matchedPairs = 0;
+            canFlip = true;
+            createCards();
+        }
+
+        // 5秒後にコンテンツを表示してゲーム開始
         setTimeout(() => {
             document.getElementById('loadingMessage').style.display = 'none';
             document.getElementById('mainContent').classList.add('show');
+            createCards();
         }, 5000);
-
-        // 犬の画像をクリックで拡大表示（オプション）
-        document.querySelectorAll('.dog-post').forEach(post => {
-            post.addEventListener('click', function() {
-                console.log('犬の画像がクリックされました');
-            });
-        });
     </script>
 </body>
 </html>
