@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Dog Paradise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-image: url('main-dog.png');
+            background-size: 200px;
+            background-repeat: repeat;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* 背景オーバーレイ */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+        }
+
+        /* 飛び回る犬 */
+        .flying-dog {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            z-index: 1000;
+            cursor: pointer;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        .flying-dog img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes fly1 {
+            0% { transform: translate(-100px, 100vh) rotate(0deg); }
+            25% { transform: translate(30vw, 20vh) rotate(90deg); }
+            50% { transform: translate(70vw, 60vh) rotate(180deg); }
+            75% { transform: translate(20vw, 30vh) rotate(270deg); }
+            100% { transform: translate(50vw, 50vh) rotate(360deg) scale(0); }
+        }
+
+        @keyframes fly2 {
+            0% { transform: translate(100vw, -100px) rotate(0deg); }
+            25% { transform: translate(60vw, 40vh) rotate(-90deg); }
+            50% { transform: translate(10vw, 20vh) rotate(-180deg); }
+            75% { transform: translate(80vw, 70vh) rotate(-270deg); }
+            100% { transform: translate(50vw, 50vh) rotate(-360deg) scale(0); }
+        }
+
+        @keyframes fly3 {
+            0% { transform: translate(50vw, -100px) rotate(0deg); }
+            33% { transform: translate(90vw, 80vh) rotate(120deg); }
+            66% { transform: translate(10vw, 90vh) rotate(240deg); }
+            100% { transform: translate(50vw, 50vh) rotate(360deg) scale(0); }
+        }
+
+        @keyframes fly4 {
+            0% { transform: translate(-100px, 50vh) rotate(0deg); }
+            20% { transform: translate(80vw, 10vh) rotate(72deg); }
+            40% { transform: translate(20vw, 80vh) rotate(144deg); }
+            60% { transform: translate(90vw, 40vh) rotate(216deg); }
+            80% { transform: translate(30vw, 60vh) rotate(288deg); }
+            100% { transform: translate(50vw, 50vh) rotate(360deg) scale(0); }
+        }
+
+        @keyframes fly5 {
+            0% { transform: translate(100vw, 100vh) rotate(0deg); }
+            50% { transform: translate(0, 0) rotate(180deg); }
+            100% { transform: translate(50vw, 50vh) rotate(360deg) scale(0); }
+        }
+
+        /* メインコンテンツ */
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .container.show {
+            display: block;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* インスタグラム風グリッド */
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .dog-post {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+            background: #f0f0f0;
+        }
+
+        .dog-post:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .dog-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dog-info {
+            display: none;
+        }
+
+        .dog-name {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .dog-breed {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ホームボタン */
+        .home-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* ローディングメッセージ */
+        .loading-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1001;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .loading-message h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .paw-prints {
+            font-size: 2rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .flying-dog {
+                width: 60px;
+                height: 60px;
+            }
+
+            .home-button {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <!-- ローディングメッセージ -->
+    <div class="loading-message" id="loadingMessage">
+        <h2>犬たちが集まってきています...</h2>
+        <div class="paw-prints">...</div>
+    </div>
+
+    <!-- 飛び回る犬たち -->
+    <div class="flying-dog" style="animation: fly1 3s;">
+        <img src="main-dog.png" alt="飛ぶ犬1">
+    </div>
+    <div class="flying-dog" style="animation: fly2 3.5s;">
+        <img src="main-dog.png" alt="飛ぶ犬2">
+    </div>
+    <div class="flying-dog" style="animation: fly3 4s;">
+        <img src="main-dog.png" alt="飛ぶ犬3">
+    </div>
+    <div class="flying-dog" style="animation: fly4 4.5s;">
+        <img src="main-dog.png" alt="飛ぶ犬4">
+    </div>
+    <div class="flying-dog" style="animation: fly5 5s;">
+        <img src="main-dog.png" alt="飛ぶ犬5">
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="container" id="mainContent">
+        <h1>わんこパラダイス</h1>
+        
+        <div class="instagram-grid">
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/ffb6c1/fff?text=Dog+1" alt="かわいい犬1">
+                <div class="dog-info">
+                    <div class="dog-name">ポチ</div>
+                    <div class="dog-breed">柴犬</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/87ceeb/fff?text=Dog+2" alt="かわいい犬2">
+                <div class="dog-info">
+                    <div class="dog-name">ココ</div>
+                    <div class="dog-breed">トイプードル</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/98fb98/fff?text=Dog+3" alt="かわいい犬3">
+                <div class="dog-info">
+                    <div class="dog-name">マロン</div>
+                    <div class="dog-breed">ゴールデンレトリバー</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/dda0dd/fff?text=Dog+4" alt="かわいい犬4">
+                <div class="dog-info">
+                    <div class="dog-name">チョコ</div>
+                    <div class="dog-breed">ダックスフンド</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/f0e68c/fff?text=Dog+5" alt="かわいい犬5">
+                <div class="dog-info">
+                    <div class="dog-name">ハナ</div>
+                    <div class="dog-breed">ポメラニアン</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/ffdab9/fff?text=Dog+6" alt="かわいい犬6">
+                <div class="dog-info">
+                    <div class="dog-name">レオ</div>
+                    <div class="dog-breed">フレンチブルドッグ</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/b0c4de/fff?text=Dog+7" alt="かわいい犬7">
+                <div class="dog-info">
+                    <div class="dog-name">モモ</div>
+                    <div class="dog-breed">コーギー</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/ffc0cb/fff?text=Dog+8" alt="かわいい犬8">
+                <div class="dog-info">
+                    <div class="dog-name">ソラ</div>
+                    <div class="dog-breed">ハスキー</div>
+                </div>
+            </div>
+            <div class="dog-post">
+                <img src="https://via.placeholder.com/400x400/add8e6/fff?text=Dog+9" alt="かわいい犬9">
+                <div class="dog-info">
+                    <div class="dog-name">ルル</div>
+                    <div class="dog-breed">マルチーズ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="home-button">ホームに戻る</a>
+
+    <script>
+        // 5秒後にコンテンツを表示
+        setTimeout(() => {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('mainContent').classList.add('show');
+        }, 5000);
+
+        // 犬の画像をクリックで拡大表示（オプション）
+        document.querySelectorAll('.dog-post').forEach(post => {
+            post.addEventListener('click', function() {
+                console.log('犬の画像がクリックされました');
+            });
+        });
+
+        // 飛び回る犬をクリックすると音が鳴る（オプション）
+        document.querySelectorAll('.flying-dog').forEach(dog => {
+            dog.addEventListener('click', function() {
+                this.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
