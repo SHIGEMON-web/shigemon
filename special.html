@@ -62,7 +62,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+            /* drop-shadowを削除して、透過PNGに対応した影なしに */
         }
 
         .flying-dog.dog1 { animation: fly1 8s linear infinite; }
@@ -866,7 +866,7 @@
             // 巨大犬
             const giantDog = document.createElement('div');
             giantDog.className = 'giant-dog';
-            giantDog.innerHTML = '<img src="images/dog-grid-1.jpg" alt="巨大な犬">';
+            giantDog.innerHTML = '<img src="images/giant-dog.png" alt="巨大な犬">';
             document.body.appendChild(giantDog);
 
             // 5秒後に変な動きを開始
