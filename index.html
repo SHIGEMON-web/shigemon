@@ -544,53 +544,11 @@
             gap: 0.3rem;
         }
 
-        /* お問い合わせフォーム */
-        .contact-form {
-            background: white;
-            padding: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .submit-btn {
-            background: #3498db;
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-
-        .submit-btn:hover {
-            background: #2980b9;
+        /* お問い合わせボタン */
+        .contact-button:hover {
+            background: #2980b9 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
         /* フッター */
@@ -1288,25 +1246,20 @@
         <!-- お問い合わせ -->
         <section id="contact">
             <h2>Contact</h2>
-            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <div class="form-group">
-                    <label for="name">お名前</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">メールアドレス</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">件名</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">お問い合わせ内容</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">送信</button>
-            </form>
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p style="color: #666; margin-bottom: 2rem;">お仕事のご依頼・ご相談は下記のボタンからお気軽にご連絡ください。</p>
+                
+                <a href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】SHIGEMONウェブサイトより&body=%0D%0A【お名前】%0D%0A%0D%0A%0D%0A【メールアドレス】%0D%0A%0D%0A%0D%0A【お問い合わせ内容】%0D%0A%0D%0A" 
+                   class="contact-button"
+                   style="display: inline-block; background: #3498db; color: white; padding: 1rem 3rem; border-radius: 5px; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: background 0.3s;">
+                    メールでお問い合わせ
+                </a>
+                
+                <p style="color: #999; font-size: 0.9rem; margin-top: 1.5rem;">
+                    ※ メールソフトが起動します。<br>
+                    起動しない場合は <strong>shigemaru1227@gmail.com</strong> へ直接メールをお送りください。
+                </p>
+            </div>
         </section>
     </main>
 
