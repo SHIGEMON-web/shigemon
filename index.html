@@ -44,10 +44,7 @@
         @keyframes shine {
             0% {
                 transform: translateX(-100%) translateY(-100%);
-            .back-to-top {
-                display: flex;
             }
-        }
             100% {
                 transform: translateX(100%) translateY(100%);
             }
@@ -132,21 +129,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-        }
-
-        /* スマホでヒーロー画像を全表示 */
-        @media (max-width: 768px) {
-            .hero {
-                height: auto;
-                aspect-ratio: 16 / 9; /* アスペクト比を維持 */
-                max-height: 400px;
-            }
-
-            .hero img {
-                object-fit: contain;
-                width: 100%;
-                height: 100%;
-            }
         }
 
         /* セクション共通 */
@@ -252,88 +234,9 @@
             margin-top: 1.5rem;
         }
 
-        /* スマホ用スライダーコンテナ */
+        /* スマホ用スライダーコンテナ - 削除 */
         .slider-container {
-            display: none;
-            position: relative;
-            overflow: hidden;
-            margin-top: 1.5rem;
-        }
-
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.3s ease;
-            gap: 1rem;
-        }
-
-        .slider-wrapper .card {
-            flex: 0 0 calc(85vw - 2rem);
-            max-width: 400px;
-        }
-
-        /* スライダーナビゲーション */
-        .slider-nav {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .slider-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .slider-dot.active {
-            background: #3498db;
-        }
-
-        /* スライダー矢印 */
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            transition: opacity 0.3s;
-        }
-
-        .slider-arrow:hover {
-            background: white;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .slider-arrow.prev {
-            left: 10px;
-        }
-
-        .slider-arrow.next {
-            right: 10px;
-        }
-
-        .slider-arrow svg {
-            width: 20px;
-            height: 20px;
-            fill: #333;
-        }
-
-        .slider-arrow:disabled {
-            opacity: 0.3;
-            cursor: default;
+            display: none !important;
         }
 
         .card {
@@ -707,38 +610,7 @@
             object-position: bottom;
         }
 
-        /* 通り過ぎる画像 */
-        .passing-train {
-            position: fixed;
-            top: 50%;
-            right: -600px;
-            transform: translateY(-50%);
-            width: 600px;
-            height: auto;
-            z-index: 50;
-            opacity: 0.8;
-            transition: none;
-            pointer-events: none;
-        }
 
-        .passing-train img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .passing-train.animate {
-            animation: passingTrain 4s ease-in-out;
-        }
-
-        @keyframes passingTrain {
-            0% {
-                right: -600px;
-            }
-            100% {
-                right: calc(100% + 600px);
-            }
-        }
 
         /* TOPへ戻るボタン */
         .back-to-top {
@@ -768,7 +640,115 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* モバイルメニュー用ハンバーガー */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* モバイルメニュー */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1002;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background: #f8f9fa;
+        }
+
+        /* オーバーレイ */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1001;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        /* スマホ対応のメディアクエリ */
         @media (max-width: 768px) {
+            /* ヘッダー調整 */
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            /* バナー調整 */
             .announcement-banner {
                 font-size: 0.8rem;
                 padding: 0.5rem 3%;
@@ -779,6 +759,20 @@
                 line-height: 1.4;
             }
 
+            /* ヒーロー画像の調整 */
+            .hero {
+                height: auto;
+                aspect-ratio: 16 / 9;
+                max-height: 400px;
+            }
+
+            .hero img {
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* セクション調整 */
             section {
                 padding: 1.5rem 5%;
             }
@@ -788,21 +782,7 @@
                 margin-bottom: 1rem;
             }
 
-            .card-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                display: none; /* スマホではグリッドを非表示 */
-            }
-
-            /* スマホでスライダーを表示 */
-            .slider-container {
-                display: block;
-            }
-
-            .slider-wrapper {
-                padding: 0 calc(7.5vw + 0.5rem);
-            }
-
+            /* プロフィール調整 */
             #profile {
                 padding: 2rem 5%;
                 width: 95%;
@@ -822,16 +802,7 @@
                 margin: 0 auto;
             }
 
-            nav ul {
-                display: none;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-
+            /* チャンネル統計の調整 */
             .channel-stats {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -852,7 +823,37 @@
                 font-size: 2rem;
             }
 
-            /* タブのスマホ表示 */
+            /* カードグリッドの調整 */
+            .card-grid {
+                display: none; /* スマホではグリッドを非表示 */
+            }
+
+            /* スマホでスライダーを表示 */
+            .slider-container {
+                display: block;
+            }
+
+            .slider-wrapper {
+                padding: 0 calc(7.5vw + 0.5rem);
+            }
+
+            /* 「もっと見る」セクションのスマホ対応 */
+            #gallery-more .card-grid,
+            #youtube-more .card-grid,
+            #contents-blog .card-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* YouTube動画グリッドのスマホ対応 */
+            #youtube-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* タブの調整 */
             .tabs {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -867,46 +868,39 @@
                 padding: 0.4rem 0.8rem;
             }
 
+            /* フォームの調整 */
             .contact-form {
-                padding: 2rem;
+                padding: 2rem 1.5rem;
             }
 
             .form-group {
                 margin-bottom: 1rem;
             }
 
+            /* フッターの調整 */
             footer {
                 padding: 2rem 5%;
             }
 
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            /* 犬の画像調整 */
             .dog-container {
                 width: 200px;
                 height: 300px;
-                right: -200px; /* スマホでは画面外に配置 */
+                right: -200px;
                 bottom: 20px;
             }
             
             .dog-container.show {
-                right: 0; /* スマホでも右端に密着 */
+                right: 0;
             }
 
-            .passing-train {
-                width: 400px;
-                right: -400px;
-            }
-            
-            @keyframes passingTrain {
-                0% {
-                    right: -400px;
-                }
-                100% {
-                    right: calc(100% + 400px);
-                }
-            }
-        }
 
-        .hidden {
-            display: none;
         }
     </style>
 </head>
@@ -922,6 +916,11 @@
     <header>
         <nav>
             <div class="logo">SHIGEMON</div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul>
                 <li><a href="#profile">プロフィール</a></li>
                 <li><a href="#skills">できること</a></li>
@@ -932,6 +931,23 @@
             </ul>
         </nav>
     </header>
+
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">SHIGEMON</div>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        </div>
+        <ul>
+            <li><a href="#profile" onclick="toggleMobileMenu()">プロフィール</a></li>
+            <li><a href="#skills" onclick="toggleMobileMenu()">できること</a></li>
+            <li><a href="#works" onclick="toggleMobileMenu()">過去の仕事</a></li>
+            <li><a href="#gallery" onclick="toggleMobileMenu()">ギャラリー</a></li>
+            <li><a href="#contents" onclick="toggleMobileMenu()">コンテンツ</a></li>
+            <li><a href="#contact" onclick="toggleMobileMenu()">お問い合わせ</a></li>
+        </ul>
+    </div>
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
 
     <main>
         <!-- ヒーローセクション -->
@@ -995,42 +1011,6 @@
                     <h3>ワークショップ</h3>
                     <p>ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。</p>
                 </div>
-            </div>
-            <!-- スマホ用スライダー -->
-            <div class="slider-container">
-                <button class="slider-arrow prev" onclick="slideCards('skills', -1)">
-                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                </button>
-                <button class="slider-arrow next" onclick="slideCards('skills', 1)">
-                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </button>
-                <div class="slider-wrapper" id="skills-slider">
-                    <div class="card">
-                        <h3>YouTube動画製作</h3>
-                        <p>鉄道模型のレビュー動画や、ジオラマ製作過程の動画を企画から編集まで一貫して行います。</p>
-                    </div>
-                    <div class="card">
-                        <h3>ジオラマ製作</h3>
-                        <p>Nゲージを中心とした精密なジオラマを製作。企業様の展示用ジオラマも承ります。</p>
-                    </div>
-                    <div class="card">
-                        <h3>イベント企画</h3>
-                        <p>鉄道模型関連のイベント企画・運営をサポート。体験型コンテンツの提供も可能です。</p>
-                    </div>
-                    <div class="card">
-                        <h3>執筆・監修</h3>
-                        <p>鉄道模型やジオラマ製作に関する記事執筆、書籍の監修を行います。</p>
-                    </div>
-                    <div class="card">
-                        <h3>商品レビュー</h3>
-                        <p>新製品のレビュー動画製作。製品の魅力を分かりやすく伝えます。</p>
-                    </div>
-                    <div class="card">
-                        <h3>ワークショップ</h3>
-                        <p>ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。</p>
-                    </div>
-                </div>
-                <div class="slider-nav" id="skills-nav"></div>
             </div>
         </section>
 
@@ -1178,48 +1158,6 @@
                     <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
                 </div>
             </div>
-            <!-- スマホ用スライダー -->
-            <div class="slider-container">
-                <button class="slider-arrow prev" onclick="slideCards('gallery', -1)">
-                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                </button>
-                <button class="slider-arrow next" onclick="slideCards('gallery', 1)">
-                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </button>
-                <div class="slider-wrapper" id="gallery-slider">
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>山間部の駅</h3>
-                        <p>緑豊かな山間部の小さな駅を再現。四季の変化も表現しています。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>都市型レイアウト</h3>
-                        <p>高架線と地上線が交差する都市部の風景を精密に再現。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>海辺の路線</h3>
-                        <p>海沿いを走るローカル線の情景。波の表現にもこだわりました。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>雪景色の駅</h3>
-                        <p>冬の雪に覆われた駅の情景。雪の質感表現が見どころです。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>田園風景</h3>
-                        <p>のどかな田園地帯を走る単線。日本の原風景を表現しました。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>機関区</h3>
-                        <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
-                    </div>
-                </div>
-                <div class="slider-nav" id="gallery-nav"></div>
-            </div>
             <div id="gallery-more" class="hidden">
                 <div class="card-grid">
                     <div class="card">
@@ -1337,11 +1275,6 @@
         </div>
     </footer>
 
-    <!-- 通り過ぎる画像 -->
-    <div class="passing-train" id="passingTrain">
-        <img src="images/train-image.png" alt="通り過ぎる列車">
-    </div>
-
     <!-- 犬の画像コンテナ -->
     <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
         <img src="images/main-dog.png" alt="犬">
@@ -1354,6 +1287,14 @@
         // YouTube API設定
         const API_KEY = 'AIzaSyBso5x4s3Air5CNAXc2UzSQEmQ5OGKkfq8';
         const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
+
+        // モバイルメニューの開閉
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
 
         // タブ切り替え機能
         function switchTab(section, tabName) {
@@ -1608,7 +1549,7 @@
         const sliderPositions = {};
         
         function initSliders() {
-            const sections = ['skills', 'gallery'];
+            const sections = ['skills', 'gallery', 'works-all', 'gallery-more', 'blog'];
             sections.forEach(section => {
                 sliderPositions[section] = 0;
                 updateSliderNav(section);
@@ -1649,6 +1590,8 @@
         
         function slideCards(section, direction) {
             const slider = document.getElementById(`${section}-slider`);
+            if (!slider) return;
+            
             const cards = slider.querySelectorAll('.card');
             const maxPosition = cards.length - 1;
             
@@ -1690,20 +1633,32 @@
         }
         
         function updateSliderButtons(section) {
-            const container = document.querySelector(`#${section} .slider-container`);
+            const container = section === 'works-all' 
+                ? document.querySelector('#works-all .slider-container')
+                : section === 'gallery-more'
+                ? document.querySelector('#gallery-more .slider-container')
+                : section === 'blog'
+                ? document.querySelector('#contents-blog .slider-container')
+                : document.querySelector(`#${section} .slider-container`);
+            
             if (!container) return;
             
             const prevBtn = container.querySelector('.prev');
             const nextBtn = container.querySelector('.next');
             const slider = document.getElementById(`${section}-slider`);
+            
+            if (!slider) return;
+            
             const cards = slider.querySelectorAll('.card');
             
-            prevBtn.disabled = sliderPositions[section] === 0;
-            nextBtn.disabled = sliderPositions[section] === cards.length - 1;
+            if (prevBtn) prevBtn.disabled = sliderPositions[section] === 0;
+            if (nextBtn) nextBtn.disabled = sliderPositions[section] === cards.length - 1;
         }
         
         function goToSlide(section, index) {
             const slider = document.getElementById(`${section}-slider`);
+            if (!slider) return;
+            
             const cards = slider.querySelectorAll('.card');
             
             sliderPositions[section] = index;
@@ -1715,34 +1670,19 @@
             updateSliderButtons(section);
         }
 
-        // ページ読み込み時に実行
-        window.addEventListener('load', () => {
-            loadChannelStats();
-            loadLatestVideos();
-            initSliders();
-        });
-
-        // ウィンドウリサイズ時の処理
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                // PCサイズに戻った時はスライダーをリセット
-                Object.keys(sliderPositions).forEach(section => {
-                    const slider = document.getElementById(`${section}-slider`);
-                    if (slider) {
-                        slider.style.transform = 'translateX(0)';
-                        sliderPositions[section] = 0;
-                    }
-                });
-            }
-        });
-
-        // 犬の画像表示制御
-        let dogTimer = null;
-        let hasTriggeredTrain = false;
-        
+        // TOPへ戻るボタンの表示制御
         window.addEventListener('scroll', () => {
-            const scrollHeight = document.documentElement.scrollHeight;
             const scrollTop = window.scrollY;
+            const backToTop = document.querySelector('.back-to-top');
+            
+            if (scrollTop > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+            
+            // 犬の画像表示制御
+            const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = window.innerHeight;
             const scrollPercentage = (scrollTop + clientHeight) / scrollHeight * 100;
             
@@ -1754,37 +1694,21 @@
                     dogContainer.classList.add('show');
                     
                     // 既存のタイマーをクリア
-                    if (dogTimer) {
-                        clearTimeout(dogTimer);
+                    if (window.dogTimer) {
+                        clearTimeout(window.dogTimer);
                     }
                     
                     // 5秒後に自動的に隠す
-                    dogTimer = setTimeout(() => {
+                    window.dogTimer = setTimeout(() => {
                         dogContainer.classList.remove('show');
                     }, 5000);
                 }
             } else {
                 dogContainer.classList.remove('show');
-                if (dogTimer) {
-                    clearTimeout(dogTimer);
-                    dogTimer = null;
+                if (window.dogTimer) {
+                    clearTimeout(window.dogTimer);
+                    window.dogTimer = null;
                 }
-            }
-            
-            // 列車の画像制御（40-60%の範囲で一度だけ発動）
-            const passingTrain = document.getElementById('passingTrain');
-            if (scrollPercentage > 40 && scrollPercentage < 60 && !hasTriggeredTrain) {
-                hasTriggeredTrain = true;
-                passingTrain.classList.add('animate');
-                
-                // アニメーション終了後にクラスを削除
-                setTimeout(() => {
-                    passingTrain.classList.remove('animate');
-                    // 少し待ってからフラグをリセット（連続発動を防ぐ）
-                    setTimeout(() => {
-                        hasTriggeredTrain = false;
-                    }, 2000);
-                }, 4000);
             }
         });
 
@@ -1792,6 +1716,12 @@
         function openSpecialPage() {
             window.open('special.html', '_blank');
         }
+
+        // ページ読み込み時に実行
+        window.addEventListener('load', () => {
+            loadChannelStats();
+            loadLatestVideos();
+        });
     </script>
 </body>
 </html>
