@@ -352,19 +352,81 @@
             font-size: 0.9rem;
         }
 
-        /* 作品カード用のスタイル */
-        .work-card-img {
+        /* 作品カード専用のスタイル */
+        .works-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .works-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .works-card-image-wrapper {
+            position: relative;
             width: 100%;
-            height: 150px;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .works-card-img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 5px;
-            margin: 0.75rem 0;
             background-color: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #999;
             font-size: 0.9rem;
+        }
+
+        .works-card-content {
+            padding: 1.2rem 1.5rem 1.5rem;
+        }
+
+        .works-card h3 {
+            margin-bottom: 0.6rem;
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .works-card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .works-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .works-card-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .works-card-date::before {
+            content: '完成:';
+        }
+
+        .works-card-duration {
+            font-weight: 500;
         }
 
         /* タブ */
@@ -441,6 +503,36 @@
 
         .card-with-tag h3 {
             margin-top: 0.5rem;
+        }
+
+        /* Worksセクション専用のタグスタイル（バッジ風） */
+        .works-card .tag {
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            top: 1rem;
+            left: 1rem;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.02em;
+        }
+
+        /* モーダルウィンドウと同じ色に統一 */
+        .works-card .tag.diorama,
+        .modal-tag {
+            background: #81c784;
+        }
+
+        .works-card .tag.event {
+            background: #42a5f5;
+        }
+
+        .works-card .tag.review {
+            background: #e74c3c;
+        }
+
+        .works-card .tag.writing {
+            background: #f39c12;
         }
 
         /* もっと見るボタン */
@@ -549,6 +641,326 @@
             background: #2980b9 !important;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* モーダルウィンドウ */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1100px;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.1);
+            color: #000;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 85vh;
+            max-height: 700px;
+        }
+
+        /* 左側：画像セクション */
+        .modal-images-section {
+            background: #000;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        .modal-main-image {
+            flex: 1;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-main-image img,
+        .modal-main-image .image-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            gap: 10px;
+            height: 80px;
+        }
+
+        .modal-thumbnail {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #333;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .modal-thumbnail:hover {
+            opacity: 0.8;
+        }
+
+        .modal-thumbnail.active {
+            border: 2px solid #3498db;
+        }
+
+        /* 右側：情報セクション */
+        .modal-info-section {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            background: #fafafa;
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .modal-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #81c784;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 30px;
+            flex: 1;
+        }
+
+        .modal-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .meta-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .meta-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .meta-value {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .modal-services {
+            margin-bottom: 30px;
+        }
+
+        .services-title {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .service-tag {
+            padding: 8px 16px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            border: 1px solid #a5d6a7;
+        }
+
+        .modal-results {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .results-title {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        .result-item::before {
+            content: '✓';
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .modal-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #81c784;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .modal-contact-btn:hover {
+            background: #66bb6a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(129, 199, 132, 0.3);
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-body {
+                grid-template-columns: 1fr;
+                height: auto;
+                max-height: none;
+            }
+
+            .modal-images-section {
+                padding: 20px;
+                height: 300px;
+            }
+
+            .modal-thumbnails {
+                height: 60px;
+            }
+
+            .modal-info-section {
+                padding: 20px;
+            }
+
+            .modal-meta-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
         }
 
         /* フッター */
@@ -1051,97 +1463,193 @@
             
             <div id="works-all" class="tab-content active">
                 <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>KATO新製品レビュー</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work1')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>KATO新製品レビュー</h3>
+                            <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年11月</span>
+                                <span class="works-card-duration">2日間</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>企業展示用ジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work2')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag diorama">ジオラマ製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>企業展示用ジオラマ</h3>
+                            <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年9月</span>
+                                <span class="works-card-duration">3ヶ月</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag event">イベント向けコンテンツ</span>
-                        <h3>鉄道フェスタ2024</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work3')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag event">イベント向けコンテンツ</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>鉄道フェスタ2024</h3>
+                            <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年7月</span>
+                                <span class="works-card-duration">3日間</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag writing">執筆・書籍</span>
-                        <h3>「はじめてのジオラマ」監修</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work4')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag writing">執筆・書籍</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>「はじめてのジオラマ」監修</h3>
+                            <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年3月</span>
+                                <span class="works-card-duration">2ヶ月</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>TOMIX製品比較動画</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work5')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>TOMIX製品比較動画</h3>
+                            <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年10月</span>
+                                <span class="works-card-duration">1週間</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>個人コレクション向けジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work6')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag diorama">ジオラマ製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>個人コレクション向けジオラマ</h3>
+                            <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年8月</span>
+                                <span class="works-card-duration">2ヶ月</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div id="works-review" class="tab-content">
                 <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>KATO新製品レビュー</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work1')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>KATO新製品レビュー</h3>
+                            <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年11月</span>
+                                <span class="works-card-duration">2日間</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>TOMIX製品比較動画</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work5')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>TOMIX製品比較動画</h3>
+                            <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年10月</span>
+                                <span class="works-card-duration">1週間</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div id="works-diorama" class="tab-content">
                 <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>企業展示用ジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work2')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag diorama">ジオラマ製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>企業展示用ジオラマ</h3>
+                            <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年9月</span>
+                                <span class="works-card-duration">3ヶ月</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>個人コレクション向けジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work6')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag diorama">ジオラマ製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>個人コレクション向けジオラマ</h3>
+                            <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年8月</span>
+                                <span class="works-card-duration">2ヶ月</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div id="works-event" class="tab-content">
                 <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag event">イベント向けコンテンツ</span>
-                        <h3>鉄道フェスタ2024</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work3')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag event">イベント向けコンテンツ</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>鉄道フェスタ2024</h3>
+                            <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年7月</span>
+                                <span class="works-card-duration">3日間</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div id="works-writing" class="tab-content">
                 <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag writing">執筆・書籍</span>
-                        <h3>「はじめてのジオラマ」監修</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                    <div class="works-card card-with-tag" onclick="openWorkModal('work4')">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag writing">執筆・書籍</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>「はじめてのジオラマ」監修</h3>
+                            <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年3月</span>
+                                <span class="works-card-duration">2ヶ月</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1312,6 +1820,60 @@
 
     <!-- TOPへ戻るボタン -->
     <a href="#" class="back-to-top" onclick="scrollToTop(event)">TOP</a>
+
+    <!-- モーダルウィンドウ -->
+    <div id="workModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeWorkModal()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-images-section">
+                    <div class="modal-main-image" id="modalMainImage">
+                        <div class="image-placeholder">メイン画像</div>
+                    </div>
+                    <div class="modal-thumbnails" id="modalThumbnails">
+                        <!-- サムネイル画像はJavaScriptで動的に追加 -->
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <div class="modal-header">
+                        <h2 id="modalTitle">プロジェクト名</h2>
+                        <span class="modal-tag" id="modalTag">レビュー動画製作</span>
+                    </div>
+                    <p class="modal-description" id="modalDescription">詳細説明</p>
+                    
+                    <div class="modal-meta-grid">
+                        <div class="meta-box">
+                            <span class="meta-label">完成年月</span>
+                            <span class="meta-value" id="modalCompleted">-</span>
+                        </div>
+                        <div class="meta-box">
+                            <span class="meta-label">製作期間</span>
+                            <span class="meta-value" id="modalPeriod">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-services" id="modalServices">
+                        <div class="services-title">提供サービス</div>
+                        <div class="service-tags" id="serviceTags">
+                            <!-- サービスタグはJavaScriptで動的に追加 -->
+                        </div>
+                    </div>
+                    
+                    <div class="modal-results" id="modalResults" style="display: none;">
+                        <div class="results-title">成果・実績</div>
+                        <div id="resultsList">
+                            <!-- 実績はJavaScriptで動的に追加 -->
+                        </div>
+                    </div>
+                    
+                    <a href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】作品について&body=%0D%0A【お問い合わせ内容】%0D%0A%0D%0A【作品名】%0D%0A" 
+                       class="modal-contact-btn">
+                        ✉️ お問い合わせ/お見積もり
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // YouTube API設定
@@ -1645,6 +2207,180 @@
         // スペシャルページを開く
         function openSpecialPage() {
             window.open('special.html', '_blank');
+        }
+
+        // 作品詳細モーダルのデータ
+        const workDetails = {
+            work1: {
+                title: 'KATO新製品レビュー',
+                tag: 'レビュー動画製作',
+                images: ['画像1', '画像2', '画像3'],
+                description: '新発売のガンプラキットを詳細にレビューする動画を制作。組み立て過程から完成品まで、視聴者にとって分かりやすい構成で制作しました。',
+                period: '2週間',
+                completed: '2024年3月',
+                services: ['動画・構成', '撮影', '編集', '詳細解説', '音響調整'],
+                results: ['再生数80万回達成', 'チャンネル登録者数20%増加', 'メーカーからの継続依頼']
+            },
+            work2: {
+                title: '企業展示用ジオラマ',
+                tag: 'ジオラマ製作',
+                images: ['画像1', '画像2', '画像3', '画像4'],
+                description: '○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。現地取材を行い、細部まで忠実に再現することで、来場者に親しみを持っていただける作品に仕上げました。',
+                period: '3ヶ月',
+                completed: '2024年9月',
+                services: ['企画・構成', '現地取材', 'ジオラマ製作', '照明演出', '設置作業'],
+                results: ['来場者数30%増加', '地元メディア掲載', 'SNSで話題に']
+            },
+            work3: {
+                title: '鉄道フェスタ2024',
+                tag: 'イベント向けコンテンツ',
+                images: ['画像1', '画像2', '画像3'],
+                description: '来場者参加型のジオラマ製作体験ブースを企画・運営。お子様から大人まで楽しめる内容で、多くの方に鉄道模型の魅力を伝えることができました。',
+                period: '3日間',
+                completed: '2024年7月',
+                services: ['イベント企画', 'ワークショップ運営', '材料準備', 'スタッフ指導'],
+                results: ['参加者500名以上', '満足度98%', '次回開催決定']
+            },
+            work4: {
+                title: '「はじめてのジオラマ」監修',
+                tag: '執筆・書籍',
+                images: ['画像1', '画像2'],
+                description: '初心者向けジオラマ製作ガイドブックの監修を担当。基本的な材料の選び方から、実際の製作手順まで、わかりやすく解説しています。',
+                period: '2ヶ月',
+                completed: '2024年3月',
+                services: ['執筆', '撮影協力', '技術監修', '作例製作'],
+                results: ['増刷3回', 'Amazon評価4.5', '読者からの好評']
+            },
+            work5: {
+                title: 'TOMIX製品比較動画',
+                tag: 'レビュー動画製作',
+                images: ['画像1', '画像2', '画像3'],
+                description: '同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。走行性能、ディテールの違い、価格差など、多角的に比較しています。',
+                period: '1週間',
+                completed: '2024年10月',
+                services: ['企画・構成', '撮影', '編集', '比較検証', 'グラフ作成'],
+                results: ['再生数50万回突破', '高評価率95%', '購入の参考になったとのコメント多数']
+            },
+            work6: {
+                title: '個人コレクション向けジオラマ',
+                tag: 'ジオラマ製作',
+                images: ['画像1', '画像2', '画像3', '画像4', '画像5'],
+                description: 'お客様の思い出の風景を、Nゲージジオラマで精密に再現。写真資料をもとに、当時の雰囲気を大切にしながら製作しました。',
+                period: '2ヶ月',
+                completed: '2024年8月',
+                services: ['ヒアリング', '設計・デザイン', 'ジオラマ製作', 'LED照明', '額装'],
+                results: ['お客様満足度100%', '追加注文獲得', '口コミで新規依頼']
+            }
+        };
+
+        // 現在選択されている画像のインデックス
+        let currentImageIndex = 0;
+
+        // モーダルを開く
+        function openWorkModal(workId) {
+            const modal = document.getElementById('workModal');
+            const work = workDetails[workId];
+            
+            if (!work) return;
+            
+            currentImageIndex = 0;
+            
+            // タイトルとタグを設定
+            document.getElementById('modalTitle').textContent = work.title;
+            document.getElementById('modalTag').textContent = work.tag;
+            
+            // メイン画像を設定
+            updateMainImage(work.images[0]);
+            
+            // サムネイルを設定
+            const thumbnailsContainer = document.getElementById('modalThumbnails');
+            thumbnailsContainer.innerHTML = '';
+            work.images.forEach((image, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = `modal-thumbnail ${index === 0 ? 'active' : ''}`;
+                thumb.textContent = image;
+                thumb.onclick = () => {
+                    currentImageIndex = index;
+                    updateMainImage(image);
+                    updateThumbnailActive(index);
+                };
+                thumbnailsContainer.appendChild(thumb);
+            });
+            
+            // 説明を設定
+            document.getElementById('modalDescription').textContent = work.description;
+            
+            // 完成年月と製作期間を設定
+            document.getElementById('modalCompleted').textContent = work.completed;
+            document.getElementById('modalPeriod').textContent = work.period;
+            
+            // 提供サービスを設定
+            const serviceTagsContainer = document.getElementById('serviceTags');
+            serviceTagsContainer.innerHTML = '';
+            work.services.forEach(service => {
+                const tag = document.createElement('div');
+                tag.className = 'service-tag';
+                tag.textContent = service;
+                serviceTagsContainer.appendChild(tag);
+            });
+            
+            // 成果・実績を設定
+            if (work.results && work.results.length > 0) {
+                document.getElementById('modalResults').style.display = 'block';
+                const resultsList = document.getElementById('resultsList');
+                resultsList.innerHTML = '';
+                work.results.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'result-item';
+                    item.textContent = result;
+                    resultsList.appendChild(item);
+                });
+            } else {
+                document.getElementById('modalResults').style.display = 'none';
+            }
+            
+            // お問い合わせボタンのメール件名に作品名を含める
+            const contactBtn = document.querySelector('.modal-contact-btn');
+            const subject = encodeURIComponent(`【お問い合わせ】${work.title}について`);
+            const body = encodeURIComponent(`\n【お問い合わせ内容】\n\n【作品名】${work.title}\n`);
+            contactBtn.href = `mailto:shigemaru1227@gmail.com?subject=${subject}&body=${body}`;
+            
+            // モーダルを表示
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // メイン画像を更新
+        function updateMainImage(imageName) {
+            const mainImage = document.getElementById('modalMainImage');
+            mainImage.innerHTML = `<div class="image-placeholder">${imageName}</div>`;
+        }
+
+        // サムネイルのアクティブ状態を更新
+        function updateThumbnailActive(index) {
+            const thumbnails = document.querySelectorAll('.modal-thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        // モーダルを閉じる
+        function closeWorkModal() {
+            const modal = document.getElementById('workModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // モーダルの外側をクリックしたら閉じる
+        window.onclick = function(event) {
+            const modal = document.getElementById('workModal');
+            if (event.target === modal) {
+                closeWorkModal();
+            }
         }
 
         // ページ読み込み時に実行
