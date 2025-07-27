@@ -161,30 +161,66 @@
 
         .profile {
             display: grid;
-            grid-template-columns: 200px 1fr;
+            grid-template-columns: 250px 1fr;
             gap: 3rem;
             align-items: start;
             padding: 0;
             background: transparent;
         }
 
+        .profile-img-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3px;
+        }
+
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
         .profile-img {
-            width: 200px;
-            height: 200px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border: 5px solid #3498db;
-            border-radius: 0;
+            border-radius: 17px;
+            position: relative;
+            z-index: 1;
         }
 
         .profile-text h3 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 0.75rem;
             color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: 0.05em;
         }
 
         .profile-text p {
             margin-bottom: 0;
             line-height: 1.8;
+            color: #555;
         }
 
         /* チャンネル統計 */
@@ -752,17 +788,18 @@
                 line-height: 1.4;
             }
 
-            /* ヒーロー画像の調整 - 余白削除 */
+            /* ヒーロー画像の調整 - 余白完全削除 */
             .hero {
-                height: 200px;
+                height: auto;
                 margin: 0;
                 padding: 0;
             }
 
             .hero img {
-                object-fit: cover;
+                object-fit: contain;
                 width: 100%;
-                height: 100%;
+                height: auto;
+                display: block;
             }
 
             /* セクション調整 */
@@ -789,10 +826,14 @@
                 gap: 1.5rem;
             }
 
-            .profile-img {
+            .profile-img-container {
                 width: 200px;
                 height: 200px;
                 margin: 0 auto;
+            }
+
+            .profile-text h3 {
+                font-size: 1.8rem;
             }
 
             /* チャンネル統計の調整 */
@@ -925,9 +966,10 @@
 
         <!-- プロフィール -->
         <section id="profile">
-            <h2>プロフィール</h2>
             <div class="profile">
-                <img src="images/profile-image.jpg" alt="SHIGEMON" class="profile-img">
+                <div class="profile-img-container">
+                    <img src="images/profile-image.jpg" alt="SHIGEMON" class="profile-img">
+                </div>
                 <div class="profile-text">
                     <h3>SHIGEMON</h3>
                     <p>YouTuberとして鉄道模型やジオラマ製作の動画を配信しています。<br>
