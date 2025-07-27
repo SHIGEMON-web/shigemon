@@ -1232,7 +1232,7 @@
         <!-- お問い合わせ -->
         <section id="contact">
             <h2>お問い合わせ</h2>
-            <form class="contact-form" action="mailto:shigemaru1227@gmail.com" method="post" enctype="text/plain">
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-group">
                     <label for="name">お名前</label>
                     <input type="text" id="name" name="name" required>
@@ -1251,6 +1251,12 @@
                 </div>
                 <button type="submit" class="submit-btn">送信</button>
             </form>
+            <p style="text-align: center; margin-top: 1rem; color: #666;">
+                または直接メールでお問い合わせください：<br>
+                <a href="#" onclick="window.location.href='mai' + 'lto:' + 'shigemaru1227' + '@' + 'gmail.com'; return false;" style="color: #3498db;">
+                    shigemaru1227[at]gmail.com
+                </a>
+            </p>
         </section>
     </main>
 
@@ -1367,10 +1373,20 @@
         // チャンネル統計情報を取得
         async function loadChannelStats() {
             try {
+                console.log('チャンネル統計の取得開始...');
                 const response = await fetch(
                     `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`
                 );
                 const data = await response.json();
+                
+                console.log('チャンネル統計レスポンス:', data);
+                
+                if (data.error) {
+                    console.error('YouTube API エラー:', data.error);
+                    console.error('エラー詳細:', data.error.message);
+                    setDefaultStats();
+                    return;
+                }
                 
                 if (data.items && data.items.length > 0) {
                     const stats = data.items[0].statistics;
@@ -1379,6 +1395,7 @@
                     document.getElementById('subscriber-count').textContent = Number(stats.subscriberCount).toLocaleString();
                     document.getElementById('video-count').textContent = Number(stats.videoCount).toLocaleString();
                     document.getElementById('view-count').textContent = Number(stats.viewCount).toLocaleString();
+                    console.log('チャンネル統計の表示完了');
                 } else {
                     console.error('チャンネルデータが見つかりません');
                     setDefaultStats();
@@ -1400,20 +1417,29 @@
         async function loadLatestVideos() {
             try {
                 console.log('動画の取得を開始...');
+                console.log('使用するAPIキー:', API_KEY);
+                console.log('チャンネルID:', CHANNEL_ID);
+                
                 const response = await fetch(
                     `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20&type=video`
                 );
                 const data = await response.json();
                 
-                console.log('検索結果:', data);
+                console.log('動画検索レスポンス:', data);
                 
                 if (data.error) {
-                    console.error('API エラー:', data.error);
+                    console.error('YouTube API エラー:', data.error);
+                    console.error('エラー詳細:', data.error.message);
+                    if (data.error.errors && data.error.errors.length > 0) {
+                        console.error('エラー理由:', data.error.errors[0].reason);
+                    }
                     showErrorMessage();
                     return;
                 }
                 
                 if (data.items && data.items.length > 0) {
+                    console.log(`${data.items.length}件の動画を取得`);
+                    
                     // ショート動画を除外
                     const regularVideos = [];
                     const videoIds = [];
@@ -1428,7 +1454,13 @@
                     );
                     const detailsData = await detailsResponse.json();
                     
-                    console.log('詳細データ:', detailsData);
+                    console.log('動画詳細レスポンス:', detailsData);
+                    
+                    if (detailsData.error) {
+                        console.error('動画詳細取得エラー:', detailsData.error);
+                        showErrorMessage();
+                        return;
+                    }
                     
                     // ショート動画をフィルタリング（60秒以下の動画を除外）
                     data.items.forEach((item, index) => {
@@ -1455,6 +1487,7 @@
                 }
             } catch (error) {
                 console.error('動画の取得エラー:', error);
+                console.error('エラー詳細:', error.message);
                 showErrorMessage();
             }
         }
@@ -1604,6 +1637,14 @@
 
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
+            console.log('=== デバッグ情報 ===');
+            console.log('現在のURL:', window.location.href);
+            console.log('プロトコル:', window.location.protocol);
+            console.log('ホスト:', window.location.host);
+            console.log('APIキー（最初の8文字）:', API_KEY.substring(0, 8) + '...');
+            console.log('チャンネルID:', CHANNEL_ID);
+            console.log('==================');
+            
             loadChannelStats();
             loadLatestVideos();
         });
