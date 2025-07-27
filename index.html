@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHIGEMON - YouTuber & ジオラマ作家</title>
-    <style>
-        * {
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   SHIGEMON - YouTuber &amp; ジオラマ作家
+  </title>
+  <style>
+   * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -156,7 +158,6 @@
         /* ジオラマギャラリー */
         #gallery {
             background: #ffffff;
-            position: relative;
         }
 
         /* コンテンツセクション */
@@ -320,6 +321,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
             position: relative;
+            overflow: visible;
         }
 
         .card:hover {
@@ -421,6 +423,7 @@
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
+            z-index: 10;
         }
 
         .tag.review {
@@ -437,6 +440,10 @@
 
         .tag.writing {
             background: #f39c12;
+        }
+
+        .card-with-tag {
+            position: relative;
         }
 
         .card-with-tag h3 {
@@ -951,375 +958,630 @@
                 right: 0;
             }
         }
-    </style>
-</head>
-<body id="top">
-    <!-- 注目のバナー -->
-    <div class="announcement-banner">
-        <a href="https://amzn.to/4lNA5tf" target="_blank">
-            初の著書『やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル(成美堂出版)』 好評発売中！
-        </a>
+  </style>
+ </head>
+ <body id="top">
+  <!-- 注目のバナー -->
+  <div class="announcement-banner">
+   <a href="https://amzn.to/4lNA5tf" target="_blank">
+    初の著書『やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル(成美堂出版)』 好評発売中！
+   </a>
+  </div>
+  <!-- ヘッダー -->
+  <header>
+   <nav>
+    <div class="logo">
+     SHIGEMON
     </div>
-
-    <!-- ヘッダー -->
-    <header>
-        <nav>
-            <div class="logo">SHIGEMON</div>
-            <ul>
-                <li><a href="#profile">Profile</a></li>
-                <li><a href="#works">Works</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contents">Contents</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <!-- ヒーローセクション -->
-        <div class="hero">
-            <img src="images/hero-image.jpg" alt="SHIGEMONの作品集">
-        </div>
-
-        <!-- プロフィール -->
-        <section id="profile">
-            <div class="profile">
-                <div class="profile-img-container">
-                    <img src="images/profile-image.jpg" alt="SHIGEMON" class="profile-img">
-                </div>
-                <div class="profile-text">
-                    <h3>SHIGEMON</h3>
-                    <p>YouTuberとして鉄道模型やジオラマ製作の動画を配信しています。<br>
-                    精密なジオラマ製作技術を活かし、企業様向けのジオラマ製作や、イベント向けコンテンツの提供も行っています。<br>
-                    鉄道模型の魅力を多くの方に伝えるため、日々活動中です。</p>
-                </div>
-            </div>
-            <div class="channel-stats">
-                <div class="stat-item">
-                    <span class="stat-number" id="subscriber-count">-</span>
-                    <span class="stat-label">チャンネル登録者数</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="video-count">-</span>
-                    <span class="stat-label">動画本数</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="view-count">-</span>
-                    <span class="stat-label">総再生回数</span>
-                </div>
-            </div>
-            
-            <!-- サービス内容 -->
-            <div class="card-grid services-grid">
-                <div class="card">
-                    <h3>YouTube動画製作</h3>
-                    <p>鉄道模型のレビュー動画や、ジオラマ製作過程の動画を企画から編集まで一貫して行います。</p>
-                </div>
-                <div class="card">
-                    <h3>ジオラマ製作</h3>
-                    <p>Nゲージを中心とした精密なジオラマを製作。企業様の展示用ジオラマも承ります。</p>
-                </div>
-                <div class="card">
-                    <h3>イベント企画</h3>
-                    <p>鉄道模型関連のイベント企画・運営をサポート。体験型コンテンツの提供も可能です。</p>
-                </div>
-                <div class="card">
-                    <h3>執筆・監修</h3>
-                    <p>鉄道模型やジオラマ製作に関する記事執筆、書籍の監修を行います。</p>
-                </div>
-                <div class="card">
-                    <h3>商品レビュー</h3>
-                    <p>新製品のレビュー動画製作。製品の魅力を分かりやすく伝えます。</p>
-                </div>
-                <div class="card">
-                    <h3>ワークショップ</h3>
-                    <p>ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 過去の仕事 -->
-        <section id="works">
-            <h2>Works</h2>
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('works', 'all')">全て</button>
-                <button class="tab" onclick="switchTab('works', 'review')">レビュー動画製作</button>
-                <button class="tab" onclick="switchTab('works', 'diorama')">ジオラマ製作</button>
-                <button class="tab" onclick="switchTab('works', 'event')">イベント向けコンテンツ</button>
-                <button class="tab" onclick="switchTab('works', 'writing')">執筆・書籍</button>
-            </div>
-            
-            <div id="works-all" class="tab-content active">
-                <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>KATO新製品レビュー</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>企業展示用ジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag event">イベント向けコンテンツ</span>
-                        <h3>鉄道フェスタ2024</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag writing">執筆・書籍</span>
-                        <h3>「はじめてのジオラマ」監修</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>TOMIX製品比較動画</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>個人コレクション向けジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="works-review" class="tab-content">
-                <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>KATO新製品レビュー</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag review">レビュー動画製作</span>
-                        <h3>TOMIX製品比較動画</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="works-diorama" class="tab-content">
-                <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>企業展示用ジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
-                    </div>
-                    <div class="card card-with-tag">
-                        <span class="tag diorama">ジオラマ製作</span>
-                        <h3>個人コレクション向けジオラマ</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="works-event" class="tab-content">
-                <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag event">イベント向けコンテンツ</span>
-                        <h3>鉄道フェスタ2024</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="works-writing" class="tab-content">
-                <div class="card-grid">
-                    <div class="card card-with-tag">
-                        <span class="tag writing">執筆・書籍</span>
-                        <h3>「はじめてのジオラマ」監修</h3>
-                        <div class="work-card-img">画像準備中</div>
-                        <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ジオラマギャラリー -->
-        <section id="gallery">
-            <h2>Gallery</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>山間部の駅</h3>
-                    <p>緑豊かな山間部の小さな駅を再現。四季の変化も表現しています。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>都市型レイアウト</h3>
-                    <p>高架線と地上線が交差する都市部の風景を精密に再現。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>海辺の路線</h3>
-                    <p>海沿いを走るローカル線の情景。波の表現にもこだわりました。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>雪景色の駅</h3>
-                    <p>冬の雪に覆われた駅の情景。雪の質感表現が見どころです。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>田園風景</h3>
-                    <p>のどかな田園地帯を走る単線。日本の原風景を表現しました。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>機関区</h3>
-                    <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
-                </div>
-            </div>
-            <div id="gallery-more" class="hidden">
-                <div class="card-grid">
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>橋梁のある風景</h3>
-                        <p>川を渡る鉄橋の情景。水面の表現にこだわりました。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>夜景レイアウト</h3>
-                        <p>LEDを使用した夜景表現。街の灯りが幻想的です。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>貨物ヤード</h3>
-                        <p>貨物列車が行き交うヤードの情景を再現。</p>
-                    </div>
-                </div>
-            </div>
-            <button class="more-btn" onclick="toggleGallery()">もっと見る</button>
-        </section>
-
-        <!-- コンテンツ -->
-        <section id="contents">
-            <h2>Contents</h2>
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('contents', 'youtube')">YouTube</button>
-                <button class="tab" onclick="switchTab('contents', 'blog')">ブログ</button>
-            </div>
-            
-            <div id="contents-youtube" class="tab-content active">
-                <div class="card-grid" id="youtube-grid">
-                    <!-- YouTube動画はJavaScriptで動的に追加されます -->
-                </div>
-                <div id="youtube-more" class="hidden">
-                    <div class="card-grid" id="youtube-more-grid">
-                        <!-- 追加のYouTube動画はJavaScriptで動的に追加されます -->
-                    </div>
-                </div>
-                <button class="more-btn" onclick="toggleYouTube()">もっと見る</button>
-            </div>
-            
-            <div id="contents-blog" class="tab-content">
-                <div class="card-grid">
-                    <div class="card">
-                        <h3>ブログ記事タイトル1</h3>
-                        <p>ブログ記事の概要がここに入ります。ジオラマ製作のコツや新製品情報など。</p>
-                    </div>
-                    <div class="card">
-                        <h3>ブログ記事タイトル2</h3>
-                        <p>ブログ記事の概要がここに入ります。製作過程の詳細解説など。</p>
-                    </div>
-                    <div class="card">
-                        <h3>ブログ記事タイトル3</h3>
-                        <p>ブログ記事の概要がここに入ります。イベントレポートなど。</p>
-                    </div>
-                </div>
-                <button class="more-btn">もっと見る</button>
-            </div>
-        </section>
-
-        <!-- お問い合わせ -->
-        <section id="contact">
-            <h2>Contact</h2>
-            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <p style="color: #666; margin-bottom: 2rem;">お仕事のご依頼・ご相談は下記のボタンからお気軽にご連絡ください。</p>
-                
-                <a href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】SHIGEMONウェブサイトより&body=%0D%0A【お名前】%0D%0A%0D%0A%0D%0A【メールアドレス】%0D%0A%0D%0A%0D%0A【お問い合わせ内容】%0D%0A%0D%0A" 
-                   class="contact-button"
-                   style="display: inline-block; background: #3498db; color: white; padding: 1rem 3rem; border-radius: 5px; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: background 0.3s;">
-                    メールでお問い合わせ
-                </a>
-                
-                <p style="color: #999; font-size: 0.9rem; margin-top: 1.5rem;">
-                    ※ メールソフトが起動します。<br>
-                    起動しない場合は <strong>shigemaru1227@gmail.com</strong> へ直接メールをお送りください。
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <!-- フッター -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section footer-info">
-                <div class="footer-logo">SHIGEMON</div>
-                <p class="footer-tagline">鉄道模型の魅力をYouTubeで配信。<br>ジオラマ製作やイベント出展、書籍の執筆など幅広く活躍中。</p>
-            </div>
-            <div class="footer-section">
-                <h4>SNS</h4>
-                <div class="social-icons">
-                    <a href="https://x.com/shigemon1227" target="_blank" title="X (Twitter)">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/shigemon1227/" target="_blank" title="Instagram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.youtube.com/@SHIGEMON" target="_blank" title="YouTube">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>関連リンク</h4>
-                <div class="footer-links">
-                    <a href="https://www5e.biglobe.ne.jp/~njouki/" target="_blank">N蒸機の世界</a>
-                    <a href="http://njouki.g1.xrea.com/" target="_blank">ポッポ屋</a>
-                    <a href="https://www5a.biglobe.ne.jp/%7etoyoyasu/" target="_blank">Nゲージ蒸気機関車</a>
-                    <a href="https://tetsumoba.com/" target="_blank">鉄道模型バザール</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            © 2025 SHIGEMON. All rights reserved.
-        </div>
-    </footer>
-
-    <!-- 犬の画像コンテナ -->
-    <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
-        <img src="images/main-dog.png" alt="犬">
+    <ul>
+     <li>
+      <a href="#profile">
+       Profile
+      </a>
+     </li>
+     <li>
+      <a href="#works">
+       Works
+      </a>
+     </li>
+     <li>
+      <a href="#gallery">
+       Gallery
+      </a>
+     </li>
+     <li>
+      <a href="#contents">
+       Contents
+      </a>
+     </li>
+     <li>
+      <a href="#contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </nav>
+  </header>
+  <main>
+   <!-- ヒーローセクション -->
+   <div class="hero">
+    <img alt="SHIGEMONの作品集" src="images/hero-image.jpg"/>
+   </div>
+   <!-- プロフィール -->
+   <section id="profile">
+    <div class="profile">
+     <div class="profile-img-container">
+      <img alt="SHIGEMON" class="profile-img" src="images/profile-image.jpg"/>
+     </div>
+     <div class="profile-text">
+      <h3>
+       SHIGEMON
+      </h3>
+      <p>
+       YouTuberとして鉄道模型やジオラマ製作の動画を配信しています。
+       <br/>
+       精密なジオラマ製作技術を活かし、企業様向けのジオラマ製作や、イベント向けコンテンツの提供も行っています。
+       <br/>
+       鉄道模型の魅力を多くの方に伝えるため、日々活動中です。
+      </p>
+     </div>
     </div>
-
-    <!-- TOPへ戻るボタン -->
-    <a href="#" class="back-to-top" onclick="scrollToTop(event)">TOP</a>
-
-    <script>
-        // YouTube API設定
+    <div class="channel-stats">
+     <div class="stat-item">
+      <span class="stat-number" id="subscriber-count">
+       -
+      </span>
+      <span class="stat-label">
+       チャンネル登録者数
+      </span>
+     </div>
+     <div class="stat-item">
+      <span class="stat-number" id="video-count">
+       -
+      </span>
+      <span class="stat-label">
+       動画本数
+      </span>
+     </div>
+     <div class="stat-item">
+      <span class="stat-number" id="view-count">
+       -
+      </span>
+      <span class="stat-label">
+       総再生回数
+      </span>
+     </div>
+    </div>
+    <!-- サービス内容 -->
+    <div class="card-grid services-grid">
+     <div class="card">
+      <h3>
+       YouTube動画製作
+      </h3>
+      <p>
+       鉄道模型のレビュー動画や、ジオラマ製作過程の動画を企画から編集まで一貫して行います。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       ジオラマ製作
+      </h3>
+      <p>
+       Nゲージを中心とした精密なジオラマを製作。企業様の展示用ジオラマも承ります。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       イベント企画
+      </h3>
+      <p>
+       鉄道模型関連のイベント企画・運営をサポート。体験型コンテンツの提供も可能です。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       執筆・監修
+      </h3>
+      <p>
+       鉄道模型やジオラマ製作に関する記事執筆、書籍の監修を行います。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       商品レビュー
+      </h3>
+      <p>
+       新製品のレビュー動画製作。製品の魅力を分かりやすく伝えます。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       ワークショップ
+      </h3>
+      <p>
+       ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。
+      </p>
+     </div>
+    </div>
+   </section>
+   <!-- 過去の仕事 -->
+   <section id="works">
+    <h2>
+     Works
+    </h2>
+    <div class="tabs">
+     <button class="tab active" onclick="switchTab('works', 'all')">
+      全て
+     </button>
+     <button class="tab" onclick="switchTab('works', 'review')">
+      レビュー動画製作
+     </button>
+     <button class="tab" onclick="switchTab('works', 'diorama')">
+      ジオラマ製作
+     </button>
+     <button class="tab" onclick="switchTab('works', 'event')">
+      イベント向けコンテンツ
+     </button>
+     <button class="tab" onclick="switchTab('works', 'writing')">
+      執筆・書籍
+     </button>
+    </div>
+    <div class="tab-content active" id="works-all">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        KATO新製品レビュー
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        企業展示用ジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        ○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag event">
+        イベント向けコンテンツ
+       </span>
+       <h3>
+        鉄道フェスタ2024
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        来場者参加型のジオラマ製作体験ブースを企画・運営。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag writing">
+        執筆・書籍
+       </span>
+       <h3>
+        「はじめてのジオラマ」監修
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        初心者向けジオラマ製作ガイドブックの監修を担当。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        TOMIX製品比較動画
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        個人コレクション向けジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        お客様の思い出の風景を、Nゲージジオラマで精密に再現。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-review">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        KATO新製品レビュー
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        TOMIX製品比較動画
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-diorama">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        企業展示用ジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        ○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        個人コレクション向けジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        お客様の思い出の風景を、Nゲージジオラマで精密に再現。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-event">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag event">
+        イベント向けコンテンツ
+       </span>
+       <h3>
+        鉄道フェスタ2024
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        来場者参加型のジオラマ製作体験ブースを企画・運営。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-writing">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag writing">
+        執筆・書籍
+       </span>
+       <h3>
+        「はじめてのジオラマ」監修
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        初心者向けジオラマ製作ガイドブックの監修を担当。
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- ジオラマギャラリー -->
+   <section id="gallery">
+    <h2>
+     Gallery
+    </h2>
+    <div class="card-grid">
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       山間部の駅
+      </h3>
+      <p>
+       緑豊かな山間部の小さな駅を再現。四季の変化も表現しています。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       都市型レイアウト
+      </h3>
+      <p>
+       高架線と地上線が交差する都市部の風景を精密に再現。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       海辺の路線
+      </h3>
+      <p>
+       海沿いを走るローカル線の情景。波の表現にもこだわりました。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       雪景色の駅
+      </h3>
+      <p>
+       冬の雪に覆われた駅の情景。雪の質感表現が見どころです。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       田園風景
+      </h3>
+      <p>
+       のどかな田園地帯を走る単線。日本の原風景を表現しました。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       機関区
+      </h3>
+      <p>
+       蒸気機関車が集う機関区の情景。細部まで作り込んでいます。
+      </p>
+     </div>
+    </div>
+    <div class="hidden" id="gallery-more">
+     <div class="card-grid">
+      <div class="card">
+       <div class="card-img">
+        画像準備中
+       </div>
+       <h3>
+        橋梁のある風景
+       </h3>
+       <p>
+        川を渡る鉄橋の情景。水面の表現にこだわりました。
+       </p>
+      </div>
+      <div class="card">
+       <div class="card-img">
+        画像準備中
+       </div>
+       <h3>
+        夜景レイアウト
+       </h3>
+       <p>
+        LEDを使用した夜景表現。街の灯りが幻想的です。
+       </p>
+      </div>
+      <div class="card">
+       <div class="card-img">
+        画像準備中
+       </div>
+       <h3>
+        貨物ヤード
+       </h3>
+       <p>
+        貨物列車が行き交うヤードの情景を再現。
+       </p>
+      </div>
+     </div>
+    </div>
+    <button class="more-btn" onclick="toggleGallery()">
+     もっと見る
+    </button>
+   </section>
+   <!-- コンテンツ -->
+   <section id="contents">
+    <h2>
+     Contents
+    </h2>
+    <div class="tabs">
+     <button class="tab active" onclick="switchTab('contents', 'youtube')">
+      YouTube
+     </button>
+     <button class="tab" onclick="switchTab('contents', 'blog')">
+      ブログ
+     </button>
+    </div>
+    <div class="tab-content active" id="contents-youtube">
+     <div class="card-grid" id="youtube-grid">
+      <!-- YouTube動画はJavaScriptで動的に追加されます -->
+     </div>
+    </div>
+    <div class="tab-content" id="contents-blog">
+     <div class="card-grid">
+      <div class="card">
+       <h3>
+        ブログ記事タイトル1
+       </h3>
+       <p>
+        ブログ記事の概要がここに入ります。ジオラマ製作のコツや新製品情報など。
+       </p>
+      </div>
+      <div class="card">
+       <h3>
+        ブログ記事タイトル2
+       </h3>
+       <p>
+        ブログ記事の概要がここに入ります。製作過程の詳細解説など。
+       </p>
+      </div>
+      <div class="card">
+       <h3>
+        ブログ記事タイトル3
+       </h3>
+       <p>
+        ブログ記事の概要がここに入ります。イベントレポートなど。
+       </p>
+      </div>
+     </div>
+     <button class="more-btn">
+      もっと見る
+     </button>
+    </div>
+   </section>
+   <!-- お問い合わせ -->
+   <section id="contact">
+    <h2>
+     Contact
+    </h2>
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+     <p style="color: #666; margin-bottom: 2rem;">
+      お仕事のご依頼・ご相談は下記のボタンからお気軽にご連絡ください。
+     </p>
+     <a class="contact-button" href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】SHIGEMONウェブサイトより&amp;body=%0D%0A【お名前】%0D%0A%0D%0A%0D%0A【メールアドレス】%0D%0A%0D%0A%0D%0A【お問い合わせ内容】%0D%0A%0D%0A" style="display: inline-block; background: #3498db; color: white; padding: 1rem 3rem; border-radius: 5px; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: background 0.3s;">
+      メールでお問い合わせ
+     </a>
+     <p style="color: #999; font-size: 0.9rem; margin-top: 1.5rem;">
+      ※ メールソフトが起動します。
+      <br/>
+      起動しない場合は
+      <strong>
+       shigemaru1227@gmail.com
+      </strong>
+      へ直接メールをお送りください。
+     </p>
+    </div>
+   </section>
+  </main>
+  <!-- フッター -->
+  <footer>
+   <div class="footer-content">
+    <div class="footer-section footer-info">
+     <div class="footer-logo">
+      SHIGEMON
+     </div>
+     <p class="footer-tagline">
+      鉄道模型の魅力をYouTubeで配信。
+      <br/>
+      ジオラマ製作やイベント出展、書籍の執筆など幅広く活躍中。
+     </p>
+    </div>
+    <div class="footer-section">
+     <h4>
+      SNS
+     </h4>
+     <div class="social-icons">
+      <a href="https://x.com/shigemon1227" target="_blank" title="X (Twitter)">
+       <svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+        </path>
+       </svg>
+      </a>
+      <a href="https://www.instagram.com/shigemon1227/" target="_blank" title="Instagram">
+       <svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z">
+        </path>
+       </svg>
+      </a>
+      <a href="https://www.youtube.com/@SHIGEMON" target="_blank" title="YouTube">
+       <svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+        </path>
+       </svg>
+      </a>
+     </div>
+    </div>
+    <div class="footer-section">
+     <h4>
+      関連リンク
+     </h4>
+     <div class="footer-links">
+      <a href="https://www5e.biglobe.ne.jp/~njouki/" target="_blank">
+       N蒸機の世界
+      </a>
+      <a href="http://njouki.g1.xrea.com/" target="_blank">
+       ポッポ屋
+      </a>
+      <a href="https://www5a.biglobe.ne.jp/%7etoyoyasu/" target="_blank">
+       Nゲージ蒸気機関車
+      </a>
+      <a href="https://tetsumoba.com/" target="_blank">
+       鉄道模型バザール
+      </a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-copyright">
+    © 2025 SHIGEMON. All rights reserved.
+   </div>
+  </footer>
+  <!-- 犬の画像コンテナ -->
+  <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
+   <img alt="犬" src="images/main-dog.png"/>
+  </div>
+  <!-- TOPへ戻るボタン -->
+  <a class="back-to-top" href="#" onclick="scrollToTop(event)">
+   TOP
+  </a>
+  <script>
+   // YouTube API設定
         const API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
         const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
 
         // タブ切り替え機能
         function switchTab(section, tabName) {
+            console.log('Switching tab:', section, tabName); // デバッグ用
+            
             const tabs = document.querySelectorAll(`#${section} .tab`);
             const contents = document.querySelectorAll(`#${section} .tab-content`);
             
@@ -1327,7 +1589,12 @@
             contents.forEach(content => content.classList.remove('active'));
             
             event.target.classList.add('active');
-            document.getElementById(`${section}-${tabName}`).classList.add('active');
+            const targetContent = document.getElementById(`${section}-${tabName}`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            } else {
+                console.error('Tab content not found:', `${section}-${tabName}`);
+            }
         }
 
         // ギャラリーの展開
@@ -1493,7 +1760,7 @@
                         }
                     });
                     
-                    displayVideos(regularVideos.slice(0, 9));
+                    displayVideos(regularVideos.slice(0, 6));
                 } else {
                     console.log('動画が見つかりません');
                     showErrorMessage();
@@ -1522,18 +1789,12 @@
         // 動画を表示
         function displayVideos(videos) {
             const mainGrid = document.getElementById('youtube-grid');
-            const moreGrid = document.getElementById('youtube-more-grid');
             
             mainGrid.innerHTML = '';
-            moreGrid.innerHTML = '';
             
-            videos.forEach((video, index) => {
+            videos.forEach((video) => {
                 const videoCard = createVideoCard(video);
-                if (index < 3) {
-                    mainGrid.appendChild(videoCard);
-                } else {
-                    moreGrid.appendChild(videoCard);
-                }
+                mainGrid.appendChild(videoCard);
             });
         }
 
@@ -1652,6 +1913,6 @@
             loadChannelStats();
             loadLatestVideos();
         });
-    </script>
-</body>
+  </script>
+ </body>
 </html>
