@@ -102,6 +102,7 @@
             color: #555;
             transition: color 0.3s;
             font-size: 0.9rem;
+            font-weight: bold;
         }
 
         nav a:hover {
@@ -133,7 +134,7 @@
 
         /* セクション共通 */
         section {
-            padding: 2.5rem 5%;
+            padding: 2rem 5%;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -163,8 +164,8 @@
         /* プロフィールセクション専用 */
         #profile {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            padding: 3rem 5%;
-            margin: 0 auto 2rem;
+            padding: 2.5rem 5%;
+            margin: 0 auto 1.5rem;
             max-width: 1200px;
             border-radius: 0 0 20px 20px;
             box-shadow: 0 5px 30px rgba(0,0,0,0.08);
@@ -173,22 +174,11 @@
             margin-top: 0;
         }
 
-        /* できることセクション */
-        #skills {
+        /* 過去の仕事セクション */
+        #works {
             background: #ffffff;
             position: relative;
             overflow: hidden;
-        }
-
-        #skills::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
         }
 
         /* ジオラマギャラリー */
@@ -216,12 +206,12 @@
         /* お問い合わせセクション */
         #contact {
             background: #ffffff;
-            padding-bottom: 3rem;
+            padding-bottom: 2rem;
         }
 
         h2 {
             font-size: 1.75rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             text-align: center;
             color: #2c3e50;
         }
@@ -229,14 +219,20 @@
         /* プロフィール */
         #profile {
             background: white;
-            padding: 3rem 5%;
-            margin: 0 auto 2rem;
+            padding: 2.5rem 5%;
+            margin: 0 auto 1.5rem;
             max-width: 1200px;
             border-radius: 0 0 15px 15px;
             box-shadow: 0 5px 30px rgba(0,0,0,0.1);
             width: 90%;
             position: relative;
             margin-top: 0;
+        }
+
+        .services-grid {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f0f0f0;
         }
 
         .profile {
@@ -355,7 +351,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
 
         .card {
@@ -417,7 +413,7 @@
         .tabs {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-bottom: 2px solid #e0e0e0;
             justify-content: center;
             flex-wrap: wrap;
@@ -644,7 +640,7 @@
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
             padding: 2rem 5% 1rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
             position: relative;
         }
 
@@ -853,103 +849,11 @@
             display: none;
         }
 
-        /* モバイルメニュー用ハンバーガー */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: #333;
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-
-        /* モバイルメニュー */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100vh;
-            background: white;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
-            z-index: 1002;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu-header {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mobile-menu-close {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mobile-menu a {
-            display: block;
-            padding: 1rem 1.5rem;
-            text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid #eee;
-            transition: background 0.3s;
-        }
-
-        .mobile-menu a:hover {
-            background: #f8f9fa;
-        }
-
-        /* オーバーレイ */
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1001;
-        }
-
-        .mobile-menu-overlay.active {
-            display: block;
-        }
-
-        /* スマホ対応のメディアクエリ */
+        /* モバイル対応のメディアクエリ */
         @media (max-width: 768px) {
             /* ヘッダー調整 */
             nav ul {
                 display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
             }
 
             /* バナー調整 */
@@ -1145,38 +1049,15 @@
     <header>
         <nav>
             <div class="logo">SHIGEMON</div>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
             <ul>
-                <li><a href="#profile">プロフィール</a></li>
-                <li><a href="#skills">できること</a></li>
-                <li><a href="#works">過去の仕事</a></li>
-                <li><a href="#gallery">ギャラリー</a></li>
-                <li><a href="#contents">コンテンツ</a></li>
-                <li><a href="#contact">お問い合わせ</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#works">Works</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contents">Contents</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-
-    <!-- モバイルメニュー -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <div class="logo">SHIGEMON</div>
-            <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
-        </div>
-        <ul>
-            <li><a href="#profile" onclick="toggleMobileMenu()">プロフィール</a></li>
-            <li><a href="#skills" onclick="toggleMobileMenu()">できること</a></li>
-            <li><a href="#works" onclick="toggleMobileMenu()">過去の仕事</a></li>
-            <li><a href="#gallery" onclick="toggleMobileMenu()">ギャラリー</a></li>
-            <li><a href="#contents" onclick="toggleMobileMenu()">コンテンツ</a></li>
-            <li><a href="#contact" onclick="toggleMobileMenu()">お問い合わせ</a></li>
-        </ul>
-    </div>
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
 
     <main>
         <!-- ヒーローセクション -->
@@ -1211,12 +1092,9 @@
                     <span class="stat-label">総再生回数</span>
                 </div>
             </div>
-        </section>
-
-        <!-- できること -->
-        <section id="skills">
-            <h2>できること</h2>
-            <div class="card-grid">
+            
+            <!-- サービス内容 -->
+            <div class="card-grid services-grid">
                 <div class="card">
                     <h3>YouTube動画製作</h3>
                     <p>鉄道模型のレビュー動画や、ジオラマ製作過程の動画を企画から編集まで一貫して行います。</p>
@@ -1246,7 +1124,7 @@
 
         <!-- 過去の仕事 -->
         <section id="works">
-            <h2>過去の仕事</h2>
+            <h2>Works</h2>
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('works', 'all')">全て</button>
                 <button class="tab" onclick="switchTab('works', 'review')">レビュー動画製作</button>
@@ -1355,7 +1233,7 @@
 
         <!-- ジオラマギャラリー -->
         <section id="gallery">
-            <h2>ジオラマギャラリー</h2>
+            <h2>Gallery</h2>
             <div class="card-grid">
                 <div class="card">
                     <div class="card-img">画像準備中</div>
@@ -1412,7 +1290,7 @@
 
         <!-- コンテンツ -->
         <section id="contents">
-            <h2>コンテンツ</h2>
+            <h2>Contents</h2>
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('contents', 'youtube')">YouTube</button>
                 <button class="tab" onclick="switchTab('contents', 'blog')">ブログ</button>
@@ -1451,7 +1329,7 @@
 
         <!-- お問い合わせ -->
         <section id="contact">
-            <h2>お問い合わせ</h2>
+            <h2>Contact</h2>
             <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-group">
                     <label for="name">お名前</label>
@@ -1528,14 +1406,6 @@
         // YouTube API設定
         const API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
         const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
-
-        // モバイルメニューの開閉
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileMenuOverlay');
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
 
         // タブ切り替え機能
         function switchTab(section, tabName) {
