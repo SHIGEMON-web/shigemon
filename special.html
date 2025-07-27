@@ -422,6 +422,11 @@
             max-height: 1200px;
             z-index: 2000;
             animation: giantAppear 2s ease-out forwards;
+            cursor: pointer;
+        }
+
+        .giant-dog:hover {
+            filter: brightness(1.1);
         }
 
         .giant-dog.crazy {
@@ -869,6 +874,11 @@
             giantDog.innerHTML = '<img src="images/giant-dog.png" alt="巨大な犬">';
             document.body.appendChild(giantDog);
 
+            // クリックで待ち受け画像をダウンロード
+            giantDog.addEventListener('click', () => {
+                downloadWallpaper();
+            });
+
             // 5秒後に変な動きを開始
             setTimeout(() => {
                 giantDog.classList.add('crazy');
@@ -878,6 +888,17 @@
             setTimeout(() => {
                 giantDog.remove();
             }, 8000);
+        }
+
+        // 待ち受け画像をダウンロード
+        function downloadWallpaper() {
+            const link = document.createElement('a');
+            link.href = 'images/wallpaper.jpg';
+            link.download = 'special-dog-wallpaper.jpg';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // ゲームをリセット
