@@ -677,11 +677,12 @@
             border-radius: 15px;
             width: 90%;
             max-width: 1100px;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             animation: slideIn 0.3s ease-out;
             position: relative;
+            margin: 5vh auto;
         }
 
         @keyframes slideIn {
@@ -722,8 +723,9 @@
         .modal-body {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            height: 85vh;
-            max-height: 700px;
+            height: calc(90vh - 20px);
+            max-height: 680px;
+            overflow: hidden;
         }
 
         /* 左側：画像セクション */
@@ -796,6 +798,7 @@
             display: flex;
             flex-direction: column;
             background: #fafafa;
+            height: 100%;
         }
 
         .modal-header {
@@ -855,6 +858,7 @@
 
         .modal-services {
             margin-bottom: 30px;
+            display: none;
         }
 
         .services-title {
@@ -906,6 +910,7 @@
             content: '✓';
             color: #4caf50;
             font-weight: bold;
+            margin-right: 8px;
         }
 
         .modal-contact-btn {
@@ -1848,13 +1853,6 @@
                         </div>
                     </div>
                     
-                    <div class="modal-services" id="modalServices">
-                        <div class="services-title">提供サービス</div>
-                        <div class="service-tags" id="serviceTags">
-                            <!-- サービスタグはJavaScriptで動的に追加 -->
-                        </div>
-                    </div>
-                    
                     <div class="modal-results" id="modalResults" style="display: none;">
                         <div class="results-title">成果・実績</div>
                         <div id="resultsList">
@@ -1864,7 +1862,7 @@
                     
                     <a href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】作品について&body=%0D%0A【お問い合わせ内容】%0D%0A%0D%0A【作品名】%0D%0A" 
                        class="modal-contact-btn">
-                        ✉️ お問い合わせ/お見積もり
+                        お問い合わせ/お見積もり
                     </a>
                 </div>
             </div>
@@ -1956,10 +1954,15 @@
                 if (data.items && data.items.length > 0) {
                     const stats = data.items[0].statistics;
                     
-                    // 数値をそのまま表示（カンマ区切り）
-                    document.getElementById('subscriber-count').textContent = Number(stats.subscriberCount).toLocaleString();
-                    document.getElementById('video-count').textContent = Number(stats.videoCount).toLocaleString();
-                    document.getElementById('view-count').textContent = Number(stats.viewCount).toLocaleString();
+                    // 要素の存在確認をしてから更新
+                    const subscriberEl = document.getElementById('subscriber-count');
+                    const videoEl = document.getElementById('video-count');
+                    const viewEl = document.getElementById('view-count');
+                    
+                    if (subscriberEl) subscriberEl.textContent = Number(stats.subscriberCount).toLocaleString();
+                    if (videoEl) videoEl.textContent = Number(stats.videoCount).toLocaleString();
+                    if (viewEl) viewEl.textContent = Number(stats.viewCount).toLocaleString();
+                    
                     console.log('チャンネル統計の表示完了');
                 } else {
                     console.error('チャンネルデータが見つかりません');
@@ -1973,9 +1976,13 @@
 
         // デフォルト値を設定
         function setDefaultStats() {
-            document.getElementById('subscriber-count').textContent = '12.3万';
-            document.getElementById('video-count').textContent = '800+';
-            document.getElementById('view-count').textContent = '5,000万+';
+            const subscriberEl = document.getElementById('subscriber-count');
+            const videoEl = document.getElementById('video-count');
+            const viewEl = document.getElementById('view-count');
+            
+            if (subscriberEl) subscriberEl.textContent = '12.3万';
+            if (videoEl) videoEl.textContent = '800+';
+            if (viewEl) viewEl.textContent = '5,000万+';
         }
 
         // 最新動画を取得
@@ -2074,16 +2081,18 @@
         // デフォルトの動画を表示
         function showDefaultVideos() {
             const mainGrid = document.getElementById('youtube-grid');
-            mainGrid.innerHTML = `
-                <div class="card">
-                    <p style="text-align: center; color: #666;">
-                        現在、動画を読み込めません。<br>
-                        <a href="https://www.youtube.com/@SHIGEMON" target="_blank" style="color: #3498db;">
-                            YouTubeチャンネルはこちら
-                        </a>
-                    </p>
-                </div>
-            `;
+            if (mainGrid) {
+                mainGrid.innerHTML = `
+                    <div class="card">
+                        <p style="text-align: center; color: #666;">
+                            現在、動画を読み込めません。<br>
+                            <a href="https://www.youtube.com/@SHIGEMON" target="_blank" style="color: #3498db;">
+                                YouTubeチャンネルはこちら
+                            </a>
+                        </p>
+                    </div>
+                `;
+            }
         }
 
         // エラーメッセージを表示
@@ -2103,6 +2112,11 @@
         // 動画を表示
         function displayVideos(videos) {
             const mainGrid = document.getElementById('youtube-grid');
+            
+            if (!mainGrid) {
+                console.error('youtube-grid要素が見つかりません');
+                return;
+            }
             
             mainGrid.innerHTML = '';
             
@@ -2232,7 +2246,6 @@
                 description: '新発売のガンプラキットを詳細にレビューする動画を制作。組み立て過程から完成品まで、視聴者にとって分かりやすい構成で制作しました。',
                 period: '2週間',
                 completed: '2024年3月',
-                services: ['動画・構成', '撮影', '編集', '詳細解説', '音響調整'],
                 results: ['再生数80万回達成', 'チャンネル登録者数20%増加', 'メーカーからの継続依頼']
             },
             work2: {
@@ -2242,7 +2255,6 @@
                 description: '○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。現地取材を行い、細部まで忠実に再現することで、来場者に親しみを持っていただける作品に仕上げました。',
                 period: '3ヶ月',
                 completed: '2024年9月',
-                services: ['企画・構成', '現地取材', 'ジオラマ製作', '照明演出', '設置作業'],
                 results: ['来場者数30%増加', '地元メディア掲載', 'SNSで話題に']
             },
             work3: {
@@ -2252,7 +2264,6 @@
                 description: '来場者参加型のジオラマ製作体験ブースを企画・運営。お子様から大人まで楽しめる内容で、多くの方に鉄道模型の魅力を伝えることができました。',
                 period: '3日間',
                 completed: '2024年7月',
-                services: ['イベント企画', 'ワークショップ運営', '材料準備', 'スタッフ指導'],
                 results: ['参加者500名以上', '満足度98%', '次回開催決定']
             },
             work4: {
@@ -2262,7 +2273,6 @@
                 description: '初心者向けジオラマ製作ガイドブックの監修を担当。基本的な材料の選び方から、実際の製作手順まで、わかりやすく解説しています。',
                 period: '2ヶ月',
                 completed: '2024年3月',
-                services: ['執筆', '撮影協力', '技術監修', '作例製作'],
                 results: ['増刷3回', 'Amazon評価4.5', '読者からの好評']
             },
             work5: {
@@ -2272,7 +2282,6 @@
                 description: '同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。走行性能、ディテールの違い、価格差など、多角的に比較しています。',
                 period: '1週間',
                 completed: '2024年10月',
-                services: ['企画・構成', '撮影', '編集', '比較検証', 'グラフ作成'],
                 results: ['再生数50万回突破', '高評価率95%', '購入の参考になったとのコメント多数']
             },
             work6: {
@@ -2282,7 +2291,6 @@
                 description: 'お客様の思い出の風景を、Nゲージジオラマで精密に再現。写真資料をもとに、当時の雰囲気を大切にしながら製作しました。',
                 period: '2ヶ月',
                 completed: '2024年8月',
-                services: ['ヒアリング', '設計・デザイン', 'ジオラマ製作', 'LED照明', '額装'],
                 results: ['お客様満足度100%', '追加注文獲得', '口コミで新規依頼']
             }
         };
@@ -2367,17 +2375,21 @@
         // メイン画像を更新
         function updateMainImage(imageName) {
             const mainImage = document.getElementById('modalMainImage');
-            mainImage.innerHTML = `<div class="image-placeholder">${imageName}</div>`;
+            if (mainImage) {
+                mainImage.innerHTML = `<div class="image-placeholder">${imageName}</div>`;
+            }
         }
 
         // サムネイルのアクティブ状態を更新
         function updateThumbnailActive(index) {
             const thumbnails = document.querySelectorAll('.modal-thumbnail');
             thumbnails.forEach((thumb, i) => {
-                if (i === index) {
-                    thumb.classList.add('active');
-                } else {
-                    thumb.classList.remove('active');
+                if (thumb) {
+                    if (i === index) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
                 }
             });
         }
@@ -2399,8 +2411,20 @@
 
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
-            loadChannelStats();
-            loadLatestVideos();
+            console.log('ページ読み込み完了');
+            
+            // 要素の存在確認
+            console.log('subscriber-count:', document.getElementById('subscriber-count'));
+            console.log('video-count:', document.getElementById('video-count'));
+            console.log('view-count:', document.getElementById('view-count'));
+            console.log('youtube-grid:', document.getElementById('youtube-grid'));
+            
+            try {
+                loadChannelStats();
+                loadLatestVideos();
+            } catch (error) {
+                console.error('初期化エラー:', error);
+            }
         });
     </script>
 </body>
