@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   SHIGEMON - YouTuber &amp; ジオラマ作家
+  </title>
+  <style>
+   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* 注目のバナー */
+        .announcement-banner {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 0.75rem 5%;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .announcement-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%);
+            }
+        }
+
+        .announcement-banner a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            z-index: 1;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .announcement-banner a:hover {
+            text-decoration: underline;
+        }
+
+        /* ヘッダー */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* メインコンテンツ */
+        main {
+            min-height: 100vh;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            width: 100%;
+            height: 300px;
+            background: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        /* セクションの背景デザイン */
+        /* プロフィールセクション */
+        #profile {
+            background: #ffffff;
+        }
+
+        /* 過去の仕事セクション */
+        #works {
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        /* ジオラマギャラリー */
+        #gallery {
+            background: #ffffff;
+            position: relative;
+        }
+
+        /* コンテンツセクション */
+        #contents {
+            background: #f8f9fa;
+        }
+
+        /* お問い合わせセクション */
+        #contact {
+            background: #ffffff;
+            padding-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* プロフィール */
+        #profile {
+            background: #ffffff;
+            padding: 2.5rem 5%;
+            margin: 0 auto;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+        }
+
+        .services-grid {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .profile {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            align-items: start;
+            padding: 0;
+            background: transparent;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: linear-gradient(90deg, 
+                #3498db 0%, 
+                #2ecc71 25%, 
+                #f39c12 50%, 
+                #e74c3c 75%, 
+                #3498db 100%
+            );
+            background-size: 200% 100%;
+            animation: gradientMove 8s ease infinite;
+            padding: 3px;
+        }
+
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 17px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-text h3 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .profile-text p {
+            margin-bottom: 0;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* チャンネル統計 */
+        .channel-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 2rem;
+            background: transparent;
+            padding: 2rem 0 0;
+            border-radius: 0;
+            box-shadow: none;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            border-right: 2px solid #f0f0f0;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* カードグリッド */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 0.75rem;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* 作品カード用のスタイル */
+        .work-card-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 0.75rem 0;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* タブ */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.5rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            transition: color 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: #3498db;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* タグ */
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+
+        .tag.review {
+            background: #e74c3c;
+        }
+
+        .tag.diorama {
+            background: #3498db;
+        }
+
+        .tag.event {
+            background: #2ecc71;
+        }
+
+        .tag.writing {
+            background: #f39c12;
+        }
+
+        .card-with-tag h3 {
+            margin-top: 0.5rem;
+        }
+
+        /* もっと見るボタン */
+        .more-btn {
+            display: block;
+            margin: 2rem auto 0;
+            padding: 0.8rem 2rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .more-btn:hover {
+            background: #2980b9;
+        }
+
+        /* YouTube動画埋め込み */
+        .video-card {
+            position: relative;
+        }
+
+        .video-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-thumbnail-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            border-radius: 5px;
+            background: #000;
+        }
+
+        .youtube-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .video-card:hover .play-icon {
+            background: #ff0000;
+        }
+
+        .play-icon::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 3px;
+        }
+
+        .video-card h3 {
+            font-size: 0.95rem;
+            margin: 0.75rem 0 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .video-views {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* お問い合わせボタン */
+        .contact-button:hover {
+            background: #2980b9 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* フッター */
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem 5% 1rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        /* フッター上部の装飾的な縁 */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #3498db 0%, 
+                #2ecc71 25%, 
+                #f39c12 50%, 
+                #e74c3c 75%, 
+                #3498db 100%
+            );
+            background-size: 200% 100%;
+            animation: gradientMove 8s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-section.footer-info {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .footer-links a::before {
+            content: '▸';
+            position: absolute;
+            left: -1rem;
+            color: #3498db;
+            transition: transform 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links a:hover::before {
+            transform: translateX(3px);
+        }
+
+        .footer-info {
+            text-align: left;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .footer-tagline {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        /* 犬の画像 */
+        .dog-container {
+            position: fixed;
+            bottom: 50px;
+            right: -300px;
+            width: 300px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 100;
+            transition: right 0.5s ease-out;
+            cursor: pointer;
+        }
+
+        .dog-container.show {
+            right: 0;
+            pointer-events: auto;
+        }
+
+        .dog-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom;
+        }
+
+        /* TOPへ戻るボタン */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* モバイル対応のメディアクエリ */
+        @media (max-width: 768px) {
+            /* ヘッダー調整 */
+            nav ul {
+                display: none;
+            }
+
+            /* バナー調整 */
+            .announcement-banner {
+                font-size: 0.8rem;
+                padding: 0.5rem 3%;
+            }
+
+            .announcement-banner a {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+
+            /* ヒーロー画像の調整 - 余白完全削除 */
+            .hero {
+                height: auto;
+                margin: 0;
+                padding: 0;
+            }
+
+            .hero img {
+                object-fit: contain;
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            /* セクション調整 */
+            section {
+                padding: 1.5rem 5%;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            /* プロフィール調整 */
+            #profile {
+                padding: 2rem 5%;
+                width: 95%;
+                margin: 0 auto 1rem;
+                border-radius: 0 0 15px 15px;
+            }
+
+            .profile {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .profile-img-container {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+
+            .profile-text h3 {
+                font-size: 1.8rem;
+            }
+
+            /* チャンネル統計の調整 */
+            .channel-stats {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin-top: 1rem;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 2px solid #f0f0f0;
+                padding: 0.75rem 0;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            /* すべてのカードグリッドを1カラムに */
+            .card-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* タブの調整 */
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: center;
+                gap: 0.5rem;
+                padding-bottom: 2px;
+            }
+
+            .tab {
+                flex: 0 0 auto;
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            /* フォームの調整 */
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            /* フッターの調整 */
+            footer {
+                padding: 1.5rem 5% 0.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+                padding-bottom: 1rem;
+            }
+
+            .footer-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-section.footer-info {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-section h4 {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer-links a {
+                padding-left: 0;
+                font-size: 0.85rem;
+            }
+
+            .footer-links a::before {
+                display: none;
+            }
+
+            .footer-copyright {
+                padding: 0.8rem 0;
+                font-size: 0.8rem;
+            }
+
+            .footer-logo {
+                font-size: 1.2rem;
+            }
+
+            .footer-tagline {
+                font-size: 0.75rem;
+            }
+
+            /* 犬の画像調整 */
+            .dog-container {
+                width: 200px;
+                height: 300px;
+                right: -200px;
+                bottom: 20px;
+            }
+            
+            .dog-container.show {
+                right: 0;
+            }
+        }
+  </style>
+  <style>
+   .works-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 1rem auto;
+  font-family: sans-serif;
+}
+.works-card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.works-card-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.works-card .tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #2ecc71;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+.works-card-content {
+  padding: 1rem;
+}
+.works-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.works-card-description {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+.works-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+.works-card-link {
+  color: #2ecc71;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+  </style>
+ </head>
+ <body id="top">
+  <!-- 注目のバナー -->
+  <div class="announcement-banner">
+   <a href="https://amzn.to/4lNA5tf" target="_blank">
+    初の著書『やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル(成美堂出版)』 好評発売中！
+   </a>
+  </div>
+  <!-- ヘッダー -->
+  <header>
+   <nav>
+    <div class="logo">
+     SHIGEMON
+    </div>
+    <ul>
+     <li>
+      <a href="#profile">
+       Profile
+      </a>
+     </li>
+     <li>
+      <a href="#works">
+       Works
+      </a>
+     </li>
+     <li>
+      <a href="#gallery">
+       Gallery
+      </a>
+     </li>
+     <li>
+      <a href="#contents">
+       Contents
+      </a>
+     </li>
+     <li>
+      <a href="#contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </nav>
+  </header>
+  <main>
+   <!-- ヒーローセクション -->
+   <div class="hero">
+    <img alt="SHIGEMONの作品集" src="images/hero-image.jpg"/>
+   </div>
+   <!-- プロフィール -->
+   <section id="profile">
+    <div class="profile">
+     <div class="profile-img-container">
+      <img alt="SHIGEMON" class="profile-img" src="images/profile-image.jpg"/>
+     </div>
+     <div class="profile-text">
+      <h3>
+       SHIGEMON
+      </h3>
+      <p>
+       YouTuberとして鉄道模型やジオラマ製作の動画を配信しています。
+       <br/>
+       精密なジオラマ製作技術を活かし、企業様向けのジオラマ製作や、イベント向けコンテンツの提供も行っています。
+       <br/>
+       鉄道模型の魅力を多くの方に伝えるため、日々活動中です。
+      </p>
+     </div>
+    </div>
+    <div class="channel-stats">
+     <div class="stat-item">
+      <span class="stat-number" id="subscriber-count">
+       -
+      </span>
+      <span class="stat-label">
+       チャンネル登録者数
+      </span>
+     </div>
+     <div class="stat-item">
+      <span class="stat-number" id="video-count">
+       -
+      </span>
+      <span class="stat-label">
+       動画本数
+      </span>
+     </div>
+     <div class="stat-item">
+      <span class="stat-number" id="view-count">
+       -
+      </span>
+      <span class="stat-label">
+       総再生回数
+      </span>
+     </div>
+    </div>
+    <!-- サービス内容 -->
+    <div class="card-grid services-grid">
+     <div class="card">
+      <h3>
+       YouTube動画製作
+      </h3>
+      <p>
+       鉄道模型のレビュー動画や、ジオラマ製作過程の動画を企画から編集まで一貫して行います。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       ジオラマ製作
+      </h3>
+      <p>
+       Nゲージを中心とした精密なジオラマを製作。企業様の展示用ジオラマも承ります。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       イベント企画
+      </h3>
+      <p>
+       鉄道模型関連のイベント企画・運営をサポート。体験型コンテンツの提供も可能です。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       執筆・監修
+      </h3>
+      <p>
+       鉄道模型やジオラマ製作に関する記事執筆、書籍の監修を行います。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       商品レビュー
+      </h3>
+      <p>
+       新製品のレビュー動画製作。製品の魅力を分かりやすく伝えます。
+      </p>
+     </div>
+     <div class="card">
+      <h3>
+       ワークショップ
+      </h3>
+      <p>
+       ジオラマ製作のワークショップを開催。初心者から上級者まで対応可能です。
+      </p>
+     </div>
+    </div>
+   </section>
+   <!-- 過去の仕事 -->
+   <section id="works">
+    <h2>
+     Works
+    </h2>
+    <div class="tabs">
+     <button class="tab active" onclick="switchTab('works', 'all')">
+      全て
+     </button>
+     <button class="tab" onclick="switchTab('works', 'review')">
+      レビュー動画製作
+     </button>
+     <button class="tab" onclick="switchTab('works', 'diorama')">
+      ジオラマ製作
+     </button>
+     <button class="tab" onclick="switchTab('works', 'event')">
+      イベント向けコンテンツ
+     </button>
+     <button class="tab" onclick="switchTab('works', 'writing')">
+      執筆・書籍
+     </button>
+    </div>
+    <div class="tab-content active" id="works-all">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        KATO新製品レビュー
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        企業展示用ジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        ○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag event">
+        イベント向けコンテンツ
+       </span>
+       <h3>
+        鉄道フェスタ2024
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        来場者参加型のジオラマ製作体験ブースを企画・運営。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag writing">
+        執筆・書籍
+       </span>
+       <h3>
+        「はじめてのジオラマ」監修
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        初心者向けジオラマ製作ガイドブックの監修を担当。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        TOMIX製品比較動画
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        個人コレクション向けジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        お客様の思い出の風景を、Nゲージジオラマで精密に再現。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-review">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        KATO新製品レビュー
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag review">
+        レビュー動画製作
+       </span>
+       <h3>
+        TOMIX製品比較動画
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-diorama">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        企業展示用ジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        ○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。
+       </p>
+      </div>
+      <div class="card card-with-tag">
+       <span class="tag diorama">
+        ジオラマ製作
+       </span>
+       <h3>
+        個人コレクション向けジオラマ
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        お客様の思い出の風景を、Nゲージジオラマで精密に再現。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-event">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag event">
+        イベント向けコンテンツ
+       </span>
+       <h3>
+        鉄道フェスタ2024
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        来場者参加型のジオラマ製作体験ブースを企画・運営。
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="tab-content" id="works-writing">
+     <div class="card-grid">
+      <div class="card card-with-tag">
+       <span class="tag writing">
+        執筆・書籍
+       </span>
+       <h3>
+        「はじめてのジオラマ」監修
+       </h3>
+       <div class="work-card-img">
+        画像準備中
+       </div>
+       <p>
+        初心者向けジオラマ製作ガイドブックの監修を担当。
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- ジオラマギャラリー -->
+   <section id="gallery">
+    <h2>
+     Gallery
+    </h2>
+    <div class="card-grid">
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       山間部の駅
+      </h3>
+      <p>
+       緑豊かな山間部の小さな駅を再現。四季の変化も表現しています。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       都市型レイアウト
+      </h3>
+      <p>
+       高架線と地上線が交差する都市部の風景を精密に再現。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       海辺の路線
+      </h3>
+      <p>
+       海沿いを走るローカル線の情景。波の表現にもこだわりました。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       雪景色の駅
+      </h3>
+      <p>
+       冬の雪に覆われた駅の情景。雪の質感表現が見どころです。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       田園風景
+      </h3>
+      <p>
+       のどかな田園地帯を走る単線。日本の原風景を表現しました。
+      </p>
+     </div>
+     <div class="card">
+      <div class="card-img">
+       画像準備中
+      </div>
+      <h3>
+       機関区
+      </h3>
+      <p>
+       蒸気機関車が集う機関区の情景。細部まで作り込んでいます。
+      </p>
+     </div>
+    </div>
+    <div class="hidden" id="gallery-more">
+     <div class="card-grid">
+      <div class="card">
+       <div class="card-img">
+        画像準備中
+       </div>
+       <h3>
+        橋梁のある風景
+       </h3>
+       <p>
+        川を渡る鉄橋の情景。水面の表現にこだわりました。
+       </p>
+      </div>
+      <div class="card">
+       <div class="card-img">
+        画像準備中
+       </div>
+       <h3>
+        夜景レイアウト
+       </h3>
+       <p>
+        LEDを使用した夜景表現。街の灯りが幻想的です。
+       </p>
+      </div>
+      <div class="card">
+       <div class="card-img">
+        画像準備中
+       </div>
+       <h3>
+        貨物ヤード
+       </h3>
+       <p>
+        貨物列車が行き交うヤードの情景を再現。
+       </p>
+      </div>
+     </div>
+    </div>
+    <button class="more-btn" onclick="toggleGallery()">
+     もっと見る
+    </button>
+   </section>
+   <!-- コンテンツ -->
+   <section id="contents">
+    <h2>
+     Contents
+    </h2>
+    <div class="tabs">
+     <button class="tab active" onclick="switchTab('contents', 'youtube')">
+      YouTube
+     </button>
+     <button class="tab" onclick="switchTab('contents', 'blog')">
+      ブログ
+     </button>
+    </div>
+    <div class="tab-content active" id="contents-youtube">
+     <div class="card-grid" id="youtube-grid">
+      <!-- YouTube動画はJavaScriptで動的に追加されます -->
+     </div>
+     <div class="hidden" id="youtube-more">
+      <div class="card-grid" id="youtube-more-grid">
+       <!-- 追加のYouTube動画はJavaScriptで動的に追加されます -->
+      </div>
+     </div>
+     <button class="more-btn" onclick="toggleYouTube()">
+      もっと見る
+     </button>
+    </div>
+    <div class="tab-content" id="contents-blog">
+     <div class="card-grid">
+      <div class="card">
+       <h3>
+        ブログ記事タイトル1
+       </h3>
+       <p>
+        ブログ記事の概要がここに入ります。ジオラマ製作のコツや新製品情報など。
+       </p>
+      </div>
+      <div class="card">
+       <h3>
+        ブログ記事タイトル2
+       </h3>
+       <p>
+        ブログ記事の概要がここに入ります。製作過程の詳細解説など。
+       </p>
+      </div>
+      <div class="card">
+       <h3>
+        ブログ記事タイトル3
+       </h3>
+       <p>
+        ブログ記事の概要がここに入ります。イベントレポートなど。
+       </p>
+      </div>
+     </div>
+     <button class="more-btn">
+      もっと見る
+     </button>
+    </div>
+   </section>
+   <!-- お問い合わせ -->
+   <section id="contact">
+    <h2>
+     Contact
+    </h2>
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+     <p style="color: #666; margin-bottom: 2rem;">
+      お仕事のご依頼・ご相談は下記のボタンからお気軽にご連絡ください。
+     </p>
+     <a class="contact-button" href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】SHIGEMONウェブサイトより&amp;body=%0D%0A【お名前】%0D%0A%0D%0A%0D%0A【メールアドレス】%0D%0A%0D%0A%0D%0A【お問い合わせ内容】%0D%0A%0D%0A" style="display: inline-block; background: #3498db; color: white; padding: 1rem 3rem; border-radius: 5px; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: background 0.3s;">
+      メールでお問い合わせ
+     </a>
+     <p style="color: #999; font-size: 0.9rem; margin-top: 1.5rem;">
+      ※ メールソフトが起動します。
+      <br/>
+      起動しない場合は
+      <strong>
+       shigemaru1227@gmail.com
+      </strong>
+      へ直接メールをお送りください。
+     </p>
+    </div>
+   </section>
+  </main>
+  <!-- フッター -->
+  <footer>
+   <div class="footer-content">
+    <div class="footer-section footer-info">
+     <div class="footer-logo">
+      SHIGEMON
+     </div>
+     <p class="footer-tagline">
+      鉄道模型の魅力をYouTubeで配信。
+      <br/>
+      ジオラマ製作やイベント出展、書籍の執筆など幅広く活躍中。
+     </p>
+    </div>
+    <div class="footer-section">
+     <h4>
+      SNS
+     </h4>
+     <div class="social-icons">
+      <a href="https://x.com/shigemon1227" target="_blank" title="X (Twitter)">
+       <svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+        </path>
+       </svg>
+      </a>
+      <a href="https://www.instagram.com/shigemon1227/" target="_blank" title="Instagram">
+       <svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z">
+        </path>
+       </svg>
+      </a>
+      <a href="https://www.youtube.com/@SHIGEMON" target="_blank" title="YouTube">
+       <svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+        </path>
+       </svg>
+      </a>
+     </div>
+    </div>
+    <div class="footer-section">
+     <h4>
+      関連リンク
+     </h4>
+     <div class="footer-links">
+      <a href="https://www5e.biglobe.ne.jp/~njouki/" target="_blank">
+       N蒸機の世界
+      </a>
+      <a href="http://njouki.g1.xrea.com/" target="_blank">
+       ポッポ屋
+      </a>
+      <a href="https://www5a.biglobe.ne.jp/%7etoyoyasu/" target="_blank">
+       Nゲージ蒸気機関車
+      </a>
+      <a href="https://tetsumoba.com/" target="_blank">
+       鉄道模型バザール
+      </a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-copyright">
+    © 2025 SHIGEMON. All rights reserved.
+   </div>
+  </footer>
+  <!-- 犬の画像コンテナ -->
+  <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
+   <img alt="犬" src="images/main-dog.png"/>
+  </div>
+  <!-- TOPへ戻るボタン -->
+  <a class="back-to-top" href="#" onclick="scrollToTop(event)">
+   TOP
+  </a>
+  <script>
+   // YouTube API設定
+        const API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
+        const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
+
+        // タブ切り替え機能
+        function switchTab(section, tabName) {
+            const tabs = document.querySelectorAll(`#${section} .tab`);
+            const contents = document.querySelectorAll(`#${section} .tab-content`);
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`${section}-${tabName}`).classList.add('active');
+        }
+
+        // ギャラリーの展開
+        function toggleGallery() {
+            const moreContent = document.getElementById('gallery-more');
+            const btn = event.target;
+            
+            if (moreContent.classList.contains('hidden')) {
+                moreContent.classList.remove('hidden');
+                btn.textContent = '閉じる';
+            } else {
+                moreContent.classList.add('hidden');
+                btn.textContent = 'もっと見る';
+            }
+        }
+
+        // YouTubeコンテンツの展開
+        function toggleYouTube() {
+            const moreContent = document.getElementById('youtube-more');
+            const btn = event.target;
+            
+            if (moreContent.classList.contains('hidden')) {
+                moreContent.classList.remove('hidden');
+                btn.textContent = '閉じる';
+            } else {
+                moreContent.classList.add('hidden');
+                btn.textContent = 'もっと見る';
+            }
+        }
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const offsetPosition = elementPosition - headerHeight - 10;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // チャンネル統計情報を取得
+        async function loadChannelStats() {
+            try {
+                console.log('チャンネル統計の取得開始...');
+                const response = await fetch(
+                    `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`
+                );
+                const data = await response.json();
+                
+                console.log('チャンネル統計レスポンス:', data);
+                
+                if (data.error) {
+                    console.error('YouTube API エラー:', data.error);
+                    console.error('エラー詳細:', data.error.message);
+                    setDefaultStats();
+                    return;
+                }
+                
+                if (data.items && data.items.length > 0) {
+                    const stats = data.items[0].statistics;
+                    
+                    // 数値をそのまま表示（カンマ区切り）
+                    document.getElementById('subscriber-count').textContent = Number(stats.subscriberCount).toLocaleString();
+                    document.getElementById('video-count').textContent = Number(stats.videoCount).toLocaleString();
+                    document.getElementById('view-count').textContent = Number(stats.viewCount).toLocaleString();
+                    console.log('チャンネル統計の表示完了');
+                } else {
+                    console.error('チャンネルデータが見つかりません');
+                    setDefaultStats();
+                }
+            } catch (error) {
+                console.error('チャンネル統計の取得エラー:', error);
+                setDefaultStats();
+            }
+        }
+
+        // デフォルト値を設定
+        function setDefaultStats() {
+            document.getElementById('subscriber-count').textContent = '0';
+            document.getElementById('video-count').textContent = '0';
+            document.getElementById('view-count').textContent = '0';
+        }
+
+        // 最新動画を取得
+        async function loadLatestVideos() {
+            try {
+                const response = await fetch(
+                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20&type=video`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    }
+                );
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    console.error('YouTube API エラー:', data.error);
+                    showErrorMessage();
+                    return;
+                }
+                
+                if (data.items && data.items.length > 0) {
+                    // ショート動画を除外
+                    const regularVideos = [];
+                    const videoIds = [];
+                    
+                    for (const item of data.items) {
+                        videoIds.push(item.id.videoId);
+                    }
+                    
+                    // 動画の詳細情報を取得
+                    const detailsResponse = await fetch(
+                        `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds.join(',')}&part=statistics,contentDetails`,
+                        {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                            }
+                        }
+                    );
+                    
+                    if (!detailsResponse.ok) {
+                        throw new Error(`HTTP error! status: ${detailsResponse.status}`);
+                    }
+                    
+                    const detailsData = await detailsResponse.json();
+                    
+                    if (detailsData.error) {
+                        console.error('動画詳細取得エラー:', detailsData.error);
+                        showErrorMessage();
+                        return;
+                    }
+                    
+                    // ショート動画をフィルタリング（60秒以下の動画を除外）
+                    data.items.forEach((item, index) => {
+                        const details = detailsData.items.find(d => d.id === item.id.videoId);
+                        if (details) {
+                            const duration = details.contentDetails.duration;
+                            const seconds = parseDuration(duration);
+                            
+                            if (seconds > 60) {
+                                regularVideos.push({
+                                    ...item,
+                                    statistics: details.statistics || {},
+                                    contentDetails: details.contentDetails || {}
+                                });
+                            }
+                        }
+                    });
+                    
+                    displayVideos(regularVideos.slice(0, 9));
+                } else {
+                    console.log('動画が見つかりません');
+                    showErrorMessage();
+                }
+            } catch (error) {
+                console.error('動画の取得エラー:', error);
+                showErrorMessage();
+            }
+        }
+
+        // エラーメッセージを表示
+        function showErrorMessage() {
+            const mainGrid = document.getElementById('youtube-grid');
+            mainGrid.innerHTML = '<div class="card"><p>動画の取得に失敗しました。しばらくしてからお試しください。</p></div>';
+        }
+
+        // ISO 8601形式の期間を秒に変換
+        function parseDuration(duration) {
+            const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+            const hours = (parseInt(match[1]) || 0);
+            const minutes = (parseInt(match[2]) || 0);
+            const seconds = (parseInt(match[3]) || 0);
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+
+        // 動画を表示
+        function displayVideos(videos) {
+            const mainGrid = document.getElementById('youtube-grid');
+            const moreGrid = document.getElementById('youtube-more-grid');
+            
+            mainGrid.innerHTML = '';
+            moreGrid.innerHTML = '';
+            
+            videos.forEach((video, index) => {
+                const videoCard = createVideoCard(video);
+                if (index < 3) {
+                    mainGrid.appendChild(videoCard);
+                } else {
+                    moreGrid.appendChild(videoCard);
+                }
+            });
+        }
+
+        // 動画カードを作成
+        function createVideoCard(video) {
+            const card = document.createElement('div');
+            card.className = 'card video-card';
+            
+            const videoId = video.id.videoId;
+            const title = video.snippet.title;
+            const thumbnail = video.snippet.thumbnails.high.url;
+            const viewCount = video.statistics.viewCount || '0';
+            const publishedAt = new Date(video.snippet.publishedAt);
+            
+            card.innerHTML = `
+                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+                    <div class="video-thumbnail-wrapper">
+                        <img src="${thumbnail}" alt="${title}" class="youtube-thumbnail">
+                        <div class="play-icon"></div>
+                    </div>
+                    <h3>${title}</h3>
+                    <div class="video-meta">
+                        <div class="video-views">
+                            <span>視聴回数: ${Number(viewCount).toLocaleString()}回</span>
+                        </div>
+                        <div class="video-date">${formatDate(publishedAt)}</div>
+                    </div>
+                </a>
+            `;
+            
+            return card;
+        }
+
+        // 日付をフォーマット
+        function formatDate(date) {
+            const now = new Date();
+            const diff = now - date;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            if (days === 0) {
+                return '今日';
+            } else if (days === 1) {
+                return '昨日';
+            } else if (days < 7) {
+                return `${days}日前`;
+            } else if (days < 30) {
+                const weeks = Math.floor(days / 7);
+                return `${weeks}週間前`;
+            } else if (days < 365) {
+                const months = Math.floor(days / 30);
+                return `${months}ヶ月前`;
+            } else {
+                const years = Math.floor(days / 365);
+                return `${years}年前`;
+            }
+        }
+
+        // TOPへ戻る機能
+        function scrollToTop(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // TOPへ戻るボタンの表示制御
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const backToTop = document.querySelector('.back-to-top');
+            
+            if (scrollTop > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+            
+            // 犬の画像表示制御
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight;
+            const scrollPercentage = (scrollTop + clientHeight) / scrollHeight * 100;
+            
+            const dogContainer = document.getElementById('dogContainer');
+            
+            // ページの90%以上スクロールしたら犬を表示
+            if (scrollPercentage > 90) {
+                if (!dogContainer.classList.contains('show')) {
+                    dogContainer.classList.add('show');
+                    
+                    // 既存のタイマーをクリア
+                    if (window.dogTimer) {
+                        clearTimeout(window.dogTimer);
+                    }
+                    
+                    // 5秒後に自動的に隠す
+                    window.dogTimer = setTimeout(() => {
+                        dogContainer.classList.remove('show');
+                    }, 5000);
+                }
+            } else {
+                dogContainer.classList.remove('show');
+                if (window.dogTimer) {
+                    clearTimeout(window.dogTimer);
+                    window.dogTimer = null;
+                }
+            }
+        });
+
+        // スペシャルページを開く
+        function openSpecialPage() {
+            window.open('special.html', '_blank');
+        }
+
+        // ページ読み込み時に実行
+        window.addEventListener('load', () => {
+            loadChannelStats();
+            loadLatestVideos();
+        });
+  </script>
+ </body>
+</html>
