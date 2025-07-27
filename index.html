@@ -358,7 +358,6 @@
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
             padding: 0;
@@ -1471,7 +1470,7 @@
             
             <div id="works-all" class="tab-content active">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work1')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag review">レビュー動画製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1485,7 +1484,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work2')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1499,7 +1498,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work3')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag event">イベント向けコンテンツ</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1513,7 +1512,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work4')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag writing">執筆・書籍</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1527,7 +1526,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work5')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag review">レビュー動画製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1541,7 +1540,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work6')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1560,7 +1559,7 @@
             
             <div id="works-review" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work1')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag review">レビュー動画製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1574,7 +1573,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work5')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag review">レビュー動画製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1593,7 +1592,7 @@
             
             <div id="works-diorama" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work2')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1607,7 +1606,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work6')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1626,7 +1625,7 @@
             
             <div id="works-event" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work3')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag event">イベント向けコンテンツ</span>
                             <div class="works-card-img">画像準備中</div>
@@ -1645,7 +1644,7 @@
             
             <div id="works-writing" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work4')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag writing">執筆・書籍</span>
                             <div class="works-card-img">画像準備中</div>
@@ -2402,12 +2401,28 @@
         }
 
         // モーダルの外側をクリックしたら閉じる
-        window.onclick = function(event) {
+        window.addEventListener('click', function(event) {
             const modal = document.getElementById('workModal');
             if (event.target === modal) {
                 closeWorkModal();
             }
-        }
+        });
+
+        // DOMが完全に読み込まれてから実行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM読み込み完了');
+            
+            // モーダル要素の存在確認
+            const modal = document.getElementById('workModal');
+            const mainImage = document.getElementById('modalMainImage');
+            const thumbnails = document.getElementById('modalThumbnails');
+            
+            console.log('モーダル要素の確認:', {
+                modal: modal ? '存在' : '不在',
+                mainImage: mainImage ? '存在' : '不在',
+                thumbnails: thumbnails ? '存在' : '不在'
+            });
+        });
 
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
