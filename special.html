@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.7);
             z-index: 0;
         }
 
@@ -42,8 +42,20 @@
             position: fixed;
             width: 80px;
             height: 80px;
-            z-index: 1;
             opacity: 0.9;
+        }
+
+        /* 犬1と犬3はカードの後ろ */
+        .flying-dog.dog1,
+        .flying-dog.dog3 {
+            z-index: 1;
+        }
+
+        /* 犬2、犬4、犬5はカードの前 */
+        .flying-dog.dog2,
+        .flying-dog.dog4,
+        .flying-dog.dog5 {
+            z-index: 100;
         }
 
         .flying-dog img {
@@ -201,7 +213,7 @@
             justify-content: center;
             position: relative;
             z-index: 5;
-            background: rgba(255, 255, 255, 0.9);
+            /* 背景を削除して、飛び回る犬が見えるように */
         }
 
         /* インスタグラム風グリッド - PC用に6列×4段 */
