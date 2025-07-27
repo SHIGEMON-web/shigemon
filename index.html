@@ -234,11 +234,6 @@
             margin-top: 1.5rem;
         }
 
-        /* スマホ用スライダーコンテナ - 削除 */
-        .slider-container {
-            display: none !important;
-        }
-
         .card {
             background: white;
             padding: 1.5rem;
@@ -589,17 +584,17 @@
         .dog-container {
             position: fixed;
             bottom: 50px;
-            right: -300px; /* 右側の画面外に配置 */
+            right: -300px;
             width: 300px;
             height: 400px;
             pointer-events: none;
             z-index: 100;
-            transition: right 0.5s ease-out; /* rightプロパティのアニメーション */
+            transition: right 0.5s ease-out;
             cursor: pointer;
         }
 
         .dog-container.show {
-            right: 0; /* 表示時は右端に密着 */
+            right: 0;
             pointer-events: auto;
         }
 
@@ -609,8 +604,6 @@
             object-fit: contain;
             object-position: bottom;
         }
-
-
 
         /* TOPへ戻るボタン */
         .back-to-top {
@@ -759,15 +752,15 @@
                 line-height: 1.4;
             }
 
-            /* ヒーロー画像の調整 */
+            /* ヒーロー画像の調整 - 余白削除 */
             .hero {
-                height: auto;
-                aspect-ratio: 16 / 9;
-                max-height: 400px;
+                height: 200px;
+                margin: 0;
+                padding: 0;
             }
 
             .hero img {
-                object-fit: contain;
+                object-fit: cover;
                 width: 100%;
                 height: 100%;
             }
@@ -823,31 +816,8 @@
                 font-size: 2rem;
             }
 
-            /* カードグリッドの調整 */
+            /* すべてのカードグリッドを1カラムに */
             .card-grid {
-                display: none; /* スマホではグリッドを非表示 */
-            }
-
-            /* スマホでスライダーを表示 */
-            .slider-container {
-                display: block;
-            }
-
-            .slider-wrapper {
-                padding: 0 calc(7.5vw + 0.5rem);
-            }
-
-            /* 「もっと見る」セクションのスマホ対応 */
-            #gallery-more .card-grid,
-            #youtube-more .card-grid,
-            #contents-blog .card-grid {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            /* YouTube動画グリッドのスマホ対応 */
-            #youtube-grid {
                 display: grid;
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -899,8 +869,6 @@
             .dog-container.show {
                 right: 0;
             }
-
-
         }
     </style>
 </head>
@@ -1126,7 +1094,7 @@
         <!-- ジオラマギャラリー -->
         <section id="gallery">
             <h2>ジオラマギャラリー</h2>
-            <div class="card-grid" id="gallery-grid">
+            <div class="card-grid">
                 <div class="card">
                     <div class="card-img">画像準備中</div>
                     <h3>山間部の駅</h3>
@@ -1285,7 +1253,7 @@
 
     <script>
         // YouTube API設定
-        const API_KEY = 'AIzaSyBso5x4s3Air5CNAXc2UzSQEmQ5OGKkfq8';
+        const API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
         const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
 
         // モバイルメニューの開閉
@@ -1543,131 +1511,6 @@
                 top: 0,
                 behavior: 'smooth'
             });
-        }
-
-        // スライダー機能
-        const sliderPositions = {};
-        
-        function initSliders() {
-            const sections = ['skills', 'gallery', 'works-all', 'gallery-more', 'blog'];
-            sections.forEach(section => {
-                sliderPositions[section] = 0;
-                updateSliderNav(section);
-                updateSliderButtons(section);
-            });
-            
-            // タッチスワイプ対応
-            if (window.innerWidth <= 768) {
-                sections.forEach(section => {
-                    const slider = document.getElementById(`${section}-slider`);
-                    if (slider) {
-                        let startX = 0;
-                        let currentX = 0;
-                        let isDragging = false;
-                        
-                        slider.addEventListener('touchstart', (e) => {
-                            startX = e.touches[0].clientX;
-                            isDragging = true;
-                        });
-                        
-                        slider.addEventListener('touchmove', (e) => {
-                            if (!isDragging) return;
-                            currentX = e.touches[0].clientX;
-                        });
-                        
-                        slider.addEventListener('touchend', () => {
-                            if (!isDragging) return;
-                            isDragging = false;
-                            const diff = startX - currentX;
-                            if (Math.abs(diff) > 50) {
-                                slideCards(section, diff > 0 ? 1 : -1);
-                            }
-                        });
-                    }
-                });
-            }
-        }
-        
-        function slideCards(section, direction) {
-            const slider = document.getElementById(`${section}-slider`);
-            if (!slider) return;
-            
-            const cards = slider.querySelectorAll('.card');
-            const maxPosition = cards.length - 1;
-            
-            sliderPositions[section] += direction;
-            
-            // 境界チェック
-            if (sliderPositions[section] < 0) {
-                sliderPositions[section] = 0;
-            } else if (sliderPositions[section] > maxPosition) {
-                sliderPositions[section] = maxPosition;
-            }
-            
-            // スライド実行
-            const cardWidth = cards[0].offsetWidth + 16; // カード幅 + gap
-            slider.style.transform = `translateX(-${sliderPositions[section] * cardWidth}px)`;
-            
-            updateSliderNav(section);
-            updateSliderButtons(section);
-        }
-        
-        function updateSliderNav(section) {
-            const nav = document.getElementById(`${section}-nav`);
-            const slider = document.getElementById(`${section}-slider`);
-            
-            if (!nav || !slider) return;
-            
-            const cards = slider.querySelectorAll('.card');
-            nav.innerHTML = '';
-            
-            cards.forEach((_, index) => {
-                const dot = document.createElement('button');
-                dot.className = 'slider-dot';
-                if (index === sliderPositions[section]) {
-                    dot.classList.add('active');
-                }
-                dot.onclick = () => goToSlide(section, index);
-                nav.appendChild(dot);
-            });
-        }
-        
-        function updateSliderButtons(section) {
-            const container = section === 'works-all' 
-                ? document.querySelector('#works-all .slider-container')
-                : section === 'gallery-more'
-                ? document.querySelector('#gallery-more .slider-container')
-                : section === 'blog'
-                ? document.querySelector('#contents-blog .slider-container')
-                : document.querySelector(`#${section} .slider-container`);
-            
-            if (!container) return;
-            
-            const prevBtn = container.querySelector('.prev');
-            const nextBtn = container.querySelector('.next');
-            const slider = document.getElementById(`${section}-slider`);
-            
-            if (!slider) return;
-            
-            const cards = slider.querySelectorAll('.card');
-            
-            if (prevBtn) prevBtn.disabled = sliderPositions[section] === 0;
-            if (nextBtn) nextBtn.disabled = sliderPositions[section] === cards.length - 1;
-        }
-        
-        function goToSlide(section, index) {
-            const slider = document.getElementById(`${section}-slider`);
-            if (!slider) return;
-            
-            const cards = slider.querySelectorAll('.card');
-            
-            sliderPositions[section] = index;
-            
-            const cardWidth = cards[0].offsetWidth + 16;
-            slider.style.transform = `translateX(-${index * cardWidth}px)`;
-            
-            updateSliderNav(section);
-            updateSliderButtons(section);
         }
 
         // TOPへ戻るボタンの表示制御
