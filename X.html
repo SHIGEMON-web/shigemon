@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロフィール - マッチングアプリ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ヘッダー */
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-3px);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .settings-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .settings-btn svg {
+            width: 20px;
+            height: 20px;
+            color: white;
+        }
+
+        /* メイン画像セクション */
+        .main-image-container {
+            position: relative;
+            background: white;
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-dots {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 35px;
+            height: 4px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        .image-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .nav-area {
+            width: 45%;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        /* サブ画像 - メイン画像の直下に配置 */
+        .sub-images {
+            background: white;
+            padding: 15px;
+            border-bottom: 8px solid #f5f5f5;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .sub-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .sub-image:hover {
+            transform: scale(1.05);
+            border-color: #ff6b6b;
+        }
+
+        .sub-image.active {
+            border-color: #ff6b6b;
+        }
+
+        /* 基本情報 */
+        .basic-info {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .name-age {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .age {
+            font-size: 22px;
+            color: #666;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .online-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 5px rgba(76, 175, 80, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+
+        /* タグセクション */
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-bottom: 8px solid #f5f5f5;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #666;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background: #4facfe;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(79,172,254,0.3);
+        }
+
+        /* 自己紹介 */
+        .bio-section {
+            background: white;
+            padding: 20px;
+            border-bottom: 8px solid #f5f5f5;
+        }
+
+        .bio-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* プロフィール詳細 */
+        .profile-details {
+            background: white;
+            padding: 20px;
+            margin-bottom: 80px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* フローティングハートボタン */
+        .floating-like-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+            font-size: 30px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255,71,87,0.4);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .floating-like-btn:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 6px 20px rgba(255,71,87,0.5);
+        }
+
+        .floating-like-btn.animated {
+            animation: heartBeat 0.8s ease-in-out;
+        }
+
+        /* メッセージボタン */
+        .message-button {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.08);
+        }
+
+        .message-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .message-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79,172,254,0.4);
+        }
+
+        .message-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ボタンアイコンの調整 */
+        .skip-btn::after {
+            content: '×';
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .like-btn::after {
+            content: '❤';
+            font-size: 32px;
+            line-height: 1;
+            font-family: Arial, sans-serif;
+        }
+
+        .super-like-btn::after {
+            content: '★';
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        /* ハートボタンのアニメーション */
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.2);
+            }
+            30% {
+                transform: scale(0.95);
+            }
+            45% {
+                transform: scale(1.15);
+            }
+            60% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ハートが飛び散るエフェクト */
+        .heart-particle {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            animation: flyHeart 1s ease-out forwards;
+            z-index: 1000;
+        }
+
+        .heart-particle::after {
+            content: '❤';
+            color: #ff4757;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes flyHeart {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--x), var(--y)) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) scale(0.5);
+            }
+        }
+
+        /* アニメーション */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .basic-info, .tags-section, .bio-section, .profile-details {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 380px) {
+            .name {
+                font-size: 24px;
+            }
+            .age {
+                font-size: 20px;
+            }
+            .floating-like-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 26px;
+            }
+            .message-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <a href="index.html" class="back-btn">←</a>
+        <h1 class="header-title">プロフィール</h1>
+        <span class="settings-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" stroke="white" stroke-width="1.5"/>
+                <path d="M16.1667 10C16.1667 10.5833 15.75 10.5833 15.75 10.5833L14.25 10.5833C14.25 10.5833 13.8333 10.5833 13.8333 10C13.8333 9.41667 14.25 9.41667 14.25 9.41667L15.75 9.41667C15.75 9.41667 16.1667 9.41667 16.1667 10Z" stroke="white" stroke-width="1.5"/>
+                <path d="M3.83333 10C3.83333 10.5833 4.25 10.5833 4.25 10.5833L5.75 10.5833C5.75 10.5833 6.16667 10.5833 6.16667 10C6.16667 9.41667 5.75 9.41667 5.75 9.41667L4.25 9.41667C4.25 9.41667 3.83333 9.41667 3.83333 10Z" stroke="white" stroke-width="1.5"/>
+                <path d="M10 3.83333C9.41667 3.83333 9.41667 4.25 9.41667 4.25L9.41667 5.75C9.41667 5.75 9.41667 6.16667 10 6.16667C10.5833 6.16667 10.5833 5.75 10.5833 5.75L10.5833 4.25C10.5833 4.25 10.5833 3.83333 10 3.83333Z" stroke="white" stroke-width="1.5"/>
+                <path d="M10 16.1667C9.41667 16.1667 9.41667 15.75 9.41667 15.75L9.41667 14.25C9.41667 14.25 9.41667 13.8333 10 13.8333C10.5833 13.8333 10.5833 14.25 10.5833 14.25L10.5833 15.75C10.5833 15.75 10.5833 16.1667 10 16.1667Z" stroke="white" stroke-width="1.5"/>
+                <path d="M14.7142 5.28584C14.3237 4.89531 13.8563 5.14373 13.8563 5.14373L12.7955 6.20452C12.7955 6.20452 12.4049 6.59505 12.7955 6.98558C13.186 7.37611 13.5765 6.98558 13.5765 6.98558L14.6373 5.92479C14.6373 5.92479 15.1047 5.67637 14.7142 5.28584Z" stroke="white" stroke-width="1.5"/>
+                <path d="M7.20452 12.7955C6.81399 12.4049 6.42346 12.7955 6.42346 12.7955L5.3627 13.8563C5.3627 13.8563 4.89531 14.1047 5.28584 14.4953C5.67637 14.8858 6.14373 14.6373 6.14373 14.6373L7.20452 13.5765C7.20452 13.5765 7.59505 13.186 7.20452 12.7955Z" stroke="white" stroke-width="1.5"/>
+                <path d="M14.7142 14.7142C15.1047 14.3237 14.8563 13.8563 14.8563 13.8563L13.7955 12.7955C13.7955 12.7955 13.4049 12.4049 13.0144 12.7955C12.6239 13.186 13.0144 13.5765 13.0144 13.5765L14.0752 14.6373C14.0752 14.6373 14.3237 15.1047 14.7142 14.7142Z" stroke="white" stroke-width="1.5"/>
+                <path d="M7.20452 7.20452C7.59505 6.81399 7.20452 6.42346 7.20452 6.42346L6.14373 5.3627C6.14373 5.3627 5.89531 4.89531 5.50478 5.28584C5.11425 5.67637 5.3627 6.14373 5.3627 6.14373L6.42346 7.20452C6.42346 7.20452 6.81399 7.59505 7.20452 7.20452Z" stroke="white" stroke-width="1.5"/>
+            </svg>
+        </span>
+    </header>
+
+    <!-- メイン画像 -->
+    <div class="main-image-container">
+        <img src="images/match-profile1.jpg" alt="プロフィール画像" class="main-image" id="mainImage">
+        <div class="image-dots">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+            <div class="dot" data-index="3"></div>
+        </div>
+        <div class="image-nav">
+            <div class="nav-area" onclick="previousImage()"></div>
+            <div class="nav-area" onclick="nextImage()"></div>
+        </div>
+        <button class="floating-like-btn" onclick="like()">❤</button>
+    </div>
+
+    <!-- サブ画像 - メイン画像の直下に配置 -->
+    <section class="sub-images">
+        <div class="image-grid">
+            <img src="images/match-profile1.jpg" alt="サブ画像1" class="sub-image active" data-index="0">
+            <img src="images/match-profile2.jpg" alt="サブ画像2" class="sub-image" data-index="1">
+            <img src="images/match-profile3.jpg" alt="サブ画像3" class="sub-image" data-index="2">
+            <img src="images/match-profile4.jpg" alt="サブ画像4" class="sub-image" data-index="3">
+        </div>
+    </section>
+
+    <!-- 基本情報 -->
+    <section class="basic-info">
+        <div class="name-age">
+            <h2 class="name">しげもん</h2>
+            <span class="age">30半ば</span>
+        </div>
+        <div class="location">
+            <span>📍</span>
+            <span>大阪府</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; margin-top: 8px;">
+            <span class="verification-badge">
+                ✓ 本人確認済み
+            </span>
+            <span class="online-badge">
+                <span class="online-dot"></span>
+                オンライン
+            </span>
+        </div>
+    </section>
+
+    <!-- タグ -->
+    <section class="tags-section">
+        <h3 class="section-title">興味・関心</h3>
+        <div class="tags">
+            <span class="tag">鉄道模型</span>
+            <span class="tag">ジオラマ製作</span>
+            <span class="tag">YouTube</span>
+            <span class="tag">犬</span>
+            <span class="tag">食べ歩き</span>
+        </div>
+    </section>
+
+    <!-- 自己紹介 -->
+    <section class="bio-section">
+        <h3 class="section-title">自己紹介</h3>
+        <p class="bio-text">
+            こんにちは！大阪でYouTuberもどきをやってます、しげもんです。<br><br>
+            鉄道模型とジオラマ製作が大好きで、作品をYouTubeで紹介したりしています。
+            休日は愛犬と散歩したり、美味しいお店を探して食べ歩きを楽しんでいます。<br><br>
+            趣味の話で盛り上がれる方、一緒に楽しい時間を過ごせたら嬉しいです！
+        </p>
+    </section>
+
+    <!-- プロフィール詳細 -->
+    <section class="profile-details">
+        <h3 class="section-title">プロフィール詳細</h3>
+        <div class="detail-item">
+            <span class="detail-label">職業</span>
+            <span class="detail-value">YouTuberもどき</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">学歴</span>
+            <span class="detail-value">大学卒</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">身長</span>
+            <span class="detail-value">174cm</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">お酒</span>
+            <span class="detail-value">飲む時は飲む</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">タバコ</span>
+            <span class="detail-value">吸わない</span>
+        </div>
+    </section>
+
+    <!-- メッセージボタン -->
+    <div class="message-button">
+        <a href="index.html" class="message-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 11.5C21.0034 12.8199 20.6951 14.1219 20.1 15.3C19.3944 16.7118 18.3098 17.8992 16.9674 18.7293C15.6251 19.5594 14.0782 19.9994 12.5 20C11.1801 20.0035 9.87812 19.6951 8.7 19.1L3 21L4.9 15.3C4.30493 14.1219 3.99656 12.8199 4 11.5C4.00061 9.92179 4.44061 8.37488 5.27072 7.03258C6.10083 5.69028 7.28825 4.6056 8.7 3.90003C9.87812 3.30496 11.1801 2.99659 12.5 3.00003H13C15.0843 3.11502 17.053 3.99479 18.5291 5.47089C20.0052 6.94699 20.885 8.91568 21 11V11.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>メッセージを送る</span>
+        </a>
+    </div>
+
+    <script>
+        const images = [
+            'images/match-profile1.jpg',
+            'images/match-profile2.jpg',
+            'images/match-profile3.jpg',
+            'images/match-profile4.jpg'
+        ];
+        
+        let currentImageIndex = 0;
+
+        function changeImage(index) {
+            currentImageIndex = index;
+            document.getElementById('mainImage').src = images[index];
+            updateDots();
+            updateSubImages();
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            changeImage(currentImageIndex);
+        }
+
+        function previousImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            changeImage(currentImageIndex);
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index === currentImageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function updateSubImages() {
+            const subImages = document.querySelectorAll('.sub-image');
+            subImages.forEach((img, index) => {
+                if (index === currentImageIndex) {
+                    img.classList.add('active');
+                } else {
+                    img.classList.remove('active');
+                }
+            });
+        }
+
+        function skip() {
+            alert('スキップしました');
+        }
+
+        function like() {
+            const likeBtn = document.querySelector('.floating-like-btn');
+            likeBtn.classList.add('animated');
+            
+            // ハートパーティクルを生成
+            createHeartParticles(likeBtn);
+            
+            setTimeout(() => {
+                likeBtn.classList.remove('animated');
+                alert('いいね！を送りました❤️');
+            }, 800);
+        }
+
+        function createHeartParticles(button) {
+            const rect = button.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'heart-particle';
+                
+                // ランダムな方向に飛ばす
+                const angle = (Math.PI * 2 * i) / 8;
+                const distance = 50 + Math.random() * 30;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--x', `${x}px`);
+                particle.style.setProperty('--y', `${y}px`);
+                particle.style.left = `${centerX - 10}px`;
+                particle.style.top = `${centerY - 10}px`;
+                
+                document.body.appendChild(particle);
+                
+                // アニメーション終了後に削除
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+        }
+
+        function superLike() {
+            alert('スーパーライクを送りました⭐');
+        }
+
+        // ドットクリック時の処理
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => changeImage(index));
+        });
+
+        // タグクリック時のアニメーション
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+
+        // サブ画像クリック時の処理
+        document.querySelectorAll('.sub-image').forEach((img, index) => {
+            img.addEventListener('click', function() {
+                changeImage(index);
+            });
+        });
+    </script>
+</body>
+</html>
