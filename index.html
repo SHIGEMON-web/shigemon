@@ -371,14 +371,11 @@
         .works-card-image-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9のアスペクト比 */
+            height: 200px;
             overflow: hidden;
         }
 
         .works-card-img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -423,21 +420,12 @@
             gap: 5px;
         }
 
-        .works-card-date.completion::before {
-            content: '完成年月:';
-        }
-
-        .works-card-date.implementation::before {
-            content: '実施年月:';
+        .works-card-date::before {
+            content: '完成:';
         }
 
         .works-card-duration {
             font-weight: 500;
-        }
-
-        .works-card-duration::before {
-            content: '製作期間:';
-            margin-right: 5px;
         }
 
         /* タブ */
@@ -1399,7 +1387,7 @@
             <ul>
                 <li><a href="#profile">Profile</a></li>
                 <li><a href="#works">Works</a></li>
-                <!-- <li><a href="#gallery">Gallery</a></li> -->
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contents">Contents</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1469,7 +1457,8 @@
             </div>
         </section>
 
-        <!-- 過去の仕事 -->
+        <!-- 過去の仕事（準備中のため非表示） -->
+        <!--
         <section id="works">
             <h2>Works</h2>
             <div class="tabs">
@@ -1482,199 +1471,120 @@
             
             <div id="works-all" class="tab-content active">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work4')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/tokyo-event.jpg" alt="鉄道を楽しみ尽くすイベント in TOKYO" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道を楽しみ尽くすイベント in TOKYO</h3>
-                            <p>鉄道模型の遊び方に関するトークショーを行いました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date implementation">2025年7月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work13')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag writing">執筆・書籍</span>
-                            <img src="images/works/technique-bible.jpg" alt="やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル(成美堂出版)</h3>
-                            <p>鉄道模型書籍の画像撮影と記事を執筆しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date implementation">2025年4月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work2')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag writing">執筆・書籍</span>
-                            <img src="images/works/rm-models-355.jpg" alt="RMモデルズ Vol.355 2025年4月号" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>RMモデルズ Vol.355 2025年4月号</h3>
-                            <p>鉄道模型店レールショップシーダーさまにオープンしたレンタルレイアウトへの取材・記事を担当いたしました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date completion">2025年2月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work3')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/tetsuhaku-2025.jpg" alt="鉄道博2025「HOゲージ体験運転」" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2025「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date implementation">2025年1月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work14')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag review">レビュー動画製作</span>
-                            <img src="images/works/tetsuhaku-2025-report.jpg" alt="鉄道博2025 会場内レポート" class="works-card-img">
+                            <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>鉄道博2025 会場内レポート</h3>
-                            <p>毎年1月に大阪南港で開催されている鉄道博2025の会場内の様子をレポートしました。</p>
+                            <h3>KATO新製品レビュー</h3>
+                            <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date implementation">2025年1月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
+                                <span class="works-card-date">2024年11月</span>
+                                <span class="works-card-duration">2日間</span>
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work1')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
-                            <img src="images/works/tsuruga-station.jpg" alt="北陸新幹線 敦賀駅ジオラマ" class="works-card-img">
+                            <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>北陸新幹線 敦賀駅ジオラマ</h3>
-                            <p>阪急うめだ本店で開催された「鉄道模型フェスティバル2024」北陸新幹線PRブースへの展示用に制作しました。</p>
+                            <h3>企業展示用ジオラマ</h3>
+                            <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date completion">2024年7月</span>
+                                <span class="works-card-date">2024年9月</span>
+                                <span class="works-card-duration">3ヶ月</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="works-card card-with-tag">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag event">イベント向けコンテンツ</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>鉄道フェスタ2024</h3>
+                            <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年7月</span>
+                                <span class="works-card-duration">3日間</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="works-card card-with-tag">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag writing">執筆・書籍</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>「はじめてのジオラマ」監修</h3>
+                            <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年3月</span>
                                 <span class="works-card-duration">2ヶ月</span>
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work5')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/festival-2024.jpg" alt="鉄道模型フェスティバル2024" class="works-card-img">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>鉄道模型フェスティバル2024</h3>
-                            <p>入門向けの小さなジオラマワークショップを行いました。</p>
+                            <h3>TOMIX製品比較動画</h3>
+                            <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date implementation">2024年7月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
+                                <span class="works-card-date">2024年10月</span>
+                                <span class="works-card-duration">1週間</span>
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work6')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/tetsuhaku-2024.jpg" alt="鉄道博2024「HOゲージ体験運転」" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2024「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date implementation">2024年1月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work8')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
-                            <img src="images/works/osaka-station.jpg" alt="大阪駅から北へ南へ、特急が走るジオラマ" class="works-card-img">
+                            <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>大阪駅から北へ南へ、特急が走るジオラマ</h3>
-                            <p>阪急うめだ本店で開催された「鉄道模型フェスティバル2023」JR西日本さまのPRブースへの展示用に制作しました。</p>
+                            <h3>個人コレクション向けジオラマ</h3>
+                            <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date completion">2023年7月</span>
-                                <span class="works-card-duration">3ヶ月</span>
+                                <span class="works-card-date">2024年8月</span>
+                                <span class="works-card-duration">2ヶ月</span>
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work9')">
+                </div>
+            </div>
+            
+            <div id="works-review" class="tab-content">
+                <div class="card-grid">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/festival-2023.jpg" alt="鉄道模型フェスティバル2023" class="works-card-img">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>鉄道模型フェスティバル2023</h3>
-                            <p>入門向けの小さなジオラマワークショップを行いました。</p>
+                            <h3>KATO新製品レビュー</h3>
+                            <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date implementation">2023年7月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
+                                <span class="works-card-date">2024年11月</span>
+                                <span class="works-card-duration">2日間</span>
                             </div>
                         </div>
                     </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work7')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <img src="images/works/tamaru-station.jpg" alt="玉城町 旧「田丸駅」駅舎" class="works-card-img">
+                            <span class="tag review">レビュー動画製作</span>
+                            <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>玉城町 旧「田丸駅」駅舎</h3>
-                            <p>建て替えのために解体される地元民に愛された駅舎をジオラマとして残しました。新駅舎のオープニングセレモニーでも披露されました。</p>
+                            <h3>TOMIX製品比較動画</h3>
+                            <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date completion">2023年6月</span>
-                                <span class="works-card-duration">1ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work11')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/tetsuhaku-2023.jpg" alt="鉄道博2023「HOゲージ体験運転」" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2023「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date implementation">2023年1月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work10')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <img src="images/works/yakumo-40th.jpg" alt="特急「やくも」40周年記念ジオラマ" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>特急「やくも」40周年記念ジオラマ</h3>
-                            <p>阪急うめだ本店で開催された「鉄道模型フェスティバル2022」JR西日本さまのPRブースへの展示用に制作しました。特急やくも40周年・WEST EXPRESS銀河をテーマに、伯備線の鉄橋と根雨駅の情景を制作しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date completion">2022年7月</span>
-                                <span class="works-card-duration">3ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work12')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <img src="images/works/tetsuhaku-2022.jpg" alt="鉄道博2022「HOゲージ体験運転」" class="works-card-img">
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2022「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date implementation">2022年1月</span>
-                                <span class="works-card-duration" style="display: none;">-</span>
+                                <span class="works-card-date">2024年10月</span>
+                                <span class="works-card-duration">1週間</span>
                             </div>
                         </div>
                     </div>
@@ -1683,59 +1593,31 @@
             
             <div id="works-diorama" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work1')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag diorama">ジオラマ製作</span>
                             <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>北陸新幹線 敦賀駅ジオラマ</h3>
-                            <p>阪急うめだ本店で開催された「鉄道模型フェスティバル2024」北陸新幹線PRブースへの展示用に制作しました。</p>
+                            <h3>企業展示用ジオラマ</h3>
+                            <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date">2024年7月</span>
+                                <span class="works-card-date">2024年9月</span>
+                                <span class="works-card-duration">3ヶ月</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="works-card card-with-tag">
+                        <div class="works-card-image-wrapper">
+                            <span class="tag diorama">ジオラマ製作</span>
+                            <div class="works-card-img">画像準備中</div>
+                        </div>
+                        <div class="works-card-content">
+                            <h3>個人コレクション向けジオラマ</h3>
+                            <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
+                            <div class="works-card-meta">
+                                <span class="works-card-date">2024年8月</span>
                                 <span class="works-card-duration">2ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work7')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>玉城町 旧「田丸駅」駅舎</h3>
-                            <p>建て替えのために解体される地元民に愛された駅舎をジオラマとして残しました。新駅舎のオープニングセレモニーでも披露されました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2023年6月</span>
-                                <span class="works-card-duration">1ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work8')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>大阪駅から北へ南へ、特急が走るジオラマ</h3>
-                            <p>阪急うめだ本店で開催された「鉄道模型フェスティバル2023」JR西日本さまのPRブースへの展示用に制作しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2023年7月</span>
-                                <span class="works-card-duration">3ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work10')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>特急「やくも」40周年記念ジオラマ</h3>
-                            <p>阪急うめだ本店で開催された「鉄道模型フェスティバル2022」JR西日本さまのPRブースへの展示用に制作しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2023年7月</span>
-                                <span class="works-card-duration">3ヶ月</span>
                             </div>
                         </div>
                     </div>
@@ -1744,101 +1626,17 @@
             
             <div id="works-event" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work3')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag event">イベント向けコンテンツ</span>
                             <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>鉄道博2025「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2025年1月</span>
-                                <span class="works-card-duration">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work4')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道を楽しみ尽くすイベント in TOKYO</h3>
-                            <p>鉄道模型の遊び方に関するトークショーを行いました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2025年7月</span>
-                                <span class="works-card-duration">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work5')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道模型フェスティバル2024</h3>
-                            <p>入門向けの小さなジオラマワークショップを行いました。</p>
+                            <h3>鉄道フェスタ2024</h3>
+                            <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
                             <div class="works-card-meta">
                                 <span class="works-card-date">2024年7月</span>
-                                <span class="works-card-duration">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work6')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2024「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年1月</span>
-                                <span class="works-card-duration">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work9')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道模型フェスティバル2023</h3>
-                            <p>入門向けの小さなジオラマワークショップを行いました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2023年7月</span>
-                                <span class="works-card-duration">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work11')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2023「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2023年1月</span>
-                                <span class="works-card-duration">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work12')">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道博2022「HOゲージ体験運転」</h3>
-                            <p>お子さま向けの鉄道模型の体験運転を実施しました。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2022年1月</span>
-                                <span class="works-card-duration">-</span>
+                                <span class="works-card-duration">3日間</span>
                             </div>
                         </div>
                     </div>
@@ -1847,23 +1645,24 @@
             
             <div id="works-writing" class="tab-content">
                 <div class="card-grid">
-                    <div class="works-card card-with-tag" onclick="openWorkModal('work2')">
+                    <div class="works-card card-with-tag">
                         <div class="works-card-image-wrapper">
                             <span class="tag writing">執筆・書籍</span>
                             <div class="works-card-img">画像準備中</div>
                         </div>
                         <div class="works-card-content">
-                            <h3>RMモデルズ Vol.355 2025年4月号</h3>
-                            <p>鉄道模型店レールショップシーダーさまにオープンしたレンタルレイアウトへの取材・記事を担当いたしました。</p>
+                            <h3>「はじめてのジオラマ」監修</h3>
+                            <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
                             <div class="works-card-meta">
-                                <span class="works-card-date">2025年2月</span>
-                                <span class="works-card-duration">-</span>
+                                <span class="works-card-date">2024年3月</span>
+                                <span class="works-card-duration">2ヶ月</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        -->
 
         <!-- ジオラマギャラリー（準備中のため非表示） -->
         <!--
@@ -2443,13 +2242,7 @@
 
         // スペシャルページを開く
         function openSpecialPage() {
-            // スマホの場合は同じウィンドウで開く
-            if (window.innerWidth <= 768) {
-                window.location.href = 'special.html';
-            } else {
-                // PCの場合は新しいタブで開く
-                window.open('special.html', '_blank');
-            }
+            window.open('special.html', '_blank');
         }
 
         // 作品詳細モーダルのデータ
