@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.7);
             z-index: 0;
         }
 
@@ -42,15 +42,27 @@
             position: fixed;
             width: 80px;
             height: 80px;
-            z-index: 1;
             opacity: 0.9;
+        }
+
+        /* 犬1と犬3はカードの後ろ */
+        .flying-dog.dog1,
+        .flying-dog.dog3 {
+            z-index: 1;
+        }
+
+        /* 犬2、犬4、犬5はカードの前 */
+        .flying-dog.dog2,
+        .flying-dog.dog4,
+        .flying-dog.dog5 {
+            z-index: 100;
         }
 
         .flying-dog img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+            /* drop-shadowを削除して、透過PNGに対応した影なしに */
         }
 
         .flying-dog.dog1 { animation: fly1 8s linear infinite; }
@@ -201,7 +213,7 @@
             justify-content: center;
             position: relative;
             z-index: 5;
-            background: rgba(255, 255, 255, 0.9);
+            /* 背景を削除して、飛び回る犬が見えるように */
         }
 
         /* インスタグラム風グリッド - PC用に6列×4段 */
@@ -410,6 +422,11 @@
             max-height: 1200px;
             z-index: 2000;
             animation: giantAppear 2s ease-out forwards;
+            cursor: pointer;
+        }
+
+        .giant-dog:hover {
+            filter: brightness(1.1);
         }
 
         .giant-dog.crazy {
@@ -477,7 +494,173 @@
             }
         }
 
-        /* ホームボタン */
+        /* ダウンロード案内テキスト */
+        .download-hint {
+            position: fixed;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 2001;
+            animation: hintFadeIn 0.5s ease-out forwards, hintPulse 2s ease-in-out infinite 0.5s;
+            opacity: 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .download-hint:hover {
+            background: rgba(0, 0, 0, 1);
+        }
+
+        @keyframes hintFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes hintPulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        /* 待ち受けプレビュー画面 */
+        .wallpaper-preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .preview-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+            animation: titleBounce 1s ease-out;
+        }
+
+        @keyframes titleBounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .wallpaper-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 60vh;
+            animation: wallpaperSlide 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes wallpaperSlide {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .wallpaper-img {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .download-button {
+            margin-top: 2rem;
+            padding: 1.2rem 3.5rem;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 165, 0, 0.4);
+            animation: buttonAppear 0.5s ease-out 0.8s both;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes buttonAppear {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .download-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 165, 0, 0.5);
+            background: linear-gradient(135deg, #FFE55C, #FFB347);
+        }
+
+        .close-preview {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .close-preview:hover {
+            opacity: 1;
+        }
         .home-button {
             position: fixed;
             bottom: 20px;
@@ -854,8 +1037,30 @@
             // 巨大犬
             const giantDog = document.createElement('div');
             giantDog.className = 'giant-dog';
-            giantDog.innerHTML = '<img src="images/dog-grid-1.jpg" alt="巨大な犬">';
+            giantDog.innerHTML = '<img src="images/giant-dog.png" alt="巨大な犬">';
             document.body.appendChild(giantDog);
+
+            // 1秒後にダウンロード案内を表示
+            setTimeout(() => {
+                const hint = document.createElement('div');
+                hint.className = 'download-hint';
+                hint.textContent = 'タップして待ち受け画像をゲット！';
+                document.body.appendChild(hint);
+
+                // クリックで待ち受けプレビューを表示（巨大犬と案内テキスト両方）
+                const showPreview = () => {
+                    showWallpaperPreview();
+                    hint.remove();
+                };
+                
+                giantDog.addEventListener('click', showPreview);
+                hint.addEventListener('click', showPreview);
+
+                // 巨大犬削除時に案内も削除
+                giantDog.addEventListener('remove', () => {
+                    hint.remove();
+                });
+            }, 1000);
 
             // 5秒後に変な動きを開始
             setTimeout(() => {
@@ -864,8 +1069,48 @@
 
             // 8秒後に削除
             setTimeout(() => {
+                const hint = document.querySelector('.download-hint');
+                if (hint) hint.remove();
                 giantDog.remove();
             }, 8000);
+        }
+
+        // 待ち受けプレビューを表示
+        function showWallpaperPreview() {
+            const preview = document.createElement('div');
+            preview.className = 'wallpaper-preview';
+            
+            preview.innerHTML = `
+                <span class="close-preview">✕</span>
+                <h2 class="preview-title">待ち受けゲット！</h2>
+                <div class="wallpaper-container">
+                    <img src="images/wallpaper.jpg" alt="待ち受け画像" class="wallpaper-img">
+                </div>
+                <button class="download-button">ダウンロード</button>
+            `;
+            
+            document.body.appendChild(preview);
+
+            // 閉じるボタン
+            preview.querySelector('.close-preview').addEventListener('click', () => {
+                preview.remove();
+            });
+
+            // ダウンロードボタン
+            preview.querySelector('.download-button').addEventListener('click', () => {
+                downloadWallpaper();
+            });
+        }
+
+        // 待ち受け画像をダウンロード
+        function downloadWallpaper() {
+            const link = document.createElement('a');
+            link.href = 'images/wallpaper.jpg';
+            link.download = 'special-dog-wallpaper.jpg';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // ゲームをリセット
