@@ -1558,8 +1558,9 @@
             img.parentElement.appendChild(placeholder);
         }
 
-        // 犬のスクロールイベント処理
+        // スクロールイベント処理（犬とTOPボタン）
         let dogShown = false;
+        const backToTopButton = document.getElementById('backToTop');
 
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
@@ -1578,25 +1579,24 @@
                 dogContainer.classList.remove('show');
                 dogShown = false;
             }
-        });
-
-        // TOPへ戻るボタンの処理
-        const backToTopButton = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            
+            // TOPへ戻るボタンの表示/非表示
+            if (scrollPosition > 300) {
                 backToTopButton.classList.add('show');
             } else {
                 backToTopButton.classList.remove('show');
             }
         });
         
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // TOPへ戻るボタンのクリックイベント
+        if (backToTopButton) {
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
-        });
+        }
 
         // YouTube API連携
         const YOUTUBE_API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
@@ -1769,9 +1769,11 @@
                     });
                 }, 100);
                 
-                // デバッグ: 犬の要素を確認
+                // デバッグ: 犬とTOPボタンの要素を確認
                 const dogContainer = document.getElementById('dogContainer');
+                const backToTopButton = document.getElementById('backToTop');
                 console.log('Dog container found:', dogContainer);
+                console.log('Back to top button found:', backToTopButton);
                 console.log('Initial scroll position:', window.scrollY);
                 
             } catch (error) {
