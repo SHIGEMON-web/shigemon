@@ -1228,6 +1228,11 @@
         </a>
     </div>
 
+    <!-- TOPへ戻るボタン -->
+    <button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">
+        ↑
+    </button>
+
     <script>
         // タブ切り替え機能
         function switchTab(section, tabName) {
@@ -1573,6 +1578,24 @@
                 dogContainer.classList.remove('show');
                 dogShown = false;
             }
+        });
+
+        // TOPへ戻るボタンの処理
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // YouTube API連携
