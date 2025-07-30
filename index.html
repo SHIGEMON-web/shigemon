@@ -1147,7 +1147,7 @@
             },
             {
                 id: 'work5',
-                title: '鉄道模型フェスティバル2024',
+                title: '阪急うめだ本店 鉄道模型フェスティバル2024',
                 category: 'event',
                 date: '2024年7月',
                 dateType: 'implementation',
@@ -1187,7 +1187,7 @@
             },
             {
                 id: 'work9',
-                title: '鉄道模型フェスティバル2023',
+                title: '阪急うめだ本店 鉄道模型フェスティバル2023',
                 category: 'event',
                 date: '2023年7月',
                 dateType: 'implementation',
@@ -1386,16 +1386,18 @@
 
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
             const dogContainer = document.getElementById('dogContainer');
             
-            // 300px以上スクロールしたら犬を表示
-            if (scrollPosition > 300 && !dogShown) {
+            // ページの一番下までスクロールしたら犬を表示（5pxの余裕を持たせる）
+            if (scrollPosition + windowHeight >= documentHeight - 5 && !dogShown) {
                 dogContainer.classList.add('show');
                 dogShown = true;
             }
             
-            // スクロール位置が100px未満になったら犬を隠す
-            if (scrollPosition < 100 && dogShown) {
+            // スクロール位置が最下部から100px以上離れたら犬を隠す
+            if (scrollPosition + windowHeight < documentHeight - 100 && dogShown) {
                 dogContainer.classList.remove('show');
                 dogShown = false;
             }
