@@ -1229,7 +1229,7 @@
     </div>
 
     <!-- TOPへ戻るボタン -->
-    <button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">
+    <button id="backToTop" aria-label="ページトップへ戻る" style="position: fixed !important; bottom: 100px !important; right: 20px !important; width: 60px !important; height: 60px !important; background-color: #3498db !important; color: white !important; border: none !important; border-radius: 50% !important; display: none; align-items: center !important; justify-content: center !important; z-index: 9998 !important;">
         ↑
     </button>
 
@@ -1561,6 +1561,7 @@
         // スクロールイベント処理（犬とTOPボタン）
         let dogShown = false;
         const backToTopButton = document.getElementById('backToTop');
+        const footer = document.querySelector('footer');
 
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
@@ -1580,7 +1581,7 @@
                 dogShown = false;
             }
             
-            // TOPへ戻るボタンの表示/非表示
+            // TOPへ戻るボタンの表示/非表示（位置調整を削除）
             if (scrollPosition > 300) {
                 backToTopButton.classList.add('show');
             } else {
