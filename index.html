@@ -1229,8 +1229,8 @@
     </div>
 
     <!-- TOPへ戻るボタン -->
-    <button id="backToTop" aria-label="ページトップへ戻る" style="position: fixed !important; bottom: 100px !important; right: 20px !important; width: 60px !important; height: 60px !important; background-color: #3498db !important; color: white !important; border: none !important; border-radius: 50% !important; display: none; align-items: center !important; justify-content: center !important; z-index: 9998 !important;">
-        ↑
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 30px; left: 20px; width: 60px; height: 60px; background-color: #3498db; color: white; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9998; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-size: 16px; font-weight: bold; cursor: pointer;">
+        TOP
     </button>
 
     <script>
@@ -1558,10 +1558,8 @@
             img.parentElement.appendChild(placeholder);
         }
 
-        // スクロールイベント処理（犬とTOPボタン）
+        // スクロールイベント処理（犬のみ）
         let dogShown = false;
-        const backToTopButton = document.getElementById('backToTop');
-        const footer = document.querySelector('footer');
 
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
@@ -1580,24 +1578,7 @@
                 dogContainer.classList.remove('show');
                 dogShown = false;
             }
-            
-            // TOPへ戻るボタンの表示/非表示（位置調整を削除）
-            if (scrollPosition > 300) {
-                backToTopButton.classList.add('show');
-            } else {
-                backToTopButton.classList.remove('show');
-            }
         });
-        
-        // TOPへ戻るボタンのクリックイベント
-        if (backToTopButton) {
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
 
         // YouTube API連携
         const YOUTUBE_API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
