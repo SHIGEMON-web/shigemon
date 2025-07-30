@@ -171,6 +171,10 @@
             position: relative;
         }
 
+        #gallery {
+            background: #ffffff;
+        }
+
         #contents {
             background: #f8f9fa;
         }
@@ -855,6 +859,7 @@
             <ul>
                 <li><a href="#profile">Profile</a></li>
                 <li><a href="#works">Works</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contents">Contents</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -971,17 +976,28 @@
             </div>
         </section>
 
+        <!-- ギャラリー -->
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <div style="text-align: center; padding: 3rem 0;">
+                <p style="color: #666; font-size: 1.2rem;">
+                    ギャラリーは準備中です
+                </p>
+                <p style="color: #999; margin-top: 1rem;">
+                    近日公開予定
+                </p>
+            </div>
+        </section>
+
         <!-- コンテンツ -->
         <section id="contents">
             <h2>Contents</h2>
             <div id="contents-youtube" class="tab-content active">
                 <div class="card-grid" id="youtube-grid">
-                    <div class="card">
+                    <!-- YouTube動画はJavaScriptで動的に読み込まれます -->
+                    <div class="card" style="grid-column: 1 / -1;">
                         <p style="text-align: center; color: #666;">
-                            最新の動画はYouTubeチャンネルでご覧いただけます。<br>
-                            <a href="https://www.youtube.com/@SHIGEMON" target="_blank" style="color: #3498db;">
-                                YouTubeチャンネルはこちら
-                            </a>
+                            動画を読み込み中...
                         </p>
                     </div>
                 </div>
@@ -1403,10 +1419,75 @@
             }
         });
 
+        // YouTube API連携
+        const YOUTUBE_API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
+        const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
+        
+        // YouTube動画を取得して表示
+        async function loadYouTubeVideos() {
+            const youtubeGrid = document.getElementById('youtube-grid');
+            
+            try {
+                // 最新の動画を6件取得
+                const response = await fetch(
+                    `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6&type=video`
+                );
+                
+                if (!response.ok) {
+                    throw new Error('YouTube API request failed');
+                }
+                
+                const data = await response.json();
+                
+                // グリッドをクリア
+                youtubeGrid.innerHTML = '';
+                
+                // 動画カードを生成
+                data.items.forEach(item => {
+                    const videoId = item.id.videoId;
+                    const title = item.snippet.title;
+                    const thumbnail = item.snippet.thumbnails.high.url;
+                    const publishedAt = new Date(item.snippet.publishedAt);
+                    const formattedDate = `${publishedAt.getFullYear()}/${publishedAt.getMonth() + 1}/${publishedAt.getDate()}`;
+                    
+                    const videoCard = `
+                        <div class="video-card">
+                            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+                                <div class="video-thumbnail-wrapper">
+                                    <img src="${thumbnail}" alt="${title}" class="youtube-thumbnail">
+                                    <div class="play-icon"></div>
+                                </div>
+                                <h3>${title}</h3>
+                                <div class="video-meta">
+                                    <span class="video-date">${formattedDate}</span>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                    
+                    youtubeGrid.innerHTML += videoCard;
+                });
+                
+            } catch (error) {
+                console.error('YouTube API Error:', error);
+                youtubeGrid.innerHTML = `
+                    <div class="card" style="grid-column: 1 / -1;">
+                        <p style="text-align: center; color: #666;">
+                            動画の読み込みに失敗しました。<br>
+                            <a href="https://www.youtube.com/@SHIGEMON" target="_blank" style="color: #3498db;">
+                                YouTubeチャンネルはこちら
+                            </a>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
             try {
                 initializeWorks();
+                loadYouTubeVideos();  // YouTube動画を読み込む
                 
                 // 画像のエラーハンドリングを設定
                 setTimeout(() => {
