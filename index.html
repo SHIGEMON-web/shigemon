@@ -123,13 +123,11 @@
             position: relative;
             margin: 0;
             padding: 0;
-        }
-
-        .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.2rem;
         }
 
         /* セクション共通 */
@@ -142,29 +140,19 @@
         }
 
         /* セクションの背景デザイン */
-        /* プロフィールセクション */
         #profile {
             background: #ffffff;
         }
 
-        /* 過去の仕事セクション */
         #works {
             background: #f8f9fa;
             position: relative;
         }
 
-        /* ジオラマギャラリー */
-        #gallery {
-            background: #ffffff;
-            position: relative;
-        }
-
-        /* コンテンツセクション */
         #contents {
             background: #f8f9fa;
         }
 
-        /* お問い合わせセクション */
         #contact {
             background: #ffffff;
             padding-bottom: 2rem;
@@ -178,21 +166,6 @@
         }
 
         /* プロフィール */
-        #profile {
-            background: #ffffff;
-            padding: 2.5rem 5%;
-            margin: 0 auto;
-            max-width: 1200px;
-            width: 100%;
-            position: relative;
-        }
-
-        .services-grid {
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #f0f0f0;
-        }
-
         .profile {
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -219,36 +192,23 @@
             background-size: 200% 100%;
             animation: gradientMove 8s ease infinite;
             padding: 3px;
-        }
-
-        .profile-img-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: rotate(45deg) translateX(-100%);
-            }
-            100% {
-                transform: rotate(45deg) translateX(100%);
-            }
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .profile-img {
-            width: 100%;
-            height: 100%;
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
             object-fit: cover;
             border-radius: 17px;
             position: relative;
             z-index: 1;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
         }
 
         .profile-text h3 {
@@ -304,12 +264,20 @@
             font-weight: 500;
         }
 
+        /* サービスグリッド */
+        .services-grid {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
         /* カードグリッド */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin-top: 1.2rem;
+            align-items: stretch;
         }
 
         .card {
@@ -338,20 +306,6 @@
             line-height: 1.6;
         }
 
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 0.9rem;
-        }
-
         /* 作品カード専用のスタイル */
         .works-card {
             background: white;
@@ -361,6 +315,10 @@
             position: relative;
             overflow: hidden;
             padding: 0;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .works-card:hover {
@@ -371,11 +329,16 @@
         .works-card-image-wrapper {
             position: relative;
             width: 100%;
-            height: 200px;
+            padding-bottom: 56.25%; /* 16:9のアスペクト比 */
             overflow: hidden;
+            background: #f0f0f0;
+            flex-shrink: 0;
         }
 
         .works-card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -389,6 +352,9 @@
 
         .works-card-content {
             padding: 1.2rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .works-card h3 {
@@ -397,6 +363,12 @@
             color: #2c3e50;
             font-size: 1.1rem;
             font-weight: 600;
+            line-height: 1.4;
+            min-height: 2.8em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .works-card p {
@@ -404,6 +376,11 @@
             line-height: 1.6;
             color: #666;
             margin-bottom: 1rem;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .works-card-meta {
@@ -412,6 +389,7 @@
             align-items: center;
             font-size: 0.85rem;
             color: #999;
+            margin-top: auto;
         }
 
         .works-card-date {
@@ -420,12 +398,21 @@
             gap: 5px;
         }
 
-        .works-card-date::before {
-            content: '完成:';
+        .works-card-date.completion::before {
+            content: '完成年月:';
+        }
+
+        .works-card-date.implementation::before {
+            content: '実施年月:';
         }
 
         .works-card-duration {
             font-weight: 500;
+        }
+
+        .works-card-duration::before {
+            content: '製作期間:';
+            margin-right: 5px;
         }
 
         /* タブ */
@@ -475,13 +462,16 @@
         /* タグ */
         .tag {
             display: inline-block;
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.5rem;
             color: white;
             border-radius: 15px;
             font-size: 0.7rem;
+            font-weight: 500;
             position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
+            top: 0.8rem;
+            left: 0.8rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
 
         .tag.review {
@@ -489,56 +479,19 @@
         }
 
         .tag.diorama {
-            background: #3498db;
+            background: #81c784;
         }
 
         .tag.event {
-            background: #2ecc71;
+            background: #42a5f5;
         }
 
         .tag.writing {
             background: #f39c12;
         }
 
-        .card-with-tag h3 {
-            margin-top: 0.5rem;
-        }
-
-        /* Worksセクション専用のタグスタイル（バッジ風） */
-        .works-card .tag {
-            padding: 0.2rem 0.5rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            position: absolute;
-            top: 0.8rem;
-            left: 0.8rem;
-            right: auto;
-            border-radius: 15px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            letter-spacing: 0;
-            z-index: 1;
-        }
-
-        /* モーダルウィンドウと同じ色に統一 */
-        .works-card .tag.diorama,
-        .modal-tag {
-            background: #81c784;
-        }
-
-        .works-card .tag.event {
-            background: #42a5f5;
-        }
-
-        .works-card .tag.review {
-            background: #e74c3c;
-        }
-
-        .works-card .tag.writing {
-            background: #f39c12;
-        }
-
         /* もっと見るボタン */
-        .more-btn {
+        .works-more-btn {
             display: block;
             margin: 2rem auto 0;
             padding: 0.8rem 2rem;
@@ -551,8 +504,20 @@
             transition: background 0.3s;
         }
 
-        .more-btn:hover {
+        .works-more-btn:hover {
             background: #2980b9;
+        }
+
+        /* 隠されたカード */
+        .works-hidden {
+            display: none;
+        }
+
+        /* カードグリッド内の直接の子要素の高さを揃える */
+        .card-grid > * {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         /* YouTube動画埋め込み */
@@ -569,10 +534,13 @@
         .video-thumbnail-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             overflow: hidden;
             border-radius: 5px;
-            background: #000;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .youtube-thumbnail {
@@ -632,344 +600,6 @@
             margin-top: 0.5rem;
         }
 
-        .video-views {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        /* お問い合わせボタン */
-        .contact-button:hover {
-            background: #2980b9 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        /* モーダルウィンドウ */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 0;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 1100px;
-            max-height: 90vh;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            animation: slideIn 0.3s ease-out;
-            position: relative;
-            margin: 5vh auto;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.05);
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-        }
-
-        .modal-close:hover {
-            background: rgba(0,0,0,0.1);
-            color: #000;
-        }
-
-        .modal-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            height: calc(90vh - 20px);
-            max-height: 680px;
-            overflow: hidden;
-        }
-
-        /* 左側：画像セクション */
-        .modal-images-section {
-            background: #000;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            position: relative;
-        }
-
-        .modal-main-image {
-            flex: 1;
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-main-image img,
-        .modal-main-image .image-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .image-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 1.2rem;
-        }
-
-        .modal-thumbnails {
-            display: flex;
-            gap: 10px;
-            height: 80px;
-        }
-
-        .modal-thumbnail {
-            flex: 1;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #333;
-            cursor: pointer;
-            transition: opacity 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        .modal-thumbnail:hover {
-            opacity: 0.8;
-        }
-
-        .modal-thumbnail.active {
-            border: 2px solid #3498db;
-        }
-
-        /* 右側：情報セクション */
-        .modal-info-section {
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            background: #fafafa;
-            height: 100%;
-        }
-
-        .modal-header {
-            margin-bottom: 30px;
-        }
-
-        .modal-header h2 {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .modal-tag {
-            display: inline-block;
-            padding: 5px 15px;
-            background: #81c784;
-            color: white;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .modal-description {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #444;
-            margin-bottom: 30px;
-            flex: 1;
-        }
-
-        .modal-meta-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .meta-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .meta-label {
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .meta-value {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        .modal-services {
-            margin-bottom: 30px;
-            display: none;
-        }
-
-        .services-title {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .service-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .service-tag {
-            padding: 8px 16px;
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            border: 1px solid #a5d6a7;
-        }
-
-        .modal-results {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .results-title {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            color: #444;
-        }
-
-        .result-item::before {
-            content: '✓';
-            color: #4caf50;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-        .modal-contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #81c784;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
-            text-align: center;
-            justify-content: center;
-        }
-
-        .modal-contact-btn:hover {
-            background: #66bb6a;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(129, 199, 132, 0.3);
-        }
-
-        /* モバイル対応 */
-        @media (max-width: 768px) {
-            .modal-content {
-                width: 95%;
-                max-height: 90vh;
-            }
-
-            .modal-body {
-                grid-template-columns: 1fr;
-                height: auto;
-                max-height: none;
-            }
-
-            .modal-images-section {
-                padding: 20px;
-                height: 300px;
-            }
-
-            .modal-thumbnails {
-                height: 60px;
-            }
-
-            .modal-info-section {
-                padding: 20px;
-            }
-
-            .modal-meta-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .modal-header h2 {
-                font-size: 1.5rem;
-            }
-        }
-
         /* フッター */
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -979,7 +609,6 @@
             position: relative;
         }
 
-        /* フッター上部の装飾的な縁 */
         footer::before {
             content: '';
             position: absolute;
@@ -1010,39 +639,26 @@
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             text-align: center;
         }
 
-        .footer-section.footer-info {
-            align-items: flex-start;
-            text-align: left;
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
 
-        .footer-section h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
         }
 
         .social-icons {
             display: flex;
             gap: 1rem;
             justify-content: center;
+            margin-bottom: 1.5rem;
         }
 
         .social-icons a {
@@ -1065,173 +681,30 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            align-items: center;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-            position: relative;
-            white-space: nowrap;
-        }
-
-        .footer-links a::before {
-            content: '▸';
-            position: absolute;
-            left: -1rem;
-            color: #3498db;
-            transition: transform 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .footer-links a:hover::before {
-            transform: translateX(3px);
-        }
-
-        .footer-info {
-            text-align: left;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .footer-tagline {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.4;
-        }
-
         .footer-copyright {
-            text-align: center;
             padding: 1rem 0;
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.5);
-            margin: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* 犬の画像 */
-        .dog-container {
-            position: fixed;
-            bottom: 50px;
-            right: -300px;
-            width: 300px;
-            height: 400px;
-            pointer-events: none;
-            z-index: 100;
-            transition: right 0.5s ease-out;
-            cursor: pointer;
-        }
-
-        .dog-container.show {
-            right: 0;
-            pointer-events: auto;
-        }
-
-        .dog-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: bottom;
-        }
-
-        /* TOPへ戻るボタン */
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .back-to-top:hover {
-            background: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
-        .back-to-top.show {
-            display: flex;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* モバイル対応のメディアクエリ */
+        /* モバイル対応 */
         @media (max-width: 768px) {
-            /* ヘッダー調整 */
             nav ul {
                 display: none;
             }
 
-            /* バナー調整 */
-            .announcement-banner {
-                font-size: 0.8rem;
-                padding: 0.5rem 3%;
-            }
-
-            .announcement-banner a {
-                font-size: 0.75rem;
-                line-height: 1.4;
-            }
-
-            /* ヒーロー画像の調整 - 余白完全削除 */
             .hero {
-                height: auto;
-                margin: 0;
-                padding: 0;
+                height: 200px;
+                font-size: 1rem;
             }
 
-            .hero img {
-                object-fit: contain;
-                width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            /* セクション調整 */
             section {
                 padding: 1.5rem 5%;
             }
 
             h2 {
                 font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
-
-            /* プロフィール調整 */
-            #profile {
-                padding: 2rem 5%;
-                width: 95%;
-                margin: 0 auto 1rem;
-                border-radius: 0 0 15px 15px;
             }
 
             .profile {
@@ -1246,133 +719,35 @@
                 margin: 0 auto;
             }
 
-            .profile-text h3 {
-                font-size: 1.8rem;
-            }
-
-            /* チャンネル統計の調整 */
             .channel-stats {
                 grid-template-columns: 1fr;
-                gap: 0;
-                margin-top: 1rem;
             }
 
             .stat-item {
                 border-right: none;
                 border-bottom: 2px solid #f0f0f0;
-                padding: 0.75rem 0;
             }
 
             .stat-item:last-child {
                 border-bottom: none;
             }
 
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            /* すべてのカードグリッドを1カラムに */
             .card-grid {
-                display: grid;
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
-            /* タブの調整 */
             .tabs {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                justify-content: center;
-                gap: 0.5rem;
-                padding-bottom: 2px;
-            }
-
-            .tab {
-                flex: 0 0 auto;
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            /* フォームの調整 */
-            .contact-form {
-                padding: 2rem 1.5rem;
-            }
-
-            .form-group {
-                margin-bottom: 1rem;
-            }
-
-            /* フッターの調整 */
-            footer {
-                padding: 1.5rem 5% 0.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                text-align: center;
-                padding-bottom: 1rem;
-            }
-
-            .footer-section {
-                align-items: center;
-                text-align: center;
-            }
-
-            .footer-section.footer-info {
-                align-items: center;
-                text-align: center;
-            }
-
-            .footer-section h4 {
-                font-size: 0.9rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .footer-links {
-                grid-template-columns: 1fr;
-                gap: 0.6rem;
-                text-align: center;
-                align-items: center;
-            }
-
-            .footer-links a {
-                padding-left: 0;
                 font-size: 0.85rem;
             }
 
-            .footer-links a::before {
-                display: none;
-            }
-
-            .footer-copyright {
-                padding: 0.8rem 0;
-                font-size: 0.8rem;
-            }
-
-            .footer-logo {
-                font-size: 1.2rem;
-            }
-
-            .footer-tagline {
-                font-size: 0.75rem;
-            }
-
-            /* 犬の画像調整 */
-            .dog-container {
-                width: 200px;
-                height: 300px;
-                right: -200px;
-                bottom: 20px;
-            }
-            
-            .dog-container.show {
-                right: 0;
+            .tab {
+                padding: 0.4rem 0.8rem;
             }
         }
     </style>
 </head>
-<body id="top">
+<body>
     <!-- 注目のバナー -->
     <div class="announcement-banner">
         <a href="https://amzn.to/4lNA5tf" target="_blank">
@@ -1387,7 +762,6 @@
             <ul>
                 <li><a href="#profile">Profile</a></li>
                 <li><a href="#works">Works</a></li>
-                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contents">Contents</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1397,14 +771,14 @@
     <main>
         <!-- ヒーローセクション -->
         <div class="hero">
-            <img src="images/hero-image.jpg" alt="SHIGEMONの作品集">
+            ヒーロー画像
         </div>
 
         <!-- プロフィール -->
         <section id="profile">
             <div class="profile">
                 <div class="profile-img-container">
-                    <img src="images/profile-image.jpg" alt="SHIGEMON" class="profile-img">
+                    <div class="profile-img">プロフィール画像</div>
                 </div>
                 <div class="profile-text">
                     <h3>SHIGEMON</h3>
@@ -1415,15 +789,15 @@
             </div>
             <div class="channel-stats">
                 <div class="stat-item">
-                    <span class="stat-number" id="subscriber-count">-</span>
+                    <span class="stat-number" id="subscriber-count">12.3万</span>
                     <span class="stat-label">チャンネル登録者数</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" id="video-count">-</span>
+                    <span class="stat-number" id="video-count">800+</span>
                     <span class="stat-label">動画本数</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" id="view-count">-</span>
+                    <span class="stat-number" id="view-count">5,000万+</span>
                     <span class="stat-label">総再生回数</span>
                 </div>
             </div>
@@ -1448,7 +822,7 @@
                 </div>
                 <div class="card">
                     <h3>イベント向けコンテンツ</h3>
-                    <p>お子様向けの模型体験運転やジオラマワークショップ、トークイベントなどイベント向けのコンテンツを提供します。。</p>
+                    <p>お子様向けの模型体験運転やジオラマワークショップ、トークイベントなどイベント向けのコンテンツを提供します。</p>
                 </div>
                 <div class="card">
                     <h3>執筆</h3>
@@ -1457,8 +831,7 @@
             </div>
         </section>
 
-        <!-- 過去の仕事（準備中のため非表示） -->
-        <!--
+        <!-- 過去の仕事 -->
         <section id="works">
             <h2>Works</h2>
             <div class="tabs">
@@ -1470,294 +843,56 @@
             </div>
             
             <div id="works-all" class="tab-content active">
-                <div class="card-grid">
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag review">レビュー動画製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>KATO新製品レビュー</h3>
-                            <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年11月</span>
-                                <span class="works-card-duration">2日間</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>企業展示用ジオラマ</h3>
-                            <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年9月</span>
-                                <span class="works-card-duration">3ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道フェスタ2024</h3>
-                            <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年7月</span>
-                                <span class="works-card-duration">3日間</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag writing">執筆・書籍</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>「はじめてのジオラマ」監修</h3>
-                            <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年3月</span>
-                                <span class="works-card-duration">2ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag review">レビュー動画製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>TOMIX製品比較動画</h3>
-                            <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年10月</span>
-                                <span class="works-card-duration">1週間</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>個人コレクション向けジオラマ</h3>
-                            <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年8月</span>
-                                <span class="works-card-duration">2ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-grid" id="works-all-grid">
+                    <!-- カードはJavaScriptで動的に生成されます -->
                 </div>
+                <button class="works-more-btn" id="works-all-more" onclick="toggleWorksMore('all')" style="display: none;">もっと見る</button>
             </div>
             
             <div id="works-review" class="tab-content">
-                <div class="card-grid">
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag review">レビュー動画製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>KATO新製品レビュー</h3>
-                            <p>最新のNゲージ車両を詳細にレビュー。走行性能から細部の造形まで徹底解説。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年11月</span>
-                                <span class="works-card-duration">2日間</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag review">レビュー動画製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>TOMIX製品比較動画</h3>
-                            <p>同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年10月</span>
-                                <span class="works-card-duration">1週間</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-grid" id="works-review-grid">
+                    <!-- カードはJavaScriptで動的に生成されます -->
                 </div>
+                <button class="works-more-btn" id="works-review-more" onclick="toggleWorksMore('review')" style="display: none;">もっと見る</button>
             </div>
             
             <div id="works-diorama" class="tab-content">
-                <div class="card-grid">
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>企業展示用ジオラマ</h3>
-                            <p>○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年9月</span>
-                                <span class="works-card-duration">3ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag diorama">ジオラマ製作</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>個人コレクション向けジオラマ</h3>
-                            <p>お客様の思い出の風景を、Nゲージジオラマで精密に再現。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年8月</span>
-                                <span class="works-card-duration">2ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-grid" id="works-diorama-grid">
+                    <!-- カードはJavaScriptで動的に生成されます -->
                 </div>
+                <button class="works-more-btn" id="works-diorama-more" onclick="toggleWorksMore('diorama')" style="display: none;">もっと見る</button>
             </div>
             
             <div id="works-event" class="tab-content">
-                <div class="card-grid">
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag event">イベント向けコンテンツ</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>鉄道フェスタ2024</h3>
-                            <p>来場者参加型のジオラマ製作体験ブースを企画・運営。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年7月</span>
-                                <span class="works-card-duration">3日間</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-grid" id="works-event-grid">
+                    <!-- カードはJavaScriptで動的に生成されます -->
                 </div>
+                <button class="works-more-btn" id="works-event-more" onclick="toggleWorksMore('event')" style="display: none;">もっと見る</button>
             </div>
             
             <div id="works-writing" class="tab-content">
-                <div class="card-grid">
-                    <div class="works-card card-with-tag">
-                        <div class="works-card-image-wrapper">
-                            <span class="tag writing">執筆・書籍</span>
-                            <div class="works-card-img">画像準備中</div>
-                        </div>
-                        <div class="works-card-content">
-                            <h3>「はじめてのジオラマ」監修</h3>
-                            <p>初心者向けジオラマ製作ガイドブックの監修を担当。</p>
-                            <div class="works-card-meta">
-                                <span class="works-card-date">2024年3月</span>
-                                <span class="works-card-duration">2ヶ月</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-grid" id="works-writing-grid">
+                    <!-- カードはJavaScriptで動的に生成されます -->
                 </div>
+                <button class="works-more-btn" id="works-writing-more" onclick="toggleWorksMore('writing')" style="display: none;">もっと見る</button>
             </div>
         </section>
-        -->
-
-        <!-- ジオラマギャラリー（準備中のため非表示） -->
-        <!--
-        <section id="gallery">
-            <h2>Gallery</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>山間部の駅</h3>
-                    <p>緑豊かな山間部の小さな駅を再現。四季の変化も表現しています。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>都市型レイアウト</h3>
-                    <p>高架線と地上線が交差する都市部の風景を精密に再現。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>海辺の路線</h3>
-                    <p>海沿いを走るローカル線の情景。波の表現にもこだわりました。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>雪景色の駅</h3>
-                    <p>冬の雪に覆われた駅の情景。雪の質感表現が見どころです。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>田園風景</h3>
-                    <p>のどかな田園地帯を走る単線。日本の原風景を表現しました。</p>
-                </div>
-                <div class="card">
-                    <div class="card-img">画像準備中</div>
-                    <h3>機関区</h3>
-                    <p>蒸気機関車が集う機関区の情景。細部まで作り込んでいます。</p>
-                </div>
-            </div>
-            <div id="gallery-more" class="hidden">
-                <div class="card-grid">
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>橋梁のある風景</h3>
-                        <p>川を渡る鉄橋の情景。水面の表現にこだわりました。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>夜景レイアウト</h3>
-                        <p>LEDを使用した夜景表現。街の灯りが幻想的です。</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">画像準備中</div>
-                        <h3>貨物ヤード</h3>
-                        <p>貨物列車が行き交うヤードの情景を再現。</p>
-                    </div>
-                </div>
-            </div>
-            <button class="more-btn" onclick="toggleGallery()">もっと見る</button>
-        </section>
-        -->
 
         <!-- コンテンツ -->
         <section id="contents">
             <h2>Contents</h2>
-            <!-- ブログタブを非表示にして、YouTubeのみ表示 -->
-            <!--
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('contents', 'youtube')">YouTube</button>
-                <button class="tab" onclick="switchTab('contents', 'blog')">ブログ</button>
-            </div>
-            -->
-            
             <div id="contents-youtube" class="tab-content active">
                 <div class="card-grid" id="youtube-grid">
-                    <!-- YouTube動画はJavaScriptで動的に追加されます -->
-                </div>
-            </div>
-            
-            <!-- ブログコンテンツは準備中のため非表示
-            <div id="contents-blog" class="tab-content">
-                <div class="card-grid">
                     <div class="card">
-                        <h3>ブログ記事タイトル1</h3>
-                        <p>ブログ記事の概要がここに入ります。ジオラマ製作のコツや新製品情報など。</p>
-                    </div>
-                    <div class="card">
-                        <h3>ブログ記事タイトル2</h3>
-                        <p>ブログ記事の概要がここに入ります。製作過程の詳細解説など。</p>
-                    </div>
-                    <div class="card">
-                        <h3>ブログ記事タイトル3</h3>
-                        <p>ブログ記事の概要がここに入ります。イベントレポートなど。</p>
+                        <p style="text-align: center; color: #666;">
+                            最新の動画はYouTubeチャンネルでご覧いただけます。<br>
+                            <a href="https://www.youtube.com/@SHIGEMON" target="_blank" style="color: #3498db;">
+                                YouTubeチャンネルはこちら
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
-            -->
         </section>
 
         <!-- お問い合わせ -->
@@ -1767,7 +902,6 @@
                 <p style="color: #666; margin-bottom: 2rem;">お仕事のご依頼・ご相談は下記のボタンからお気軽にご連絡ください。</p>
                 
                 <a href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】SHIGEMONウェブサイトより&body=%0D%0A【お名前】%0D%0A%0D%0A%0D%0A【メールアドレス】%0D%0A%0D%0A%0D%0A【お問い合わせ内容】%0D%0A%0D%0A" 
-                   class="contact-button"
                    style="display: inline-block; background: #3498db; color: white; padding: 1rem 3rem; border-radius: 5px; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: background 0.3s;">
                     メールでお問い合わせ
                 </a>
@@ -1783,38 +917,12 @@
     <!-- フッター -->
     <footer>
         <div class="footer-content">
-            <div class="footer-section footer-info">
-                <div class="footer-logo">SHIGEMON</div>
-                <p class="footer-tagline">鉄道模型の魅力をYouTubeで配信。<br>ジオラマ製作やイベント出展、書籍の執筆など幅広く活躍中。</p>
-            </div>
-            <div class="footer-section">
-                <h4>SNS</h4>
-                <div class="social-icons">
-                    <a href="https://x.com/shigemon1227" target="_blank" title="X (Twitter)">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/shigemon1227/" target="_blank" title="Instagram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.youtube.com/@SHIGEMON" target="_blank" title="YouTube">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>関連リンク</h4>
-                <div class="footer-links">
-                    <a href="https://www5e.biglobe.ne.jp/~njouki/" target="_blank">N蒸機の世界</a>
-                    <a href="http://njouki.g1.xrea.com/" target="_blank">ポッポ屋</a>
-                    <a href="https://www5a.biglobe.ne.jp/%7etoyoyasu/" target="_blank">Nゲージ蒸気機関車</a>
-                    <a href="https://tetsumoba.com/" target="_blank">鉄道模型バザール</a>
-                </div>
+            <div class="footer-logo">SHIGEMON</div>
+            <p class="footer-tagline">鉄道模型の魅力をYouTubeで配信。<br>ジオラマ製作やイベント出展、書籍の執筆など幅広く活躍中。</p>
+            <div class="social-icons">
+                <a href="https://x.com/shigemon1227" target="_blank" title="X (Twitter)">X</a>
+                <a href="https://www.instagram.com/shigemon1227/" target="_blank" title="Instagram">IG</a>
+                <a href="https://www.youtube.com/@SHIGEMON" target="_blank" title="YouTube">YT</a>
             </div>
         </div>
         <div class="footer-copyright">
@@ -1822,66 +930,7 @@
         </div>
     </footer>
 
-    <!-- 犬の画像コンテナ -->
-    <div class="dog-container" id="dogContainer" onclick="openSpecialPage()">
-        <img src="images/main-dog.png" alt="犬">
-    </div>
-
-    <!-- TOPへ戻るボタン -->
-    <a href="#" class="back-to-top" onclick="scrollToTop(event)">TOP</a>
-
-    <!-- モーダルウィンドウ -->
-    <div id="workModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeWorkModal()">&times;</button>
-            <div class="modal-body">
-                <div class="modal-images-section">
-                    <div class="modal-main-image" id="modalMainImage">
-                        <div class="image-placeholder">メイン画像</div>
-                    </div>
-                    <div class="modal-thumbnails" id="modalThumbnails">
-                        <!-- サムネイル画像はJavaScriptで動的に追加 -->
-                    </div>
-                </div>
-                <div class="modal-info-section">
-                    <div class="modal-header">
-                        <h2 id="modalTitle">プロジェクト名</h2>
-                        <span class="modal-tag" id="modalTag">レビュー動画製作</span>
-                    </div>
-                    <p class="modal-description" id="modalDescription">詳細説明</p>
-                    
-                    <div class="modal-meta-grid">
-                        <div class="meta-box">
-                            <span class="meta-label">完成年月</span>
-                            <span class="meta-value" id="modalCompleted">-</span>
-                        </div>
-                        <div class="meta-box">
-                            <span class="meta-label">製作期間</span>
-                            <span class="meta-value" id="modalPeriod">-</span>
-                        </div>
-                    </div>
-                    
-                    <div class="modal-results" id="modalResults" style="display: none;">
-                        <div class="results-title">成果・実績</div>
-                        <div id="resultsList">
-                            <!-- 実績はJavaScriptで動的に追加 -->
-                        </div>
-                    </div>
-                    
-                    <a href="mailto:shigemaru1227@gmail.com?subject=【お問い合わせ】作品について&body=%0D%0A【お問い合わせ内容】%0D%0A%0D%0A【作品名】%0D%0A" 
-                       class="modal-contact-btn" id="modalContactBtn">
-                        お問い合わせ/お見積もり
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // YouTube API設定
-        const API_KEY = 'AIzaSyCvSrelu0TbyLdqi7DF5JVDWgPBwjmomJg';
-        const CHANNEL_ID = 'UCnzFVWBJ2l3C_KdYk9XkNSQ';
-
         // タブ切り替え機能
         function switchTab(section, tabName) {
             const tabs = document.querySelectorAll(`#${section} .tab`);
@@ -1894,561 +943,260 @@
             document.getElementById(`${section}-${tabName}`).classList.add('active');
         }
 
-        // ギャラリーの展開
-        function toggleGallery() {
-            const moreContent = document.getElementById('gallery-more');
-            const btn = event.target;
-            
-            if (moreContent.classList.contains('hidden')) {
-                moreContent.classList.remove('hidden');
-                btn.textContent = '閉じる';
-            } else {
-                moreContent.classList.add('hidden');
-                btn.textContent = 'もっと見る';
-            }
-        }
-
-        // YouTubeコンテンツの展開
-        function toggleYouTube() {
-            // この関数は削除されましたが、参照が残っている可能性があるため空の関数として残します
-        }
-
-        // スムーズスクロール
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const offsetPosition = elementPosition - headerHeight - 10;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // チャンネル統計情報を取得
-        async function loadChannelStats() {
-            try {
-                console.log('チャンネル統計の取得開始...');
-                const response = await fetch(
-                    `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`
-                );
-                
-                if (!response.ok) {
-                    console.error('APIレスポンスエラー:', response.status);
-                    if (response.status === 403) {
-                        console.error('APIキーの制限またはクォータ超過の可能性があります');
-                    }
-                    setDefaultStats();
-                    return;
-                }
-                
-                const data = await response.json();
-                
-                console.log('チャンネル統計レスポンス:', data);
-                
-                if (data.error) {
-                    console.error('YouTube API エラー:', data.error);
-                    console.error('エラー詳細:', data.error.message);
-                    setDefaultStats();
-                    return;
-                }
-                
-                if (data.items && data.items.length > 0) {
-                    const stats = data.items[0].statistics;
-                    
-                    // 要素の存在確認をしてから更新
-                    const subscriberEl = document.getElementById('subscriber-count');
-                    const videoEl = document.getElementById('video-count');
-                    const viewEl = document.getElementById('view-count');
-                    
-                    if (subscriberEl) subscriberEl.textContent = Number(stats.subscriberCount).toLocaleString();
-                    if (videoEl) videoEl.textContent = Number(stats.videoCount).toLocaleString();
-                    if (viewEl) viewEl.textContent = Number(stats.viewCount).toLocaleString();
-                    
-                    console.log('チャンネル統計の表示完了');
-                } else {
-                    console.error('チャンネルデータが見つかりません');
-                    setDefaultStats();
-                }
-            } catch (error) {
-                console.error('チャンネル統計の取得エラー:', error);
-                setDefaultStats();
-            }
-        }
-
-        // デフォルト値を設定
-        function setDefaultStats() {
-            const subscriberEl = document.getElementById('subscriber-count');
-            const videoEl = document.getElementById('video-count');
-            const viewEl = document.getElementById('view-count');
-            
-            if (subscriberEl) subscriberEl.textContent = '12.3万';
-            if (videoEl) videoEl.textContent = '800+';
-            if (viewEl) viewEl.textContent = '5,000万+';
-        }
-
-        // 最新動画を取得
-        async function loadLatestVideos() {
-            try {
-                const response = await fetch(
-                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20&type=video`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                        }
-                    }
-                );
-                
-                if (!response.ok) {
-                    console.error('APIレスポンスエラー:', response.status);
-                    if (response.status === 403) {
-                        console.error('APIキーの制限またはクォータ超過の可能性があります');
-                        showDefaultVideos();
-                        return;
-                    }
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                if (data.error) {
-                    console.error('YouTube API エラー:', data.error);
-                    showDefaultVideos();
-                    return;
-                }
-                
-                if (data.items && data.items.length > 0) {
-                    // ショート動画を除外
-                    const regularVideos = [];
-                    const videoIds = [];
-                    
-                    for (const item of data.items) {
-                        videoIds.push(item.id.videoId);
-                    }
-                    
-                    // 動画の詳細情報を取得
-                    const detailsResponse = await fetch(
-                        `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds.join(',')}&part=statistics,contentDetails`,
-                        {
-                            method: 'GET',
-                            headers: {
-                                'Accept': 'application/json',
-                            }
-                        }
-                    );
-                    
-                    if (!detailsResponse.ok) {
-                        console.error('動画詳細取得エラー:', detailsResponse.status);
-                        showDefaultVideos();
-                        return;
-                    }
-                    
-                    const detailsData = await detailsResponse.json();
-                    
-                    if (detailsData.error) {
-                        console.error('動画詳細取得エラー:', detailsData.error);
-                        showDefaultVideos();
-                        return;
-                    }
-                    
-                    // ショート動画をフィルタリング（60秒以下の動画を除外）
-                    data.items.forEach((item, index) => {
-                        const details = detailsData.items.find(d => d.id === item.id.videoId);
-                        if (details) {
-                            const duration = details.contentDetails.duration;
-                            const seconds = parseDuration(duration);
-                            
-                            if (seconds > 60) {
-                                regularVideos.push({
-                                    ...item,
-                                    statistics: details.statistics || {},
-                                    contentDetails: details.contentDetails || {}
-                                });
-                            }
-                        }
-                    });
-                    
-                    displayVideos(regularVideos.slice(0, 6));
-                } else {
-                    console.log('動画が見つかりません');
-                    showDefaultVideos();
-                }
-            } catch (error) {
-                console.error('動画の取得エラー:', error);
-                showDefaultVideos();
-            }
-        }
-
-        // デフォルトの動画を表示
-        function showDefaultVideos() {
-            const mainGrid = document.getElementById('youtube-grid');
-            if (mainGrid) {
-                mainGrid.innerHTML = `
-                    <div class="card">
-                        <p style="text-align: center; color: #666;">
-                            現在、動画を読み込めません。<br>
-                            <a href="https://www.youtube.com/@SHIGEMON" target="_blank" style="color: #3498db;">
-                                YouTubeチャンネルはこちら
-                            </a>
-                        </p>
-                    </div>
-                `;
-            }
-        }
-
-        // エラーメッセージを表示
-        function showErrorMessage() {
-            showDefaultVideos();
-        }
-
-        // ISO 8601形式の期間を秒に変換
-        function parseDuration(duration) {
-            const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-            const hours = (parseInt(match[1]) || 0);
-            const minutes = (parseInt(match[2]) || 0);
-            const seconds = (parseInt(match[3]) || 0);
-            return hours * 3600 + minutes * 60 + seconds;
-        }
-
-        // 動画を表示
-        function displayVideos(videos) {
-            const mainGrid = document.getElementById('youtube-grid');
-            
-            if (!mainGrid) {
-                console.error('youtube-grid要素が見つかりません');
-                return;
-            }
-            
-            mainGrid.innerHTML = '';
-            
-            // 最新6件の動画のみ表示
-            videos.slice(0, 6).forEach((video) => {
-                const videoCard = createVideoCard(video);
-                mainGrid.appendChild(videoCard);
-            });
-        }
-
-        // 動画カードを作成
-        function createVideoCard(video) {
-            const card = document.createElement('div');
-            card.className = 'card video-card';
-            
-            const videoId = video.id.videoId;
-            const title = video.snippet.title;
-            const thumbnail = video.snippet.thumbnails.high.url;
-            const viewCount = video.statistics.viewCount || '0';
-            const publishedAt = new Date(video.snippet.publishedAt);
-            
-            card.innerHTML = `
-                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
-                    <div class="video-thumbnail-wrapper">
-                        <img src="${thumbnail}" alt="${title}" class="youtube-thumbnail">
-                        <div class="play-icon"></div>
-                    </div>
-                    <h3>${title}</h3>
-                    <div class="video-meta">
-                        <div class="video-views">
-                            <span>視聴回数: ${Number(viewCount).toLocaleString()}回</span>
-                        </div>
-                        <div class="video-date">${formatDate(publishedAt)}</div>
-                    </div>
-                </a>
-            `;
-            
-            return card;
-        }
-
-        // 日付をフォーマット
-        function formatDate(date) {
-            const now = new Date();
-            const diff = now - date;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            
-            if (days === 0) {
-                return '今日';
-            } else if (days === 1) {
-                return '昨日';
-            } else if (days < 7) {
-                return `${days}日前`;
-            } else if (days < 30) {
-                const weeks = Math.floor(days / 7);
-                return `${weeks}週間前`;
-            } else if (days < 365) {
-                const months = Math.floor(days / 30);
-                return `${months}ヶ月前`;
-            } else {
-                const years = Math.floor(days / 365);
-                return `${years}年前`;
-            }
-        }
-
-        // TOPへ戻る機能
-        function scrollToTop(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // TOPへ戻るボタンの表示制御
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const backToTop = document.querySelector('.back-to-top');
-            
-            if (scrollTop > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-            
-            // 犬の画像表示制御
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight;
-            const scrollPercentage = (scrollTop + clientHeight) / scrollHeight * 100;
-            
-            const dogContainer = document.getElementById('dogContainer');
-            
-            // ページの90%以上スクロールしたら犬を表示
-            if (scrollPercentage > 90) {
-                if (!dogContainer.classList.contains('show')) {
-                    dogContainer.classList.add('show');
-                    
-                    // 既存のタイマーをクリア
-                    if (window.dogTimer) {
-                        clearTimeout(window.dogTimer);
-                    }
-                    
-                    // 5秒後に自動的に隠す
-                    window.dogTimer = setTimeout(() => {
-                        dogContainer.classList.remove('show');
-                    }, 5000);
-                }
-            } else {
-                dogContainer.classList.remove('show');
-                if (window.dogTimer) {
-                    clearTimeout(window.dogTimer);
-                    window.dogTimer = null;
-                }
-            }
-        });
-
-        // スペシャルページを開く
-        function openSpecialPage() {
-            window.open('special.html', '_blank');
-        }
-
-        // 作品詳細モーダルのデータ
-        const workDetails = {
-            work1: {
-                title: 'KATO新製品レビュー',
-                tag: 'レビュー動画製作',
-                images: ['画像1', '画像2', '画像3'],
-                description: '新発売のガンプラキットを詳細にレビューする動画を制作。組み立て過程から完成品まで、視聴者にとって分かりやすい構成で制作しました。',
-                period: '2週間',
-                completed: '2024年3月',
-                results: ['再生数80万回達成', 'チャンネル登録者数20%増加', 'メーカーからの継続依頼']
+        // 作品データ
+        const worksData = [
+            {
+                id: 'work4',
+                title: '鉄道を楽しみ尽くすイベント in TOKYO',
+                category: 'event',
+                date: '2025年7月',
+                dateType: 'implementation',
+                duration: '-',
+                description: '鉄道模型の遊び方に関するトークショーを行いました。',
             },
-            work2: {
-                title: '企業展示用ジオラマ',
-                tag: 'ジオラマ製作',
-                images: ['画像1', '画像2', '画像3', '画像4'],
-                description: '○○鉄道様の展示スペース用に、実際の風景を再現した大型ジオラマを製作。現地取材を行い、細部まで忠実に再現することで、来場者に親しみを持っていただける作品に仕上げました。',
-                period: '3ヶ月',
-                completed: '2024年9月',
-                results: ['来場者数30%増加', '地元メディア掲載', 'SNSで話題に']
+            {
+                id: 'work13',
+                title: 'やりたいことから引ける！鉄道模型 Nゲージテクニックバイブル(成美堂出版)',
+                category: 'writing',
+                date: '2025年4月',
+                dateType: 'implementation',
+                duration: '-',
+                description: '鉄道模型書籍の画像撮影と記事を執筆しました。',
             },
-            work3: {
-                title: '鉄道フェスタ2024',
-                tag: 'イベント向けコンテンツ',
-                images: ['画像1', '画像2', '画像3'],
-                description: '来場者参加型のジオラマ製作体験ブースを企画・運営。お子様から大人まで楽しめる内容で、多くの方に鉄道模型の魅力を伝えることができました。',
-                period: '3日間',
-                completed: '2024年7月',
-                results: ['参加者500名以上', '満足度98%', '次回開催決定']
+            {
+                id: 'work2',
+                title: 'RMモデルズ Vol.355 2025年4月号',
+                category: 'writing',
+                date: '2025年2月',
+                dateType: 'completion',
+                duration: '-',
+                description: '鉄道模型店レールショップシーダーさまにオープンしたレンタルレイアウトへの取材・記事を担当いたしました。',
             },
-            work4: {
-                title: '「はじめてのジオラマ」監修',
-                tag: '執筆・書籍',
-                images: ['画像1', '画像2'],
-                description: '初心者向けジオラマ製作ガイドブックの監修を担当。基本的な材料の選び方から、実際の製作手順まで、わかりやすく解説しています。',
-                period: '2ヶ月',
-                completed: '2024年3月',
-                results: ['増刷3回', 'Amazon評価4.5', '読者からの好評']
+            {
+                id: 'work3',
+                title: '鉄道博2025「HOゲージ体験運転」',
+                category: 'event',
+                date: '2025年1月',
+                dateType: 'implementation',
+                duration: '-',
+                description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
             },
-            work5: {
-                title: 'TOMIX製品比較動画',
-                tag: 'レビュー動画製作',
-                images: ['画像1', '画像2', '画像3'],
-                description: '同型車両の新旧製品を比較検証。購入の参考になる詳細レビュー。走行性能、ディテールの違い、価格差など、多角的に比較しています。',
-                period: '1週間',
-                completed: '2024年10月',
-                results: ['再生数50万回突破', '高評価率95%', '購入の参考になったとのコメント多数']
+            {
+                id: 'work14',
+                title: '鉄道博2025 会場内レポート',
+                category: 'review',
+                date: '2025年1月',
+                dateType: 'implementation',
+                duration: '-',
+                description: '毎年1月に大阪南港で開催されている鉄道博2025の会場内の様子をレポートしました。',
             },
-            work6: {
-                title: '個人コレクション向けジオラマ',
-                tag: 'ジオラマ製作',
-                images: ['画像1', '画像2', '画像3', '画像4', '画像5'],
-                description: 'お客様の思い出の風景を、Nゲージジオラマで精密に再現。写真資料をもとに、当時の雰囲気を大切にしながら製作しました。',
-                period: '2ヶ月',
-                completed: '2024年8月',
-                results: ['お客様満足度100%', '追加注文獲得', '口コミで新規依頼']
+            {
+                id: 'work1',
+                title: '北陸新幹線 敦賀駅ジオラマ',
+                category: 'diorama',
+                date: '2024年7月',
+                dateType: 'completion',
+                duration: '2ヶ月',
+                description: '阪急うめだ本店で開催された「鉄道模型フェスティバル2024」北陸新幹線PRブースへの展示用に制作しました。',
+            },
+            {
+                id: 'work5',
+                title: '鉄道模型フェスティバル2024',
+                category: 'event',
+                date: '2024年7月',
+                dateType: 'implementation',
+                duration: '-',
+                description: '入門向けの小さなジオラマワークショップを行いました。',
+            },
+            {
+                id: 'work6',
+                title: '鉄道博2024「HOゲージ体験運転」',
+                category: 'event',
+                date: '2024年1月',
+                dateType: 'implementation',
+                duration: '-',
+                description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
+            },
+            {
+                id: 'work16',
+                title: '鉄道博2024 会場内レポート',
+                category: 'review',
+                date: '2024年1月',
+                dateType: 'implementation',
+                duration: '-',
+                description: '毎年1月に大阪南港で開催されている鉄道博2024の会場内の様子をレポートしました。',
+            },
+            {
+                id: 'work8',
+                title: '大阪駅から北へ南へ、特急が走るジオラマ',
+                category: 'diorama',
+                date: '2023年7月',
+                dateType: 'completion',
+                duration: '3ヶ月',
+                description: '阪急うめだ本店で開催された「鉄道模型フェスティバル2023」JR西日本さまのPRブースへの展示用に制作しました。',
+            },
+            {
+                id: 'work9',
+                title: '鉄道模型フェスティバル2023',
+                category: 'event',
+                date: '2023年7月',
+                dateType: 'implementation',
+                duration: '-',
+                description: '入門向けの小さなジオラマワークショップを行いました。',
+            },
+            {
+                id: 'work7',
+                title: '玉城町 旧「田丸駅」駅舎',
+                category: 'diorama',
+                date: '2023年6月',
+                dateType: 'completion',
+                duration: '1ヶ月',
+                description: '建て替えのために解体される地元民に愛された駅舎をジオラマとして残しました。新駅舎のオープニングセレモニーでも披露されました。',
+            },
+            {
+                id: 'work11',
+                title: '鉄道博2023「HOゲージ体験運転」',
+                category: 'event',
+                date: '2023年1月',
+                dateType: 'implementation',
+                duration: '-',
+                description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
+            },
+            {
+                id: 'work15',
+                title: '「デジプラコレクション まるごと鉄道」アプリレビュー',
+                category: 'review',
+                date: '2022年8月',
+                dateType: 'implementation',
+                duration: '-',
+                description: 'スマホで鉄道ジオラマが作れる！デジプラコレクション まるごと鉄道！のPR動画を製作しました。',
+            },
+            {
+                id: 'work10',
+                title: '特急「やくも」40周年記念ジオラマ',
+                category: 'diorama',
+                date: '2022年7月',
+                dateType: 'completion',
+                duration: '3ヶ月',
+                description: '阪急うめだ本店で開催された「鉄道模型フェスティバル2022」JR西日本さまのPRブースへの展示用に制作しました。',
+            },
+            {
+                id: 'work12',
+                title: '鉄道博2022「HOゲージ体験運転」',
+                category: 'event',
+                date: '2022年1月',
+                dateType: 'implementation',
+                duration: '-',
+                description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
             }
+        ];
+
+        // カテゴリ別タグの色
+        const categoryTags = {
+            review: { label: 'レビュー動画製作', class: 'review' },
+            diorama: { label: 'ジオラマ製作', class: 'diorama' },
+            event: { label: 'イベント向けコンテンツ', class: 'event' },
+            writing: { label: '執筆・書籍', class: 'writing' }
         };
 
-        // 現在選択されている画像のインデックス
-        let currentImageIndex = 0;
+        // 日付を比較可能な形式に変換
+        function parseDate(dateStr) {
+            const [year, month] = dateStr.match(/(\d{4})年(\d{1,2})月/).slice(1);
+            return new Date(year, month - 1);
+        }
 
-        // モーダルを開く
-        function openWorkModal(workId) {
-            const modal = document.getElementById('workModal');
-            const work = workDetails[workId];
+        // 作品カードを生成
+        function createWorkCard(work) {
+            const categoryInfo = categoryTags[work.category];
+            const dateClass = work.dateType === 'completion' ? 'completion' : 'implementation';
+            const durationStyle = work.duration === '-' ? 'display: none;' : '';
             
-            if (!work) return;
-            
-            currentImageIndex = 0;
-            
-            // タイトルとタグを設定
-            document.getElementById('modalTitle').textContent = work.title;
-            document.getElementById('modalTag').textContent = work.tag;
-            
-            // メイン画像を設定
-            updateMainImage(work.images[0]);
-            
-            // サムネイルを設定
-            const thumbnailsContainer = document.getElementById('modalThumbnails');
-            thumbnailsContainer.innerHTML = '';
-            work.images.forEach((image, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = `modal-thumbnail ${index === 0 ? 'active' : ''}`;
-                thumb.textContent = image;
-                thumb.onclick = () => {
-                    currentImageIndex = index;
-                    updateMainImage(image);
-                    updateThumbnailActive(index);
-                };
-                thumbnailsContainer.appendChild(thumb);
+            return `
+                <div class="works-card card-with-tag">
+                    <div class="works-card-image-wrapper">
+                        <span class="tag ${categoryInfo.class}">${categoryInfo.label}</span>
+                        <div class="works-card-img">画像準備中</div>
+                    </div>
+                    <div class="works-card-content">
+                        <h3>${work.title}</h3>
+                        <p>${work.description}</p>
+                        <div class="works-card-meta">
+                            <span class="works-card-date ${dateClass}">${work.date}</span>
+                            <span class="works-card-duration" style="${durationStyle}">${work.duration}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Worksセクションを初期化
+        function initializeWorks() {
+            // 日付順にソート（新しい順）
+            const sortedWorks = [...worksData].sort((a, b) => {
+                return parseDate(b.date) - parseDate(a.date);
             });
-            
-            // 説明を設定
-            document.getElementById('modalDescription').textContent = work.description;
-            
-            // 完成年月と製作期間を設定
-            document.getElementById('modalCompleted').textContent = work.completed;
-            document.getElementById('modalPeriod').textContent = work.period;
-            
-            // 提供サービスを設定
-            const serviceTagsContainer = document.getElementById('serviceTags');
-            serviceTagsContainer.innerHTML = '';
-            work.services.forEach(service => {
-                const tag = document.createElement('div');
-                tag.className = 'service-tag';
-                tag.textContent = service;
-                serviceTagsContainer.appendChild(tag);
-            });
-            
-            // 成果・実績を設定
-            if (work.results && work.results.length > 0) {
-                document.getElementById('modalResults').style.display = 'block';
-                const resultsList = document.getElementById('resultsList');
-                resultsList.innerHTML = '';
-                work.results.forEach(result => {
-                    const item = document.createElement('div');
-                    item.className = 'result-item';
-                    item.textContent = result;
-                    resultsList.appendChild(item);
+
+            // カテゴリ別に分類
+            const worksByCategory = {
+                all: sortedWorks,
+                review: sortedWorks.filter(w => w.category === 'review'),
+                diorama: sortedWorks.filter(w => w.category === 'diorama'),
+                event: sortedWorks.filter(w => w.category === 'event'),
+                writing: sortedWorks.filter(w => w.category === 'writing')
+            };
+
+            // 各カテゴリのグリッドを更新
+            Object.keys(worksByCategory).forEach(category => {
+                const gridId = `works-${category}-grid`;
+                const moreButtonId = `works-${category}-more`;
+                const grid = document.getElementById(gridId);
+                const moreButton = document.getElementById(moreButtonId);
+                
+                if (!grid) return;
+
+                const works = worksByCategory[category];
+                let html = '';
+                
+                // 最初の3件を表示
+                works.slice(0, 3).forEach(work => {
+                    html += createWorkCard(work);
                 });
-            } else {
-                document.getElementById('modalResults').style.display = 'none';
-            }
-            
-            // お問い合わせボタンのメール件名に作品名を含める
-            const contactBtn = document.querySelector('.modal-contact-btn');
-            const subject = encodeURIComponent(`【お問い合わせ】${work.title}について`);
-            const body = encodeURIComponent(`\n【お問い合わせ内容】\n\n【作品名】${work.title}\n`);
-            contactBtn.href = `mailto:shigemaru1227@gmail.com?subject=${subject}&body=${body}`;
-            
-            // モーダルを表示
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // メイン画像を更新
-        function updateMainImage(imageName) {
-            const mainImage = document.getElementById('modalMainImage');
-            if (mainImage) {
-                mainImage.innerHTML = `<div class="image-placeholder">${imageName}</div>`;
-            }
-        }
-
-        // サムネイルのアクティブ状態を更新
-        function updateThumbnailActive(index) {
-            const thumbnails = document.querySelectorAll('.modal-thumbnail');
-            thumbnails.forEach((thumb, i) => {
-                if (thumb) {
-                    if (i === index) {
-                        thumb.classList.add('active');
-                    } else {
-                        thumb.classList.remove('active');
-                    }
+                
+                // 4件目以降は隠す
+                works.slice(3).forEach((work, index) => {
+                    html += `<div class="works-hidden" data-category="${category}">`;
+                    html += createWorkCard(work);
+                    html += '</div>';
+                });
+                
+                grid.innerHTML = html;
+                
+                // もっと見るボタンの表示制御
+                if (moreButton && works.length > 3) {
+                    moreButton.style.display = 'block';
+                    moreButton.textContent = 'もっと見る';
+                    moreButton.dataset.expanded = 'false';
                 }
             });
         }
 
-        // モーダルを閉じる
-        function closeWorkModal() {
-            const modal = document.getElementById('workModal');
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-
-        // モーダルの外側をクリックしたら閉じる
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('workModal');
-            if (event.target === modal) {
-                closeWorkModal();
-            }
-        });
-
-        // DOMが完全に読み込まれてから実行
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM読み込み完了');
+        // もっと見る/閉じるの切り替え
+        function toggleWorksMore(category) {
+            const hiddenCards = document.querySelectorAll(`#works-${category}-grid .works-hidden`);
+            const button = document.getElementById(`works-${category}-more`);
+            const isExpanded = button.dataset.expanded === 'true';
             
-            // モーダル要素の存在確認
-            const modal = document.getElementById('workModal');
-            const mainImage = document.getElementById('modalMainImage');
-            const thumbnails = document.getElementById('modalThumbnails');
-            
-            console.log('モーダル要素の確認:', {
-                modal: modal ? '存在' : '不在',
-                mainImage: mainImage ? '存在' : '不在',
-                thumbnails: thumbnails ? '存在' : '不在'
+            hiddenCards.forEach(card => {
+                card.style.display = isExpanded ? 'none' : 'block';
             });
-        });
+            
+            button.textContent = isExpanded ? 'もっと見る' : '閉じる';
+            button.dataset.expanded = isExpanded ? 'false' : 'true';
+        }
 
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
-            console.log('ページ読み込み完了');
-            
-            // 要素の存在確認
-            console.log('subscriber-count:', document.getElementById('subscriber-count'));
-            console.log('video-count:', document.getElementById('video-count'));
-            console.log('view-count:', document.getElementById('view-count'));
-            console.log('youtube-grid:', document.getElementById('youtube-grid'));
-            
-            try {
-                loadChannelStats();
-                loadLatestVideos();
-            } catch (error) {
-                console.error('初期化エラー:', error);
-            }
+            initializeWorks();
         });
     </script>
 </body>
