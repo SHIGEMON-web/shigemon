@@ -50,6 +50,8 @@
             position: relative;
             z-index: 1001;
             overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .announcement-banner::before {
@@ -935,10 +937,65 @@
 
             .tabs {
                 font-size: 0.85rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
             }
 
             .tab {
                 padding: 0.4rem 0.8rem;
+                flex-shrink: 0;
+            }
+
+            /* フッター修正 */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-section.footer-info {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links a::before {
+                display: none;
+            }
+
+            /* 犬のコンテナ調整 */
+            .dog-container {
+                width: 150px;
+                height: 225px;
+                right: -150px;
+            }
+
+            .dog-container.show {
+                right: 0;
+            }
+
+            /* overflow-x対策 */
+            body {
+                overflow-x: hidden;
+            }
+
+            main {
+                overflow-x: hidden;
+            }
+
+            /* 幅の問題を修正 */
+            * {
+                max-width: 100%;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
             }
         }
     </style>
