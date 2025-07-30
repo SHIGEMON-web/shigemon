@@ -1131,7 +1131,7 @@
                 <div class="works-card card-with-tag">
                     <div class="works-card-image-wrapper">
                         <span class="tag ${categoryInfo.class}">${categoryInfo.label}</span>
-                        <img src="${work.image}" alt="${work.title}" class="works-card-img" onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\\'works-card-img\\' style=\\'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#999;\\'>画像準備中</div>'">
+                        <img src="${work.image}" alt="${work.title}" class="works-card-img" loading="lazy">
                     </div>
                     <div class="works-card-content">
                         <h3>${work.title}</h3>
@@ -1210,9 +1210,40 @@
             button.dataset.expanded = isExpanded ? 'false' : 'true';
         }
 
+        // 画像エラー処理
+        function handleImageError(img) {
+            // 既にエラー処理済みの場合は何もしない
+            if (img.dataset.errorHandled === 'true') return;
+            
+            img.dataset.errorHandled = 'true';
+            img.style.display = 'none';
+            
+            const placeholder = document.createElement('div');
+            placeholder.className = 'works-card-img';
+            placeholder.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#999;background:#f0f0f0;';
+            placeholder.textContent = '画像準備中';
+            
+            img.parentElement.appendChild(placeholder);
+        }
+
         // ページ読み込み時に実行
         window.addEventListener('load', () => {
-            initializeWorks();
+            try {
+                initializeWorks();
+                
+                // 画像のエラーハンドリングを設定
+                setTimeout(() => {
+                    document.querySelectorAll('.works-card-img').forEach(img => {
+                        if (img.tagName === 'IMG') {
+                            img.onerror = function() {
+                                handleImageError(this);
+                            };
+                        }
+                    });
+                }, 100);
+            } catch (error) {
+                console.error('Initialize error:', error);
+            }
         });
     </script>
 </body>
