@@ -953,6 +953,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: '鉄道模型の遊び方に関するトークショーを行いました。',
+                image: 'images/tokyo-event.jpg'
             },
             {
                 id: 'work13',
@@ -962,6 +963,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: '鉄道模型書籍の画像撮影と記事を執筆しました。',
+                image: 'images/technique-bible.jpg'
             },
             {
                 id: 'work2',
@@ -971,6 +973,7 @@
                 dateType: 'completion',
                 duration: '-',
                 description: '鉄道模型店レールショップシーダーさまにオープンしたレンタルレイアウトへの取材・記事を担当いたしました。',
+                image: 'images/rm-models-355.jpg'
             },
             {
                 id: 'work3',
@@ -980,15 +983,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
-            },
-            {
-                id: 'work14',
-                title: '鉄道博2025 会場内レポート',
-                category: 'review',
-                date: '2025年1月',
-                dateType: 'implementation',
-                duration: '-',
-                description: '毎年1月に大阪南港で開催されている鉄道博2025の会場内の様子をレポートしました。',
+                image: 'images/tetsuhaku-2025.jpg'
             },
             {
                 id: 'work1',
@@ -998,6 +993,7 @@
                 dateType: 'completion',
                 duration: '2ヶ月',
                 description: '阪急うめだ本店で開催された「鉄道模型フェスティバル2024」北陸新幹線PRブースへの展示用に制作しました。',
+                image: 'images/tsuruga-station.jpg'
             },
             {
                 id: 'work5',
@@ -1007,6 +1003,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: '入門向けの小さなジオラマワークショップを行いました。',
+                image: 'images/festival-2024.jpg'
             },
             {
                 id: 'work6',
@@ -1016,6 +1013,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
+                image: 'images/tetsuhaku-2024.jpg'
             },
             {
                 id: 'work16',
@@ -1025,6 +1023,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: '毎年1月に大阪南港で開催されている鉄道博2024の会場内の様子をレポートしました。',
+                image: 'images/tetsuhaku-2024-report.jpg'
             },
             {
                 id: 'work8',
@@ -1034,6 +1033,7 @@
                 dateType: 'completion',
                 duration: '3ヶ月',
                 description: '阪急うめだ本店で開催された「鉄道模型フェスティバル2023」JR西日本さまのPRブースへの展示用に制作しました。',
+                image: 'images/osaka-station.jpg'
             },
             {
                 id: 'work9',
@@ -1043,6 +1043,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: '入門向けの小さなジオラマワークショップを行いました。',
+                image: 'images/festival-2023.jpg'
             },
             {
                 id: 'work7',
@@ -1052,6 +1053,7 @@
                 dateType: 'completion',
                 duration: '1ヶ月',
                 description: '建て替えのために解体される地元民に愛された駅舎をジオラマとして残しました。新駅舎のオープニングセレモニーでも披露されました。',
+                image: 'images/tamaru-station.jpg'
             },
             {
                 id: 'work11',
@@ -1061,6 +1063,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
+                image: 'images/tetsuhaku-2023.jpg'
             },
             {
                 id: 'work15',
@@ -1070,6 +1073,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: 'スマホで鉄道ジオラマが作れる！デジプラコレクション まるごと鉄道！のPR動画を製作しました。',
+                image: 'images/digipla-collection.jpg'
             },
             {
                 id: 'work10',
@@ -1079,6 +1083,7 @@
                 dateType: 'completion',
                 duration: '3ヶ月',
                 description: '阪急うめだ本店で開催された「鉄道模型フェスティバル2022」JR西日本さまのPRブースへの展示用に制作しました。',
+                image: 'images/yakumo-40th.jpg'
             },
             {
                 id: 'work12',
@@ -1088,6 +1093,7 @@
                 dateType: 'implementation',
                 duration: '-',
                 description: 'お子さま向けの鉄道模型の体験運転を実施しました。',
+                image: 'images/tetsuhaku-2022.jpg'
             }
         ];
 
@@ -1115,7 +1121,7 @@
                 <div class="works-card card-with-tag">
                     <div class="works-card-image-wrapper">
                         <span class="tag ${categoryInfo.class}">${categoryInfo.label}</span>
-                        <div class="works-card-img">画像準備中</div>
+                        <img src="${work.image}" alt="${work.title}" class="works-card-img" onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\\'works-card-img\\' style=\\'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#999;\\'>画像準備中</div>'">
                     </div>
                     <div class="works-card-content">
                         <h3>${work.title}</h3>
