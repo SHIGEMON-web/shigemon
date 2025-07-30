@@ -9,7 +9,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+            /* 犬の画像調整 */
+            .dog-container {
+                width: 200px;
+                height: 300px;
+                right: -200px;
+                bottom: 20px;
+            }
+            
+            .dog-container.show {
+                right: 0;
+            }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -771,14 +781,14 @@
     <main>
         <!-- ヒーローセクション -->
         <div class="hero">
-            ヒーロー画像
+            <img src="images/hero-image.jpg" alt="SHIGEMONの作品集" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
 
         <!-- プロフィール -->
         <section id="profile">
             <div class="profile">
                 <div class="profile-img-container">
-                    <div class="profile-img">プロフィール画像</div>
+                    <img src="images/profile-image.jpg" alt="SHIGEMON" class="profile-img">
                 </div>
                 <div class="profile-text">
                     <h3>SHIGEMON</h3>
